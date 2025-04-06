@@ -1,5 +1,7 @@
 #include "string.h"
 #include "io.h"
+#include "stdint.h"
+#include "stddef.h"
 
 /* VGA Color Enum */
 #define FB_BLACK       0
@@ -33,9 +35,9 @@
 #define FB_LOW_BYTE_COMMAND     15
 
 
-volatile unsigned char *fb = (unsigned char *) 0x000B8000;
-static unsigned int terminal_col;
-static unsigned int terminal_row;
+volatile uint8_t* fb = (uint8_t*) 0x000B8000;
+static size_t terminal_col;
+static size_t terminal_row;
 
 
 void fb_move_cursor(unsigned short pos)
