@@ -7,5 +7,6 @@ struct gdt_ptr {
 } __attribute__((packed));
 
 void load_gdt(struct gdt_ptr* gdtable);
+void set_segments_and_jump();
 
 #endif /* INCLUDE_GDT_H */

@@ -209,6 +209,10 @@ void kmain() {
   fb_intitialize();
   serial_configure_baud_rate(SERIAL_COM1_BASE,1);
   serial_configure_line(SERIAL_COM1_BASE);
+
+  init_gdt();
+  set_segments_and_jump();
+  
   fb_writestring("Hello\n");
   fb_writestring("Hello\n");
   fb_writestring("Hello\n");
