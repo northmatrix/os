@@ -109,3 +109,9 @@ void fb_write(char *buf, unsigned int len) {
 void fb_writestring(char* buf) {
   fb_write(buf,strlen(buf));
 }
+
+//void fb_writeint(int num) {
+//  char buffer[32];
+//  itoa(num,buffer,10);
+//  fb_writestring(buffer);
+//}
