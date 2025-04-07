@@ -43,6 +43,7 @@ void itoa(int num,char* str,int base) {
     else {
       str[i++] = rem + '0'; 
     }
+    num = num / base;
   }
 
   if(isNegative) {

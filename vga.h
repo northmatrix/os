@@ -3,7 +3,7 @@
 
 void fb_initialize();
 void fb_writestring(char* buf);
-//void fb_writeint(int num);
+void fb_writeint(int num,int base);
 
 #endif
 

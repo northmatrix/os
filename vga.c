@@ -2,6 +2,7 @@
 #include "io.h"
 #include "stdint.h"
 #include "stddef.h"
+#include "stdlib.h"
 
 /* VGA Color Enum */
 #define FB_BLACK       0
@@ -68,7 +69,7 @@ void fb_shift_up() {
   for (unsigned int i = 0; i < VGA_WIDTH; i++) {
         unsigned int idx = (VGA_WIDTH * (VGA_HEIGHT - 1) + i) * 2;
         fb[idx] = ' ';                     // Clear character
-        fb[idx + 1] = (FB_BLACK << 4) | FB_GREEN; // Default color (black on green)
+        fb[idx + 1] = (FB_BLACK << 4) | FB_CYAN; // Default color (black on green)
    }
    terminal_row --;
    terminal_col = 0;
@@ -94,7 +95,7 @@ void fb_write(char *buf, unsigned int len) {
         fb_shift_up();
       }
     } else {
-        fb_write_cell(((terminal_row * VGA_WIDTH) + terminal_col) * 2,buf[i],FB_GREEN,FB_BLACK);
+        fb_write_cell(((terminal_row * VGA_WIDTH) + terminal_col) * 2,buf[i],FB_CYAN,FB_BLACK);
         if ( ++terminal_col == VGA_WIDTH ) {
              terminal_col = 0;
              if ( ++terminal_row == VGA_HEIGHT ) {
@@ -110,8 +111,9 @@ void fb_writestring(char* buf) {
   fb_write(buf,strlen(buf));
 }
 
-//void fb_writeint(int num) {
-//  char buffer[32];
-//  itoa(num,buffer,10);
-//  fb_writestring(buffer);
-//}
+void fb_writeint(int num,int base) {
+  char buffer[8];
+  itoa(num,buffer,base);
+  fb_writestring(buffer);
+
+}

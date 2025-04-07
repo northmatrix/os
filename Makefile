@@ -1,4 +1,4 @@
-OBJECTS = loader.o kmain.o io.o vga.o string.o serial.o gdt.o gdt_asm.o 
+OBJECTS = loader.o kmain.o io.o vga.o string.o serial.o gdt.o gdt_asm.o stdlib.o 
 CC = gcc
 CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
 			 -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
@@ -25,7 +25,7 @@ os.iso: kernel.elf
 							iso
 
 run: os.iso
-	bochs -f bochsrc.txt 
+	bochs -f bochsrc.txt -q 
 
 %.o: %.c
 	$(CC) $(CFLAGS)  $< -o $@
