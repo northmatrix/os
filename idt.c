@@ -21,11 +21,14 @@ struct cpu_state {
 	uint32_t ecx;
 	uint32_t ebx;
 	uint32_t eax;
-	uint32_t esp;
+} __attribute__((packed));
+
+struct int_detail {
+  unsigned int interrupt;
+  unsigned int error_code;
 } __attribute__((packed));
 
 struct stack_state {
-    unsigned int error_code;
     unsigned int eip;
     unsigned int cs;
     unsigned int eflags;
@@ -45,23 +48,20 @@ typedef struct idt_gate idt_gate_t;
 void interrupt_handler_0(void);
 void interrupt_handler_1(void);
 void interrupt_handler_2(void);
-void interrupt_handler_3(void);
-void interrupt_handler_4(void);
-void interrupt_handler_5(void);
-void interrupt_handler_6(void);
 
 idt_gate_t idt[IDT_NUM_ENTRIES];
 
 /* external assembly function to set the gdt */
 void load_idt(uint32_t* idt_ptr_t);
 
-void interrupt_handler(struct cpu_state cpu, struct stack_state stack, unsigned int interrupt) {
-  fb_writeint(interrupt,10);
-  serial_writeint(cpu.eax,16);
-  serial_writeint(stack.cs,16);
-  serial_writeint(interrupt,10);
-  while (1) {}
-  return;
+/* eflags  cs eip errrorcode  interruptnum [eax.ebx...edi]  (topofthestakishere) */
+void interrupt_handler(struct cpu_state cpu, struct int_detail detial,struct stack_state stack) {
+  serial_writeint(cpu.eax,10);
+  serial_writeint(stack.eip,10);
+  serial_writestring("\n");
+  fb_writestring("\nAn error has occured: ");
+  fb_writeint(detial.interrupt,10);
+  while(1) {};
 }
 
 static void create_idt_gate(uint8_t n, uint32_t handler, uint8_t type, uint8_t pl) {
@@ -87,10 +87,6 @@ void idt_init() {
   create_idt_gate(0,(uint32_t) &interrupt_handler_0,IDT_TRAP_GATE_TYPE,PL0);
   create_idt_gate(1,(uint32_t) &interrupt_handler_1,IDT_TRAP_GATE_TYPE,PL0); 
   create_idt_gate(2,(uint32_t) &interrupt_handler_2,IDT_TRAP_GATE_TYPE,PL0); 
-  create_idt_gate(3,(uint32_t) &interrupt_handler_3,IDT_TRAP_GATE_TYPE,PL0);
-  create_idt_gate(4,(uint32_t) &interrupt_handler_4,IDT_TRAP_GATE_TYPE,PL0); 
-  create_idt_gate(5,(uint32_t) &interrupt_handler_5,IDT_TRAP_GATE_TYPE,PL0); 
-  create_idt_gate(6,(uint32_t) &interrupt_handler_6,IDT_TRAP_GATE_TYPE,PL0); 
   load_idt((uint32_t*) &idt_ptr);
 }
 

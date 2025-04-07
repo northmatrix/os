@@ -3,7 +3,7 @@
 
 #include "stdint.h"
 
-#define IDT_NUM_ENTRIES 4
+#define IDT_NUM_ENTRIES 3
 
 void idt_init();
 

@@ -46,7 +46,3 @@
     no_error_code_interrupt_handler 0       ; create handler for interrupt 0
     no_error_code_interrupt_handler 1       ; create handler for interrupt 1 
     no_error_code_interrupt_handler 2       ; create handler for interrupt 2
-    no_error_code_interrupt_handler 3       ; create handler for interrupt 3
-    no_error_code_interrupt_handler 4       ; create handler for interrupt 4
-    no_error_code_interrupt_handler 5       ; create handler for interrupt 5
-    no_error_code_interrupt_handler 6       ; create handler for interrupt 6
