@@ -1,5 +1,7 @@
+#include "serial.h"
 #include "io.h"
 #include "string.h"
+#include "stdlib.h"
 
 #define SERIAL_COM1_BASE                0x3F8      /* COM1 base port */
 #define SERIAL_DATA_PORT(base)          (base)
@@ -46,4 +48,11 @@ void serial_write(unsigned short com, char* data, unsigned int len ) {
 
 void serial_writestring(char* buf) {
   serial_write(SERIAL_COM1_BASE,buf,strlen(buf));
+}
+
+
+void serial_writeint(int num,int base) {
+  char buffer[32];
+  itoa(num,buffer,base);
+  serial_writestring(buffer);
 }

@@ -81,7 +81,7 @@ void fb_initialize() {
   terminal_col = 0;
   for(unsigned int i = 0; i < VGA_HEIGHT; i ++ ) {
     for(unsigned int j = 0; j < VGA_WIDTH; j ++ ) {
-      fb_write_cell((i * VGA_WIDTH + j) * 2,' ',FB_GREEN,FB_BLACK);
+      fb_write_cell((i * VGA_WIDTH + j) * 2,' ',FB_RED,FB_BLACK);
     }
   } 
 } 
@@ -95,7 +95,7 @@ void fb_write(char *buf, unsigned int len) {
         fb_shift_up();
       }
     } else {
-        fb_write_cell(((terminal_row * VGA_WIDTH) + terminal_col) * 2,buf[i],FB_CYAN,FB_BLACK);
+        fb_write_cell(((terminal_row * VGA_WIDTH) + terminal_col) * 2,buf[i],FB_RED,FB_BLACK);
         if ( ++terminal_col == VGA_WIDTH ) {
              terminal_col = 0;
              if ( ++terminal_row == VGA_HEIGHT ) {
@@ -112,7 +112,7 @@ void fb_writestring(char* buf) {
 }
 
 void fb_writeint(int num,int base) {
-  char buffer[8];
+  char buffer[32];
   itoa(num,buffer,base);
   fb_writestring(buffer);
 

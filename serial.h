@@ -3,6 +3,6 @@
 
 void serial_initialize();
 void serial_writestring(char* buf);
-
+void serial_writeint(int num,int base);
 #endif
 

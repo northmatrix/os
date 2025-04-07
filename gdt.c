@@ -1,4 +1,3 @@
-#include "stdint.h"
 #include "gdt.h"
 
 #define SEGMENT_BASE    0
@@ -28,21 +27,21 @@ typedef struct gdt_ptr gdt_ptr_t;
 gdt_entry_t gdt_entries[GDT_NUM_ENTRIES];
 
 /* external assembly function to set the gdt */
-void gdt_load_and_set(uint32_t gdt_ptr_t);
+void gdt_load_and_set(uint32_t* gdt_ptr_t);
 static void gdt_create_entry(uint32_t n, uint8_t pl, uint8_t type);
 
 void gdt_init()
 {
   	gdt_ptr_t gdt_ptr;
     gdt_ptr.limit   = sizeof(gdt_entry_t)*GDT_NUM_ENTRIES;
-    gdt_ptr.base    = (uint32_t)&gdt_entries;
+    gdt_ptr.base    = (uint32_t) &gdt_entries;
     /* the null entry */
     gdt_create_entry(0, 0, 0);
     /* kernel mode code segment */
     gdt_create_entry(1, PL0, CODE_RX_TYPE);
     /* kernel mode data segment */
     gdt_create_entry(2, PL0, DATA_RW_TYPE);
-    gdt_load_and_set((uint32_t)&gdt_ptr);
+    gdt_load_and_set((uint32_t*)&gdt_ptr);
 
 }
 
