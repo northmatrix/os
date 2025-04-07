@@ -24,7 +24,7 @@
 00000000000i[USBCTL] Pluggable USB devices
 00000000000i[USBCTL]   floppy mouse tablet keypad keyboard hub disk cdrom
 00000000000i[USBCTL]   printer
-00000000000i[MEM0  ] allocated memory at 0x7c1c395dd010. after alignment, vector=0x7c1c395de000, block_size = 128K
+00000000000i[MEM0  ] allocated memory at 0x7f3d57fdd010. after alignment, vector=0x7f3d57fde000, block_size = 128K
 00000000000i[MEM0  ] 32.00MB
 00000000000i[MEM0  ] mem block size = 0x00020000, blocks=256
 00000000000i[MEM0  ] rom at 0xfffe0000/131072 ('/usr/share/bochs/BIOS-bochs-latest')
@@ -37,7 +37,7 @@
 00000000000i[DEV   ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[PLUGIN] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS  ] Using local time for initial clock
-00000000000i[CMOS  ] Setting initial clock to: Mon Apr  7 20:53:42   2025 tz=utc (time0=1744059222)
+00000000000i[CMOS  ] Setting initial clock to: Mon Apr  7 21:36:28   2025 tz=utc (time0=1744061788)
 00000000000i[PLUGIN] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA   ] channel 4 used by cascade
 00000000000i[PLUGIN] init_dev of 'pic' plugin device by virtual method
@@ -253,7 +253,32 @@
 00001488383i[BXVGA ] VBE known Display Interface b0c5
 00001489804i[VBIOS ] VBE Bios ID: vbe.c 2025-01-08
 00005207530i[BIOS  ] IDE time out
-00711650662i[BIOS  ] Booting from 07c0:0000
-00711745361i[BIOS  ] int13_harddisk: function 41, unmapped device for ELDL=80
-00711749033i[BIOS  ] int13_harddisk: function 08, unmapped device for ELDL=80
-00711752706i[BIOS  ] *** int 15h function AX=00c0, BX=0000 not yet supported!
+00720328282i[BIOS  ] Booting from 07c0:0000
+00720422981i[BIOS  ] int13_harddisk: function 41, unmapped device for ELDL=80
+00720426653i[BIOS  ] int13_harddisk: function 08, unmapped device for ELDL=80
+00720430326i[BIOS  ] *** int 15h function AX=00c0, BX=0000 not yet supported!
+02650062319p[TERM  ] >>PANIC<< Received SIGHUP: quit simulation
+02650062319i[CPU0  ] CPU is in protected mode (active)
+02650062319i[CPU0  ] CS.mode = 32 bit
+02650062319i[CPU0  ] SS.mode = 32 bit
+02650062319i[CPU0  ] EFER = 0x00000000: ffxsr nxe lma lme sce
+02650062319i[CPU0  ] XCR0=0x00000001: tiledata tilecfg hwp lbr uintr hdc cet_s cet_u pasid pkru pt hi_zmm zmm_hi256 opmask bndcfg bndregs ymm sse FPU
+02650062319i[CPU0  ] | EAX=00000030  EBX=00102004  ECX=00000004  EDX=000003d5
+02650062319i[CPU0  ] | ESP=00103fa0  EBP=00103fa8  ESI=0002cef0  EDI=0002cef1
+02650062319i[CPU0  ] | EFLAGS=00000006: id vip vif ac vm rf nt IOPL=0 of df if tf sf zf af PF cf
+02650062319i[CPU0  ] | SEG sltr(index|ti|rpl)     base    limit G D
+02650062319i[CPU0  ] |  CS:0008( 0001| 0|  0) 00000000 ffffffff 1 1
+02650062319i[CPU0  ] |  DS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+02650062319i[CPU0  ] |  SS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+02650062319i[CPU0  ] |  ES:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+02650062319i[CPU0  ] |  FS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+02650062319i[CPU0  ] |  GS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+02650062319i[CPU0  ] | EIP=00100adf (00100ade)
+02650062319i[CPU0  ] | CR0=0x60000011: pg CD NW ac wp ne ET ts em mp PE
+02650062319i[CPU0  ] | CR2=0x00000000
+02650062319i[CPU0  ] | CR3=0x00000000
+02650062319i[CPU0  ] | CR4=0x00000000: lass uintr pks cet pke smap smep keylock osxsave pcid fsgsbase smx vmx la57 umip osxmmexcpt osfxsr pce pge mce pae pse de tsd pvi vme
+02650062319i[CPU0  ] 0x0000000000100ade>> nop  : 90
+02650062319i[CMOS  ] Last time: 1744064438 tz=utc (Mon Apr  7 22:20:38   2025)
+02650062319i[      ] restoring default signal behavior
+02650062319i[SIM   ] quit_sim called with exit code 1
