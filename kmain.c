@@ -11,9 +11,9 @@ void kmain() {
   fb_writestring("Developed by me\n");
   fb_writestring("Is it a good operating system fuck no are you stupid its a shit one\n");
   fb_writestring("Are you ready for some maths\n");
-  fb_writestring("5/0=");
-  float x = 5.0;
-  float y = 0.001;
-  float z = x / y;
-  fb_writeint(z,10);
+  int arr[10];  // Array of size 10
+  int index = 20;  // Invalid index, exceeding array bounds
+  arr[index] = 42;
+  serial_writeint(arr[5],10);
 }
+

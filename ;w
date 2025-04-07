@@ -46,7 +46,7 @@ void interrupt_handler_0(void);
 void interrupt_handler_1(void);
 void interrupt_handler_2(void);
 void interrupt_handler_3(void);
-void interrupt_handler_4(void);
+void interrupt_handler_3(void);
 void interrupt_handler_5(void);
 void interrupt_handler_6(void);
 
@@ -56,11 +56,10 @@ idt_gate_t idt[IDT_NUM_ENTRIES];
 void load_idt(uint32_t* idt_ptr_t);
 
 void interrupt_handler(struct cpu_state cpu, struct stack_state stack, unsigned int interrupt) {
-  fb_writeint(interrupt,10);
+  serial_writeint(interrupt,16);
   serial_writeint(cpu.eax,16);
   serial_writeint(stack.cs,16);
-  serial_writeint(interrupt,10);
-  while (1) {}
+  fb_writeint(interrupt,10);
   return;
 }
 
@@ -92,6 +91,7 @@ void idt_init() {
   create_idt_gate(5,(uint32_t) &interrupt_handler_5,IDT_TRAP_GATE_TYPE,PL0); 
   create_idt_gate(6,(uint32_t) &interrupt_handler_6,IDT_TRAP_GATE_TYPE,PL0); 
   load_idt((uint32_t*) &idt_ptr);
+  serial_writestring("i thinkt the idt is ready");
 }
 
 
