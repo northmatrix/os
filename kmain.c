@@ -18,7 +18,7 @@ void kmain() {
   printf("IDT Initialized\n\n");
   vga_setcolor(VGA_COLOR_LIGHT_GREY);
  
-  printf("This is myosnameOS version 0.1.4\n");
+  printf("This is myosnameOS version 0.1.4\n\n");
 
   int y = 5;
   int x = 0;
