@@ -2,6 +2,7 @@
 #include "serial.h"
 #include "gdt.h"
 #include "idt.h"
+#include "stdio.h" 
 
 void kmain() {
   // Initialization vga, serial, gdt, idt
@@ -10,7 +11,10 @@ void kmain() {
   gdt_init(); 
   idt_init();
   //writing
-  serial_writestring("This is mynameOS version 0.1.4 i think its working\n");
-  vga_writestring("I am going to try and write something to vga output\n and hope it works i dont know why it wouldnt work surley it should\n if it doesnt them i dont know what to do");
+  printf("Welcome To MyOS.\n");
+  int y = 5;
+  int x = 0;
+  int z = y / x;
+  printf("5 / 0 = %d",z);
 }
 

@@ -1,6 +1,7 @@
 #include "idt.h"
 #include "stdio.h"
 #include "serial.h"
+#include "vga.h"
 
 #define IDT_TRAP_GATE_TYPE		1 
 #define PL0 0x0
@@ -101,13 +102,13 @@ void load_idt(uint32_t* idt_ptr_t);
 
 /* eflags  cs eip errrorcode  interruptnum [eax.ebx...edi]  (topofthestakishere) */
 void interrupt_handler(struct cpu_state cpu, struct int_detail detail,struct stack_state stack) {
-  printf("An error occured:\n");
-  printf("EIP%d\n",detail.interrupt);
-  printf("EDI 0x%x\nESI 0x%x\nEBP 0x%x\nEDX 0x%x\nECX 0x%x\nEBX 0x%x\nEAX 0x%x\n",cpu.edi,cpu.esi,cpu.ebp,cpu.edx,cpu.ecx,cpu.ebx,cpu.eax);
-
-  sprintf("An error occured:\n");
-  sprintf("EIP%d\n",detail.interrupt);
-  sprintf("EDI 0x%x\nESI 0x%x\nEBP 0x%x\nEDX 0x%x\nECX 0x%x\nEBX 0x%x\nEAX 0x%x\n",cpu.edi,cpu.esi,cpu.ebp,cpu.edx,cpu.ecx,cpu.ebx,cpu.eax);
+  vga_setcolor(VGA_COLOR_RED);
+  printf("Interrupt: %d\n",detail.interrupt);
+  printf("EDI 0x%x\nESI 0x%x\nEBP 0x%x\nEDX 0x%x\nECX 0x%x\nEBX 0x%x\nEAX 0x%x\nEIP 0x%x\n",cpu.edi,cpu.esi,cpu.ebp,cpu.edx,cpu.ecx,cpu.ebx,cpu.eax,stack.eip);
+  vga_setcolor(VGA_COLOR_WHITE);  
+  sprintf("Interrupt: %d\n",detail.interrupt);
+  sprintf("EDI 0x%x\nESI 0x%x\nEBP 0x%x\nEDX 0x%x\nECX 0x%x\nEBX 0x%x\nEAX 0x%x\nEIP 0x%x\n",cpu.edi,cpu.esi,cpu.ebp,cpu.edx,cpu.ecx,cpu.ebx,cpu.eax,stack.eip);
+  while (1) {};
 }
 
 static void create_idt_gate(uint8_t n, uint32_t handler, uint8_t type, uint8_t pl) {
