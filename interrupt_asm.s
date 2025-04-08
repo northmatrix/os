@@ -64,7 +64,7 @@ error_code_interrupt_handler    17       ; create handler for interrupt 17
 no_error_code_interrupt_handler 18       ; create handler for interrupt 18
 no_error_code_interrupt_handler 19       ; create handler for interrupt 19
 
-; irqs
+;irqs
 no_error_code_interrupt_handler 32
 no_error_code_interrupt_handler 33
 no_error_code_interrupt_handler 34

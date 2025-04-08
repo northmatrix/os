@@ -63,7 +63,7 @@ void vga_shift_up() {
         unsigned int idx = (VGA_WIDTH * (VGA_HEIGHT - 1) + i);
         terminal_buffer[idx] = 0;                     // Clear character
    }
-   terminal_row --;
+   terminal_row = VGA_HEIGHT - 1;
    terminal_column = 0;
    vga_move_cursor(terminal_row * VGA_WIDTH + terminal_column);
 }
@@ -85,6 +85,10 @@ void vga_putchar(char c) {
         vga_shift_up();
       }
     }
+  }
+
+  if (terminal_row >= VGA_HEIGHT) {
+    vga_shift_up();
   }
   const size_t index = terminal_row * VGA_WIDTH + terminal_column;
   vga_move_cursor(index);

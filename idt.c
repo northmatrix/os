@@ -1,9 +1,6 @@
 #include "idt.h"
-#include "keyboard.h"
 #include "stdio.h"
-#include "vga.h"
-#include "pic_acknowledge.h"
-#include "keyboard.h"
+#include "serial.h"
 
 #define IDT_TRAP_GATE_TYPE		1 
 #define PL0 0x0
@@ -104,14 +101,13 @@ void load_idt(uint32_t* idt_ptr_t);
 
 /* eflags  cs eip errrorcode  interruptnum [eax.ebx...edi]  (topofthestakishere) */
 void interrupt_handler(struct cpu_state cpu, struct int_detail detail,struct stack_state stack) {
-  //vga_setcolor(VGA_COLOR_LIGHT_RED);
-  //printf("An error occured:\n");
-  //printf("Error Code: %d\n",detail.interrupt);
-  //printf("EDI 0x%x\nESI 0x%x\nEBP 0x%x\nEDX 0x%x\nECX 0x%x\nEBX 0x%x\nEAX 0x%x\n",cpu.edi,cpu.esi,cpu.ebp,cpu.edx,cpu.ecx,cpu.ebx,cpu.eax);
-  //vga_setcolor(VGA_COLOR_LIGHT_GREY);
-  unsigned char c = read_scan_code();
-  vga_putchar(c);
-  pic_acknowledge(1);
+  printf("An error occured:\n");
+  printf("EIP%d\n",detail.interrupt);
+  printf("EDI 0x%x\nESI 0x%x\nEBP 0x%x\nEDX 0x%x\nECX 0x%x\nEBX 0x%x\nEAX 0x%x\n",cpu.edi,cpu.esi,cpu.ebp,cpu.edx,cpu.ecx,cpu.ebx,cpu.eax);
+
+  sprintf("An error occured:\n");
+  sprintf("EIP%d\n",detail.interrupt);
+  sprintf("EDI 0x%x\nESI 0x%x\nEBP 0x%x\nEDX 0x%x\nECX 0x%x\nEBX 0x%x\nEAX 0x%x\n",cpu.edi,cpu.esi,cpu.ebp,cpu.edx,cpu.ecx,cpu.ebx,cpu.eax);
 }
 
 static void create_idt_gate(uint8_t n, uint32_t handler, uint8_t type, uint8_t pl) {
