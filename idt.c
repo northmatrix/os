@@ -1,5 +1,5 @@
 #include "idt.h"
-#include "serial.h"
+#include "stdio.h"
 #include "vga.h"
 
 #define IDT_TRAP_GATE_TYPE		1 
@@ -55,25 +55,12 @@ idt_gate_t idt[IDT_NUM_ENTRIES];
 void load_idt(uint32_t* idt_ptr_t);
 
 /* eflags  cs eip errrorcode  interruptnum [eax.ebx...edi]  (topofthestakishere) */
-void interrupt_handler(struct cpu_state cpu, struct int_detail detial,struct stack_state stack) {
-  serial_writeint(cpu.eax,10);
-  serial_writeint(stack.eip,10);
-  serial_writestring("\n");
-
-  fb_writestring("\nValue in EAX: 0x");
-  fb_writeint(cpu.eax,16);
-  fb_writestring("\n");
-
-  fb_writestring("\nValue in EDX: 0x");
-  fb_writeint(cpu.edx,16);
-  fb_writestring("\n");
-
-
-  fb_writestring("\nError Code: ");
-  fb_writeint(detial.interrupt,10);
-  fb_writestring("\n");
-
-
+void interrupt_handler(struct cpu_state cpu, struct int_detail detail,struct stack_state stack) {
+  vga_setcolor(VGA_COLOR_LIGHT_RED);
+  printf("An error occured:\n");
+  printf("Error Code: %d\n",detail.interrupt);
+  printf("EDI 0x%x\nESI 0x%x\nEBP 0x%x\nEDX 0x%x\nECX 0x%x\nEBX 0x%x\nEAX 0x%x\n",cpu.edi,cpu.esi,cpu.ebp,cpu.edx,cpu.ecx,cpu.ebx,cpu.eax);
+  vga_setcolor(VGA_COLOR_LIGHT_GREY);
   while(1) {};
 }
 

@@ -39,15 +39,19 @@ void serial_initialize() {
     serial_configure_line(SERIAL_COM1_BASE);
 }
 
-void serial_write(unsigned short com, char* data, unsigned int len ) {
-  for ( unsigned int i = 0 ; i < len ; i ++) {
-    while (!serial_is_transmit_fifo_empty(com));
-    outb(SERIAL_DATA_PORT(com), data[i]);
+void serial_putchar(const char c) {
+  while (!serial_is_transmit_fifo_empty(SERIAL_COM1_BASE));
+  outb(SERIAL_DATA_PORT(SERIAL_COM1_BASE),c);
+}
+
+void serial_write(const char* data, size_t len ) {
+  for ( size_t i = 0 ; i < len ; i ++ ) {
+    serial_putchar(data[i]);
   }
 }
 
-void serial_writestring(char* buf) {
-  serial_write(SERIAL_COM1_BASE,buf,strlen(buf));
+void serial_writestring(const char* data) {
+  serial_write(data,strlen(data));
 }
 
 

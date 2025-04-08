@@ -1,30 +1,14 @@
 #include "string.h"
 #include "io.h"
-#include "stdint.h"
-#include "stddef.h"
 #include "stdlib.h"
+#include "stdint.h"
+#include "vga.h"
 
-/* VGA Color Enum */
-#define FB_BLACK       0
-#define FB_BLUE        1
-#define FB_GREEN       2
-#define FB_CYAN        3
-#define FB_RED         4
-#define FB_MAGENTA     5
-#define FB_BROWN       6
-#define FB_LIGHT_GREY  7
-#define FB_DARK_GREY   8
-#define FB_LIGHT_BLUE  9
-#define FB_LIGHT_GREEN 10
-#define FB_LIGHT_CYAN  11
-#define FB_LIGHT_RED   12
-#define FB_LIGHT_MAGENTA 13
-#define FB_LIGHT_BROWN 14
-#define FB_WHITE       15
 
 /* Frame Buffer */
-#define VGA_HEIGHT 25 
-#define VGA_WIDTH 80 
+static const size_t VGA_WIDTH = 80;
+static const size_t VGA_HEIGHT = 25;
+static uint16_t* const VGA_MEMORY = (uint16_t*) 0xB8000;
 
 
 /* The I/O ports */
@@ -36,12 +20,22 @@
 #define FB_LOW_BYTE_COMMAND     15
 
 
-volatile uint8_t* fb = (uint8_t*) 0x000B8000;
-static size_t terminal_col;
-static size_t terminal_row;
+static size_t terminal_column;
+static size_t terminal_row; 
+static uint8_t terminal_color;
+static uint16_t* terminal_buffer;
+
+static inline uint8_t vga_entry_color(enum vga_color fg,enum vga_color bg) {
+  return fg | bg << 4;
+}
+
+static inline uint16_t vga_entry(unsigned char uc,uint8_t color) {
+  return (uint16_t) uc | (uint16_t) color << 8;
+}
 
 
-void fb_move_cursor(unsigned short pos)
+
+void vga_move_cursor(unsigned short pos)
 {
     outb(FB_COMMAND_PORT, FB_HIGH_BYTE_COMMAND);
     outb(FB_DATA_PORT,    ((pos >> 8) & 0x00FF));
@@ -49,71 +43,77 @@ void fb_move_cursor(unsigned short pos)
     outb(FB_DATA_PORT,    pos & 0x00FF);
 }
 
-void fb_write_cell(unsigned int i, char c, unsigned char fg, unsigned char bg)
+void vga_putentryat(unsigned char c,uint8_t color, size_t x,size_t y)
 {
-         fb[i] = c;
-         fb[i + 1] = ((bg & 0x0F) << 4) | (fg & 0x0F);
+         const size_t index = y * VGA_WIDTH + x;
+         terminal_buffer[index] = vga_entry(c, color);
 }
 
-void fb_shift_up() {
+void vga_shift_up() {
   //lets first shift everything up 1 discarding the first row and leaving the last row empty  
   for (unsigned int i = 1; i < VGA_HEIGHT; i ++ ) {
     for (unsigned int j = 0; j < VGA_WIDTH; j ++) {
-      unsigned int src_idx = (VGA_WIDTH * i + j ) * 2;
-      unsigned int dst_idx = (VGA_WIDTH * (i-1) + j ) * 2;
-      fb[dst_idx] = fb[src_idx];         // Copy character
-      fb[dst_idx + 1] = fb[src_idx + 1]; // Copy attribute (color)
+      unsigned int src_idx = (VGA_WIDTH * i + j );
+      unsigned int dst_idx = (VGA_WIDTH * (i-1) + j );
+      terminal_buffer[dst_idx] = terminal_buffer[src_idx];         // Copy character
     }
   }
   //clear the last row
   for (unsigned int i = 0; i < VGA_WIDTH; i++) {
-        unsigned int idx = (VGA_WIDTH * (VGA_HEIGHT - 1) + i) * 2;
-        fb[idx] = ' ';                     // Clear character
-        fb[idx + 1] = (FB_BLACK << 4) | FB_CYAN; // Default color (black on green)
+        unsigned int idx = (VGA_WIDTH * (VGA_HEIGHT - 1) + i);
+        terminal_buffer[idx] = 0;                     // Clear character
    }
    terminal_row --;
-   terminal_col = 0;
-   fb_move_cursor(terminal_row * VGA_WIDTH + terminal_col);
+   terminal_column = 0;
+   vga_move_cursor(terminal_row * VGA_WIDTH + terminal_column);
 }
 
-void fb_initialize() {
+void vga_putchar(char c) {
+  unsigned char uc = c;
+  if (uc == '\n') {
+    terminal_row++;
+    terminal_column=0;
+    if ( terminal_row == VGA_HEIGHT) {
+      vga_shift_up();
+    }
+  }
+  else {
+    vga_putentryat(uc,terminal_color,terminal_column,terminal_row);
+    if(++terminal_column == VGA_WIDTH) {
+      terminal_column = 0;
+      if(++terminal_row==VGA_HEIGHT) {
+        vga_shift_up();
+      }
+    }
+  }
+  const size_t index = terminal_row * VGA_WIDTH + terminal_column;
+  vga_move_cursor(index);
+}
+
+
+void vga_initialize() {
   terminal_row = 0;
-  terminal_col = 0;
+  terminal_column = 0;
+  terminal_color = vga_entry_color(VGA_COLOR_LIGHT_GREY,VGA_COLOR_BLACK);
+  terminal_buffer = VGA_MEMORY;
   for(unsigned int i = 0; i < VGA_HEIGHT; i ++ ) {
     for(unsigned int j = 0; j < VGA_WIDTH; j ++ ) {
-      fb_write_cell((i * VGA_WIDTH + j) * 2,' ',FB_RED,FB_BLACK);
+      const size_t index = i * VGA_WIDTH + j;
+      terminal_buffer[index] = vga_entry(' ', terminal_color);
     }
   } 
 } 
   
-void fb_write(char *buf, unsigned int len) {
-  for (unsigned int i = 0; i < len; i ++) {
-    if ( buf[i] == '\n') {
-      terminal_row ++;
-      terminal_col = 0;
-      if (terminal_row == VGA_HEIGHT ) {
-        fb_shift_up();
-      }
-    } else {
-        fb_write_cell(((terminal_row * VGA_WIDTH) + terminal_col) * 2,buf[i],FB_RED,FB_BLACK);
-        if ( ++terminal_col == VGA_WIDTH ) {
-             terminal_col = 0;
-             if ( ++terminal_row == VGA_HEIGHT ) {
-                 fb_shift_up();
-             }
-        }
-    }
-  }
-  fb_move_cursor(terminal_row * VGA_WIDTH + terminal_col);
+void vga_write(const char* data, size_t size) {
+  for (size_t i = 0; i < size; i++)
+    vga_putchar(data[i]);
 }
 
-void fb_writestring(char* buf) {
-  fb_write(buf,strlen(buf));
+
+void vga_writestring(const char* data) {
+  vga_write(data,strlen(data));
 }
 
-void fb_writeint(int num,int base) {
-  char buffer[32];
-  itoa(num,buffer,base);
-  fb_writestring(buffer);
-
+void vga_setcolor(enum vga_color fg) {
+  terminal_color = vga_entry_color(fg,VGA_COLOR_BLACK);
 }
