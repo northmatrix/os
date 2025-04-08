@@ -1,4 +1,4 @@
-OBJECTS = loader.o kmain.o io.o vga.o string.o serial.o gdt.o gdt_asm.o stdlib.o  interrupt_asm.o idt.o idt_asm.o  stdio.o
+OBJECTS = loader.o kmain.o io.o vga.o string.o serial.o gdt.o gdt_asm.o stdlib.o  interrupt_asm.o idt.o idt_asm.o  stdio.o pic_acknowledge.o keyboard.o
 CC = gcc
 CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
 			 -nostartfiles -nodefaultlibs  -c
