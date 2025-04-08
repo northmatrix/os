@@ -3,6 +3,7 @@
 #include "gdt.h"
 #include "idt.h"
 #include "stdio.h" 
+#include "pic.h" 
 
 void kmain() {
   // Initialization vga, serial, gdt, idt
@@ -10,11 +11,8 @@ void kmain() {
   serial_initialize(); 
   gdt_init(); 
   idt_init();
+  pic_init();
   //writing
   printf("Welcome To MyOS.\n");
-  int y = 5;
-  int x = 0;
-  int z = y / x;
-  printf("5 / 0 = %d",z);
 }
 

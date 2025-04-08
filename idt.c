@@ -2,6 +2,8 @@
 #include "stdio.h"
 #include "serial.h"
 #include "vga.h"
+#include "io.h"
+#include "pic.c"
 
 #define IDT_TRAP_GATE_TYPE		1 
 #define PL0 0x0
@@ -100,14 +102,33 @@ idt_gate_t idt[IDT_NUM_ENTRIES];
 /* external assembly function to set the gdt */
 void load_idt(uint32_t* idt_ptr_t);
 
+#define KBD_DATA_PORT   0x60
+
+    /** read_scan_code:
+     *  Reads a scan code from the keyboard
+     *
+     *  @return The scan code (NOT an ASCII character!)
+     */
+unsigned char read_scan_code(void)
+{
+    return inb(KBD_DATA_PORT);
+}
+
 /* eflags  cs eip errrorcode  interruptnum [eax.ebx...edi]  (topofthestakishere) */
 void interrupt_handler(struct cpu_state cpu, struct int_detail detail,struct stack_state stack) {
-  vga_setcolor(VGA_COLOR_RED);
-  printf("Interrupt: %d\n",detail.interrupt);
-  printf("EDI 0x%x\nESI 0x%x\nEBP 0x%x\nEDX 0x%x\nECX 0x%x\nEBX 0x%x\nEAX 0x%x\nEIP 0x%x\n",cpu.edi,cpu.esi,cpu.ebp,cpu.edx,cpu.ecx,cpu.ebx,cpu.eax,stack.eip);
-  vga_setcolor(VGA_COLOR_WHITE);  
-  sprintf("Interrupt: %d\n",detail.interrupt);
-  sprintf("EDI 0x%x\nESI 0x%x\nEBP 0x%x\nEDX 0x%x\nECX 0x%x\nEBX 0x%x\nEAX 0x%x\nEIP 0x%x\n",cpu.edi,cpu.esi,cpu.ebp,cpu.edx,cpu.ecx,cpu.ebx,cpu.eax,stack.eip);
+  if ( detail.interrupt == 33 ) {
+    char c = read_scan_code();
+    vga_putchar(c);
+    pic_acknowledge(33);
+  }
+  else {
+    vga_setcolor(VGA_COLOR_RED);
+    printf("Interrupt: %d\n",detail.interrupt);
+    printf("EDI 0x%x\nESI 0x%x\nEBP 0x%x\nEDX 0x%x\nECX 0x%x\nEBX 0x%x\nEAX 0x%x\nEIP 0x%x\n",cpu.edi,cpu.esi,cpu.ebp,cpu.edx,cpu.ecx,cpu.ebx,cpu.eax,stack.eip);
+    vga_setcolor(VGA_COLOR_WHITE);  
+    sprintf("Interrupt: %d\n",detail.interrupt);
+    sprintf("EDI 0x%x\nESI 0x%x\nEBP 0x%x\nEDX 0x%x\nECX 0x%x\nEBX 0x%x\nEAX 0x%x\nEIP 0x%x\n",cpu.edi,cpu.esi,cpu.ebp,cpu.edx,cpu.ecx,cpu.ebx,cpu.eax,stack.eip);
+  }
   while (1) {};
 }
 
