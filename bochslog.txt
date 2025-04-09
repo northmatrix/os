@@ -38,7 +38,7 @@
 00000000000i[USBCTL] Pluggable USB devices
 00000000000i[USBCTL]   floppy mouse tablet keypad keyboard hub disk cdrom
 00000000000i[USBCTL]   printer
-00000000000i[MEM0  ] allocated memory at 0x77ac838ba010. after alignment, vector=0x77ac838bb000
+00000000000i[MEM0  ] allocated memory at 0x7e73e6aba010. after alignment, vector=0x7e73e6abb000
 00000000000i[MEM0  ] 32.00MB
 00000000000i[MEM0  ] mem block size = 0x00020000, blocks=256
 00000000000i[MEM0  ] rom at 0xfffe0000/131072 ('/usr/share/bochs/BIOS-bochs-latest')
@@ -50,7 +50,7 @@
 00000000000i[DEV   ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[PLUGIN] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS  ] Using local time for initial clock
-00000000000i[CMOS  ] Setting initial clock to: Wed Apr  9 22:43:03 2025 (time0=1744238583)
+00000000000i[CMOS  ] Setting initial clock to: Wed Apr  9 23:34:05 2025 (time0=1744241645)
 00000000000i[PLUGIN] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA   ] channel 4 used by cascade
 00000000000i[PLUGIN] init_dev of 'pic' plugin device by virtual method
@@ -230,9 +230,9 @@
 00001390808i[PCI   ] i440FX PMC write to PAM register 59 (TLB Flush)
 00001391538i[BIOS  ] bios_table_cur_addr: 0x000f9fc4
 00001494298i[VBIOS ] VGABios $Id: vgabios.c 288 2021-05-28 19:05:28Z vruppert $
-00005143462i[BIOS  ] IDE time out
-00091719402i[BIOS  ] KBD: int09h_handler(): scancode & asciicode are zero?
-00124890830i[BIOS  ] Booting from 07c0:0000
-00124986103i[BIOS  ] int13_harddisk: function 41, unmapped device for ELDL=80
-00124989774i[BIOS  ] int13_harddisk: function 08, unmapped device for ELDL=80
-00124993445i[BIOS  ] *** int 15h function AX=00c0, BX=0000 not yet supported!
+00005143689i[BIOS  ] IDE time out
+00072209399i[BIOS  ] KBD: int09h_handler(): scancode & asciicode are zero?
+00088639514i[BIOS  ] Booting from 07c0:0000
+00088734787i[BIOS  ] int13_harddisk: function 41, unmapped device for ELDL=80
+00088738458i[BIOS  ] int13_harddisk: function 08, unmapped device for ELDL=80
+00088742129i[BIOS  ] *** int 15h function AX=00c0, BX=0000 not yet supported!
