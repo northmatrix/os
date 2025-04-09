@@ -17,5 +17,6 @@ void kmain() {
     "sti"
   );
   printf("Welcome To MyOS.\n");
+  printf("So far i have enabled VGA\nSERIAL COM1\nThe global descriptor table\nThe interrupt descriptor table\nAnd the Programmable interrupt controller\n");
 }
 
