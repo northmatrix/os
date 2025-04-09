@@ -38,7 +38,7 @@
 00000000000i[USBCTL] Pluggable USB devices
 00000000000i[USBCTL]   floppy mouse tablet keypad keyboard hub disk cdrom
 00000000000i[USBCTL]   printer
-00000000000i[MEM0  ] allocated memory at 0x76240bcba010. after alignment, vector=0x76240bcbb000
+00000000000i[MEM0  ] allocated memory at 0x77ac838ba010. after alignment, vector=0x77ac838bb000
 00000000000i[MEM0  ] 32.00MB
 00000000000i[MEM0  ] mem block size = 0x00020000, blocks=256
 00000000000i[MEM0  ] rom at 0xfffe0000/131072 ('/usr/share/bochs/BIOS-bochs-latest')
@@ -50,7 +50,7 @@
 00000000000i[DEV   ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[PLUGIN] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS  ] Using local time for initial clock
-00000000000i[CMOS  ] Setting initial clock to: Wed Apr  9 02:31:46 2025 (time0=1744165906)
+00000000000i[CMOS  ] Setting initial clock to: Wed Apr  9 22:43:03 2025 (time0=1744238583)
 00000000000i[PLUGIN] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA   ] channel 4 used by cascade
 00000000000i[PLUGIN] init_dev of 'pic' plugin device by virtual method
@@ -196,64 +196,43 @@
 00000319026i[BIOS  ] Shutdown flag 0
 00000319624i[BIOS  ] ram_size=0x02000000
 00000320056i[BIOS  ] ram_end=32MB
-00000332343i[BIOS  ] Found 1 cpu(s)
-00000345996i[BIOS  ] bios_table_addr: 0x000f9d98 end=0x000fcc00
-00000673812i[PCI   ] i440FX PMC write to PAM register 59 (TLB Flush)
-00001001747i[P2ISA ] PCI IRQ routing: PIRQA# set to 0x0b
-00001001771i[P2ISA ] PCI IRQ routing: PIRQB# set to 0x09
-00001001795i[P2ISA ] PCI IRQ routing: PIRQC# set to 0x0b
-00001001819i[P2ISA ] PCI IRQ routing: PIRQD# set to 0x09
-00001001829i[P2ISA ] write: ELCR2 = 0x0a
-00001002598i[BIOS  ] PIIX3/PIIX4 init: elcr=00 0a
-00001016274i[BIOS  ] PCI: bus=0 devfn=0x00: vendor_id=0x8086 device_id=0x1237 class=0x0600
-00001018618i[BIOS  ] PCI: bus=0 devfn=0x08: vendor_id=0x8086 device_id=0x7000 class=0x0601
-00001020801i[BIOS  ] PCI: bus=0 devfn=0x09: vendor_id=0x8086 device_id=0x7010 class=0x0101
-00001021036i[PIDE  ] BAR #4: i/o base address = 0xc000
-00001021652i[BIOS  ] region 4: 0x0000c000
-00001023687i[BIOS  ] PCI: bus=0 devfn=0x0a: vendor_id=0x8086 device_id=0x7020 class=0x0c03
-00001023900i[UHCI  ] BAR #4: i/o base address = 0xc020
-00001024516i[BIOS  ] region 4: 0x0000c020
-00001024644i[UHCI  ] new IRQ line = 9
-00001026566i[BIOS  ] PCI: bus=0 devfn=0x0b: vendor_id=0x8086 device_id=0x7113 class=0x0680
-00001026842i[ACPI  ] new IRQ line = 11
-00001026856i[ACPI  ] new IRQ line = 9
-00001026884i[ACPI  ] new PM base address: 0xb000
-00001026898i[ACPI  ] new SM base address: 0xb100
-00001026926i[PCI   ] setting SMRAM control register to 0x4a
-00001191061i[CPU0  ] Enter to System Management Mode
-00001191071i[CPU0  ] RSM: Resuming from System Management Mode
-00001355127i[PCI   ] setting SMRAM control register to 0x0a
-00001381792i[BIOS  ] MP table addr=0x000f9e70 MPC table addr=0x000f9da0 size=0xc8
-00001383499i[BIOS  ] SMBIOS table addr=0x000f9e80
-00001385588i[BIOS  ] ACPI tables: RSDP addr=0x000f9fa0 ACPI DATA addr=0x01ff0000 size=0xff8
-00001388572i[BIOS  ] Firmware waking vector 0x1ff00cc
-00001390826i[PCI   ] i440FX PMC write to PAM register 59 (TLB Flush)
-00001391556i[BIOS  ] bios_table_cur_addr: 0x000f9fc4
-00001494316i[VBIOS ] VGABios $Id: vgabios.c 288 2021-05-28 19:05:28Z vruppert $
-00005143819i[BIOS  ] IDE time out
-00220931400i[BIOS  ] KBD: int09h_handler(): scancode & asciicode are zero?
-00232221632i[BIOS  ] Booting from 07c0:0000
-00232316905i[BIOS  ] int13_harddisk: function 41, unmapped device for ELDL=80
-00232320576i[BIOS  ] int13_harddisk: function 08, unmapped device for ELDL=80
-00232324247i[BIOS  ] *** int 15h function AX=00c0, BX=0000 not yet supported!
-05212741594i[      ] Ctrl-C detected in signal handler.
-05212741595i[      ] dbg: Quit
-05212741595i[CPU0  ] CPU is in protected mode (active)
-05212741595i[CPU0  ] CS.mode = 32 bit
-05212741595i[CPU0  ] SS.mode = 32 bit
-05212741595i[CPU0  ] EFER   = 0x00000000
-05212741595i[CPU0  ] | EAX=00000000  EBX=0002cd80  ECX=000b8000  EDX=000003d5
-05212741595i[CPU0  ] | ESP=00105000  EBP=00105000  ESI=0002cef0  EDI=0002cef1
-05212741595i[CPU0  ] | IOPL=0 id vip vif ac vm rf nt of df IF tf sf zf af PF cf
-05212741595i[CPU0  ] | SEG sltr(index|ti|rpl)     base    limit G D
-05212741595i[CPU0  ] |  CS:0008( 0001| 0|  0) 00000000 ffffffff 1 1
-05212741595i[CPU0  ] |  DS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-05212741595i[CPU0  ] |  SS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-05212741595i[CPU0  ] |  ES:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-05212741595i[CPU0  ] |  FS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-05212741595i[CPU0  ] |  GS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-05212741595i[CPU0  ] | EIP=00100018 (00100018)
-05212741595i[CPU0  ] | CR0=0x60000011 CR2=0x00000000
-05212741595i[CPU0  ] | CR3=0x00000000 CR4=0x00000000
-05212741595i[CMOS  ] Last time is 1744171118 (Wed Apr  9 03:58:38 2025)
-05212741595i[SIM   ] quit_sim called with exit code 0
+00000332325i[BIOS  ] Found 1 cpu(s)
+00000345978i[BIOS  ] bios_table_addr: 0x000f9d98 end=0x000fcc00
+00000673794i[PCI   ] i440FX PMC write to PAM register 59 (TLB Flush)
+00001001729i[P2ISA ] PCI IRQ routing: PIRQA# set to 0x0b
+00001001753i[P2ISA ] PCI IRQ routing: PIRQB# set to 0x09
+00001001777i[P2ISA ] PCI IRQ routing: PIRQC# set to 0x0b
+00001001801i[P2ISA ] PCI IRQ routing: PIRQD# set to 0x09
+00001001811i[P2ISA ] write: ELCR2 = 0x0a
+00001002580i[BIOS  ] PIIX3/PIIX4 init: elcr=00 0a
+00001016256i[BIOS  ] PCI: bus=0 devfn=0x00: vendor_id=0x8086 device_id=0x1237 class=0x0600
+00001018600i[BIOS  ] PCI: bus=0 devfn=0x08: vendor_id=0x8086 device_id=0x7000 class=0x0601
+00001020783i[BIOS  ] PCI: bus=0 devfn=0x09: vendor_id=0x8086 device_id=0x7010 class=0x0101
+00001021018i[PIDE  ] BAR #4: i/o base address = 0xc000
+00001021634i[BIOS  ] region 4: 0x0000c000
+00001023669i[BIOS  ] PCI: bus=0 devfn=0x0a: vendor_id=0x8086 device_id=0x7020 class=0x0c03
+00001023882i[UHCI  ] BAR #4: i/o base address = 0xc020
+00001024498i[BIOS  ] region 4: 0x0000c020
+00001024626i[UHCI  ] new IRQ line = 9
+00001026548i[BIOS  ] PCI: bus=0 devfn=0x0b: vendor_id=0x8086 device_id=0x7113 class=0x0680
+00001026824i[ACPI  ] new IRQ line = 11
+00001026838i[ACPI  ] new IRQ line = 9
+00001026866i[ACPI  ] new PM base address: 0xb000
+00001026880i[ACPI  ] new SM base address: 0xb100
+00001026908i[PCI   ] setting SMRAM control register to 0x4a
+00001191043i[CPU0  ] Enter to System Management Mode
+00001191053i[CPU0  ] RSM: Resuming from System Management Mode
+00001355109i[PCI   ] setting SMRAM control register to 0x0a
+00001381774i[BIOS  ] MP table addr=0x000f9e70 MPC table addr=0x000f9da0 size=0xc8
+00001383481i[BIOS  ] SMBIOS table addr=0x000f9e80
+00001385570i[BIOS  ] ACPI tables: RSDP addr=0x000f9fa0 ACPI DATA addr=0x01ff0000 size=0xff8
+00001388554i[BIOS  ] Firmware waking vector 0x1ff00cc
+00001390808i[PCI   ] i440FX PMC write to PAM register 59 (TLB Flush)
+00001391538i[BIOS  ] bios_table_cur_addr: 0x000f9fc4
+00001494298i[VBIOS ] VGABios $Id: vgabios.c 288 2021-05-28 19:05:28Z vruppert $
+00005143462i[BIOS  ] IDE time out
+00091719402i[BIOS  ] KBD: int09h_handler(): scancode & asciicode are zero?
+00124890830i[BIOS  ] Booting from 07c0:0000
+00124986103i[BIOS  ] int13_harddisk: function 41, unmapped device for ELDL=80
+00124989774i[BIOS  ] int13_harddisk: function 08, unmapped device for ELDL=80
+00124993445i[BIOS  ] *** int 15h function AX=00c0, BX=0000 not yet supported!
