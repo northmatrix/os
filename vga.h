@@ -29,7 +29,7 @@ void vga_setcolor(enum vga_color fg);
 void vga_putchar(const char c);
 void vga_write(const char* data, size_t size);
 void vga_writestring(const char* data);
-
+void vga_backspace();
 
 #endif
 

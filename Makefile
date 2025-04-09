@@ -1,11 +1,10 @@
-OBJECTS = loader.o kmain.o io.o vga.o string.o serial.o gdt.o gdt_asm.o stdlib.o  interrupt_asm.o idt.o idt_asm.o  stdio.o
+OBJECTS = loader.o kmain.o io.o vga.o string.o serial.o gdt.o gdt_asm.o stdlib.o  interrupt_asm.o idt.o idt_asm.o  stdio.o pic.o
 CC = gcc
 CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
-			 -nostartfiles -nodefaultlibs  -c
+			 -nostartfiles -nodefaultlibs  -c  -Wall -Wextra -Werror
 LDFLAGS = -T link.ld -melf_i386
 AS = nasm
 ASFLAGS = -f elf
-#-Wall -Wextra -Werror
 all: kernel.elf
 
 kernel.elf: $(OBJECTS)

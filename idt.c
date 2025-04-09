@@ -1,9 +1,16 @@
 #include "idt.h"
 #include "stdio.h"
-#include "serial.h"
 #include "vga.h"
 #include "io.h"
-#include "pic.c"
+#include "pic.h"
+
+static char scancode_to_ascii[128] = {
+  0,  27, '1','2','3','4','5','6','7','8','9','0','-','=', '\b',
+ '\t','q','w','e','r','t','y','u','i','o','p','[',']','\n', 0,
+ 'a','s','d','f','g','h','j','k','l',';','\'','`', 0,'\\','z','x',
+ 'c','v','b','n','m',',','.','/', 0, '*', 0,' ', 0, // up to 57
+};
+
 
 #define IDT_TRAP_GATE_TYPE		1 
 #define PL0 0x0
@@ -94,9 +101,6 @@ DECLARE_INTERRUPT_HANDLER(46);
 DECLARE_INTERRUPT_HANDLER(47);
 
 
-void interrupt_handler_1(void);
-void interrupt_handler_2(void);
-
 idt_gate_t idt[IDT_NUM_ENTRIES];
 
 /* external assembly function to set the gdt */
@@ -116,20 +120,25 @@ unsigned char read_scan_code(void)
 
 /* eflags  cs eip errrorcode  interruptnum [eax.ebx...edi]  (topofthestakishere) */
 void interrupt_handler(struct cpu_state cpu, struct int_detail detail,struct stack_state stack) {
-  if ( detail.interrupt == 33 ) {
-    char c = read_scan_code();
-    vga_putchar(c);
-    pic_acknowledge(33);
+  if ( detail.interrupt >= 32 && detail.interrupt <= 47) {
+    unsigned char scancode = read_scan_code();
+    if (scancode == 0x0E) {
+      vga_backspace();
+    }
+    else if (!(scancode & 0x80)) {
+      char c = scancode_to_ascii[scancode];
+      vga_putchar(c);
+    }
+    PIC_sendEOI(2);
   }
   else {
     vga_setcolor(VGA_COLOR_RED);
     printf("Interrupt: %d\n",detail.interrupt);
     printf("EDI 0x%x\nESI 0x%x\nEBP 0x%x\nEDX 0x%x\nECX 0x%x\nEBX 0x%x\nEAX 0x%x\nEIP 0x%x\n",cpu.edi,cpu.esi,cpu.ebp,cpu.edx,cpu.ecx,cpu.ebx,cpu.eax,stack.eip);
     vga_setcolor(VGA_COLOR_WHITE);  
-    sprintf("Interrupt: %d\n",detail.interrupt);
-    sprintf("EDI 0x%x\nESI 0x%x\nEBP 0x%x\nEDX 0x%x\nECX 0x%x\nEBX 0x%x\nEAX 0x%x\nEIP 0x%x\n",cpu.edi,cpu.esi,cpu.ebp,cpu.edx,cpu.ecx,cpu.ebx,cpu.eax,stack.eip);
+    //sprintf("Interrupt: %d\n",detail.interrupt);
+    //sprintf("EDI 0x%x\nESI 0x%x\nEBP 0x%x\nEDX 0x%x\nECX 0x%x\nEBX 0x%x\nEAX 0x%x\nEIP 0x%x\n",cpu.edi,cpu.esi,cpu.ebp,cpu.edx,cpu.ecx,cpu.ebx,cpu.eax,stack.eip);
   }
-  while (1) {};
 }
 
 static void create_idt_gate(uint8_t n, uint32_t handler, uint8_t type, uint8_t pl) {

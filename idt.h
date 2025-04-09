@@ -3,9 +3,9 @@
 
 #include "stdint.h"
 
-#define IDT_NUM_ENTRIES 3
+#define IDT_NUM_ENTRIES 36
 
 void idt_init();
-
+unsigned char read_scan_code(void);
 
 #endif

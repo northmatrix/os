@@ -10,9 +10,12 @@ void kmain() {
   vga_initialize(); 
   serial_initialize(); 
   gdt_init(); 
-  idt_init();
   pic_init();
+  idt_init();
   //writing
+  __asm__ (
+    "sti"
+  );
   printf("Welcome To MyOS.\n");
 }
 

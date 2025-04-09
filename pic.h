@@ -1,7 +1,9 @@
 #ifndef PIC_H
 #define PIC_H 
 
+#include "stdint.h"
+
 void pic_init();
-void pic_acknowledge(unsigned int interrupt);
+void PIC_sendEOI(uint8_t irq);
 
 #endif 

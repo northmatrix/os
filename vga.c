@@ -121,3 +121,14 @@ void vga_writestring(const char* data) {
 void vga_setcolor(enum vga_color fg) {
   terminal_color = vga_entry_color(fg,VGA_COLOR_BLACK);
 }
+
+void vga_backspace() {
+  if (--terminal_column == 0) {
+    terminal_column = VGA_WIDTH;
+    if (terminal_row != 0) {
+      terminal_row  --;
+    }
+  }
+  vga_putentryat((char) 0,terminal_color,terminal_column,terminal_row);
+  vga_move_cursor(terminal_row * VGA_WIDTH + terminal_column);
+}
