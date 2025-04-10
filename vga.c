@@ -68,6 +68,24 @@ void vga_shift_up() {
    vga_move_cursor(terminal_row * VGA_WIDTH + terminal_column);
 }
 
+void vga_backspace() {
+  //if (--terminal_column == 0) {
+  //  terminal_column = VGA_WIDTH;
+  //  if (terminal_row != 0) {
+  //    terminal_row  --;
+  //  }
+  //}
+  if (terminal_column > 0) {
+    --terminal_column;
+  } else if (terminal_row > 0) {
+    --terminal_row;
+    terminal_column = VGA_WIDTH - 1;
+  }
+  vga_putentryat((char) 0,terminal_color,terminal_column,terminal_row);
+  vga_move_cursor(terminal_row * VGA_WIDTH + terminal_column);
+}
+
+
 void vga_putchar(char c) {
   unsigned char uc = c;
   if (uc == '\n') {
@@ -76,8 +94,9 @@ void vga_putchar(char c) {
     if ( terminal_row == VGA_HEIGHT) {
       vga_shift_up();
     }
-  }
-  else {
+  } else if (uc == '\b') {
+    vga_backspace();
+  } else {
     vga_putentryat(uc,terminal_color,terminal_column,terminal_row);
     if(++terminal_column == VGA_WIDTH) {
       terminal_column = 0;
@@ -116,15 +135,4 @@ void vga_writestring(const char* data) {
 
 void vga_setcolor(enum vga_color fg) {
   terminal_color = vga_entry_color(fg,VGA_COLOR_BLACK);
-}
-
-void vga_backspace() {
-  if (--terminal_column == 0) {
-    terminal_column = VGA_WIDTH;
-    if (terminal_row != 0) {
-      terminal_row  --;
-    }
-  }
-  vga_putentryat((char) 0,terminal_color,terminal_column,terminal_row);
-  vga_move_cursor(terminal_row * VGA_WIDTH + terminal_column);
 }
