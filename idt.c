@@ -4,12 +4,6 @@
 #include "io.h"
 #include "pic.h"
 
-static char scancode_to_ascii[128] = {
-  0,  27, '1','2','3','4','5','6','7','8','9','0','-','=', '\b',
- '\t','q','w','e','r','t','y','u','i','o','p','[',']','\n', 0,
- 'a','s','d','f','g','h','j','k','l',';','\'','`', 0,'\\','z','x',
- 'c','v','b','n','m',',','.','/', 0, '*', 0,' ', 0, // up to 57
-};
 
 
 #define IDT_TRAP_GATE_TYPE		1 
@@ -29,26 +23,6 @@ struct idt_ptr {
 } __attribute__((packed));
 typedef struct idt_ptr idt_ptr_t;
 
-struct cpu_state {
-  uint32_t edi;
-	uint32_t esi;
-	uint32_t ebp;
-	uint32_t edx;
-	uint32_t ecx;
-	uint32_t ebx;
-	uint32_t eax;
-} __attribute__((packed));
-
-struct int_detail {
-  unsigned int interrupt;
-  unsigned int error_code;
-} __attribute__((packed));
-
-struct stack_state {
-    unsigned int eip;
-    unsigned int cs;
-    unsigned int eflags;
-} __attribute__((packed));
 
 struct idt_gate {
 	uint16_t handler_low;
@@ -106,40 +80,6 @@ idt_gate_t idt[IDT_NUM_ENTRIES];
 /* external assembly function to set the gdt */
 void load_idt(uint32_t* idt_ptr_t);
 
-#define KBD_DATA_PORT   0x60
-
-    /** read_scan_code:
-     *  Reads a scan code from the keyboard
-     *
-     *  @return The scan code (NOT an ASCII character!)
-     */
-unsigned char read_scan_code(void)
-{
-    return inb(KBD_DATA_PORT);
-}
-
-/* eflags  cs eip errrorcode  interruptnum [eax.ebx...edi]  (topofthestakishere) */
-void interrupt_handler(struct cpu_state cpu, struct int_detail detail,struct stack_state stack) {
-  if ( detail.interrupt >= 32 && detail.interrupt <= 47) {
-    unsigned char scancode = read_scan_code();
-    if (scancode == 0x0E) {
-      vga_backspace();
-    }
-    else if (!(scancode & 0x80)) {
-      char c = scancode_to_ascii[scancode];
-      vga_putchar(c);
-    }
-    PIC_sendEOI(2);
-  }
-  else {
-    vga_setcolor(VGA_COLOR_RED);
-    printf("Interrupt: %d\n",detail.interrupt);
-    printf("EDI 0x%x\nESI 0x%x\nEBP 0x%x\nEDX 0x%x\nECX 0x%x\nEBX 0x%x\nEAX 0x%x\nEIP 0x%x\n",cpu.edi,cpu.esi,cpu.ebp,cpu.edx,cpu.ecx,cpu.ebx,cpu.eax,stack.eip);
-    vga_setcolor(VGA_COLOR_WHITE);  
-    //sprintf("Interrupt: %d\n",detail.interrupt);
-    //sprintf("EDI 0x%x\nESI 0x%x\nEBP 0x%x\nEDX 0x%x\nECX 0x%x\nEBX 0x%x\nEAX 0x%x\nEIP 0x%x\n",cpu.edi,cpu.esi,cpu.ebp,cpu.edx,cpu.ecx,cpu.ebx,cpu.eax,stack.eip);
-  }
-}
 
 static void create_idt_gate(uint8_t n, uint32_t handler, uint8_t type, uint8_t pl) {
     idt[n].handler_low = handler & 0x0000FFFF; // this is equiv to only the  lower 16 as the hex is a and mask of just 1111 1111 1111 1111

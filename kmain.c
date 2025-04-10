@@ -4,14 +4,16 @@
 #include "idt.h"
 #include "stdio.h" 
 #include "pic.h" 
+#include "keyboard.h" 
 
 void kmain() {
   // Initialization vga, serial, gdt, idt
   vga_initialize(); 
   serial_initialize(); 
-  gdt_init(); 
-  pic_init();
+  gdt_init();
   idt_init();
+  pic_init();
+  keyboard_init();
   //writing
   __asm__ (
     "sti"

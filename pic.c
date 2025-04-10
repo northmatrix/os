@@ -19,7 +19,7 @@ static inline void io_wait(void)
 
 void PIC_sendEOI(uint8_t irq)
 {
-	if(irq >= 8)
+	if(irq >= 32 && irq <= 47)
 		outb(PIC2_COMMAND,PIC_EOI);
 	
 	outb(PIC1_COMMAND,PIC_EOI);

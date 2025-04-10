@@ -1,7 +1,7 @@
-OBJECTS = loader.o kmain.o io.o vga.o string.o serial.o gdt.o gdt_asm.o stdlib.o  interrupt_asm.o idt.o idt_asm.o  stdio.o pic.o
+OBJECTS = loader.o kmain.o io.o vga.o string.o serial.o gdt.o gdt_asm.o stdlib.o  interrupt_asm.o idt.o idt_asm.o  stdio.o pic.o interrupt.o keyboard.o
 CC = gcc
 CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
-			 -nostartfiles -nodefaultlibs  -c  -Wall -Wextra -Werror
+			 -nostartfiles -nodefaultlibs  -c  -Wall -Wextra -Werror -mno-sse -mno-sse2 -mno-mmx -mno-3dnow -mfpmath=387
 LDFLAGS = -T link.ld -melf_i386
 AS = nasm
 ASFLAGS = -f elf
