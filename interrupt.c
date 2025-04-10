@@ -21,12 +21,10 @@ void interrupt_handler(cpu_state_t state, interrupt_detail_t info, stack_state_t
 {
     sprintf("Interrupt: %d\n",info.interrupt);
     sprintf("EIP: %x\n",exec.eip);
-
+    sprintf("hello\n");
     if (interrupt_handlers[info.interrupt] != NULL) {
         interrupt_handlers[info.interrupt](state, info, exec);
     } else {
-        sprintf("interrupt_handler",
-                  "unhandled interrupt: %u, eip: %X, cs: %X, eflags: %X\n",
-                  info.interrupt, exec.eip, exec.cs, exec.eflags);
+        sprintf("interrupt_handler unhandled interrupt: %d, eip: %d, cs: %d, eflags: %d\n",info.interrupt, exec.eip, exec.cs, exec.eflags);
     }
 }

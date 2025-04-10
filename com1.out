@@ -1,6 +1,3 @@
-Interrupt: 33
-EIP: 1d05856
-Interrupt: 33
-EIP: 1dd199a
 Interrupt: 6
-EIP: 1ff0095
+EIP: 22358
+hello
