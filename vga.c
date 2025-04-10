@@ -113,7 +113,7 @@ void vga_putchar(char c) {
 void vga_initialize() {
   terminal_row = 0;
   terminal_column = 0;
-  terminal_color = vga_entry_color(VGA_COLOR_LIGHT_GREEN,VGA_COLOR_BLACK);
+  terminal_color = vga_entry_color(VGA_COLOR_LIGHT_GREY,VGA_COLOR_BLACK);
   terminal_buffer = VGA_MEMORY;
   for(unsigned int i = 0; i < VGA_HEIGHT; i ++ ) {
     for(unsigned int j = 0; j < VGA_WIDTH; j ++ ) {
