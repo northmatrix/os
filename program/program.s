@@ -1,2 +1,2 @@
-mov eax, 0xDEADBEEF
-jmp $
+mov eax, 7
+ret

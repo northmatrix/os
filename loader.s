@@ -23,7 +23,7 @@ align 4                         ; the code must be 4 byte aligned
 
 loader:                                         ; the loader label (defined as entry point in linker script)
     mov esp, kernel_stack + KERNEL_STACK_SIZE   ;point esp to the start of the stack ( end of memory area )
-    mov ebp, esp
+    mov esp, esp
     push ebx
     call kmain 
     pop ebx

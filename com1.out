@@ -1,3 +1,4 @@
-Interrupt: 6
-EIP: 22358
-hello
+Testing serial worksLoading module from 0x108000 to 0x108007
+Interrupt: 0
+EIP: 100139
+EAX: 100007

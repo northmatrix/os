@@ -21,7 +21,7 @@ void interrupt_handler(cpu_state_t state, interrupt_detail_t info, stack_state_t
 {
     sprintf("Interrupt: %d\n",info.interrupt);
     sprintf("EIP: %x\n",exec.eip);
-    sprintf("hello\n");
+    sprintf("EAX: %x\n",state.eax);
     if (interrupt_handlers[info.interrupt] != NULL) {
         interrupt_handlers[info.interrupt](state, info, exec);
     } else {
