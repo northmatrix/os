@@ -22,8 +22,7 @@ void kmain(unsigned int ebx) {
   printf("GDT INIT\n");
   printf("IDT INIT\n");
   printf("KBD INIT\n\n");
-
-  sprintf("Testing serial works");
+  sprintf("Testing serial works\n");
   multiboot_info_t *mbinfo = (multiboot_info_t *) ebx;
   unsigned int address_of_module = mbinfo->mods_addr;
   unsigned int module_count = mbinfo->mods_count;
@@ -38,9 +37,6 @@ void kmain(unsigned int ebx) {
     if (module_end > module_start) {
       call_module_t start_program = (call_module_t) module_start;
       start_program();
-      __asm__(
-        "int $0"
-      );
       sprintf("Program has run\n");
     }
   }
@@ -53,5 +49,6 @@ void kmain(unsigned int ebx) {
     vga_setcolor(i);
     printf("%c%c", 0xDB, 0xDB);
   }
+
 }
 

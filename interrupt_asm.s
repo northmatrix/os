@@ -11,6 +11,7 @@
     %macro error_code_interrupt_handler 1
     global interrupt_handler_%1
     interrupt_handler_%1:
+        push    dword 0
         push    dword %1                    ; push the interrupt number
         jmp     common_interrupt_handler    ; jump to the common handler
     %endmacro

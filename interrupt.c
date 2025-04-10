@@ -20,8 +20,12 @@ uint32_t register_interrupt_handler(uint32_t interrupt,
 void interrupt_handler(cpu_state_t state, interrupt_detail_t info, stack_state_t exec)
 {
     sprintf("Interrupt: %d\n",info.interrupt);
+    sprintf("Error: %d\n",info.error_code);
     sprintf("EIP: %x\n",exec.eip);
     sprintf("EAX: %x\n",state.eax);
+    sprintf("EBP: %x\n",state.ebp);
+    sprintf("EBX: %x\n",state.ebx);
+    sprintf("ESI: %x\n\n",state.esi);
     if (interrupt_handlers[info.interrupt] != NULL) {
         interrupt_handlers[info.interrupt](state, info, exec);
     } else {

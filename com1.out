@@ -1,4 +1,3 @@
-Testing serial worksLoading module from 0x108000 to 0x108007
-Interrupt: 0
-EIP: 100139
-EAX: 100007
+Testing serial works
+Loading module from 0x108000 to 0x108007
+Program has run
