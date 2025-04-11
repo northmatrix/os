@@ -7,8 +7,11 @@
 #include "keyboard.h" 
 #include "multiboot.h"
 #include "interrupt.h"
+#include "paging.h" 
+
 
 typedef void (*call_module_t)(void);
+
 
 void kmain(unsigned int ebx) {
   vga_initialize(); 
@@ -18,7 +21,9 @@ void kmain(unsigned int ebx) {
   init_interrupt();
   pic_init();
   keyboard_init();
-
+  paging_init(); 
+  
+  enable_interrupts();
   printf("Welcome to RunexOS\n\n");
   printf("VGA INIT\n");
   printf("COM INIT\n");
