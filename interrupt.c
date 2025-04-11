@@ -2,26 +2,19 @@
 #include "idt.h"
 #include "stdio.h" 
 
+#define NULL ((void*)0)
 
-static interrupt_handler_t interrupt_handlers[IDT_NUM_ENTRIES]; 
-
-// Manually set te array to 0 initialized because C is not doing it
-void init_interrupt() {
-  for(int i = 0; i < IDT_NUM_ENTRIES; i++) {
-    interrupt_handlers[i] = (interrupt_handler_t)0;
-  }
-}
+static interrupt_handler_t interrupt_handlers[IDT_NUM_ENTRIES] = { (interrupt_handler_t) NULL };
 
 uint32_t register_interrupt_handler(uint32_t interrupt,
                                     interrupt_handler_t handler)
 {
-    if (interrupt > 255) {
+    if (interrupt > IDT_NUM_ENTRIES ) {
         return 1;
     }
     if (interrupt_handlers[interrupt] != 0) {
         return 1;
     }
-
     interrupt_handlers[interrupt] = handler;
     return 0;
 }

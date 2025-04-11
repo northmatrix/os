@@ -1,0 +1,3214 @@
+
+kernel.elf:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+00100000 <loader-0xc>:
+  100000:	02 b0 ad 1b 01 00    	add    0x11bad(%eax),%dh
+  100006:	00 00                	add    %al,(%eax)
+  100008:	fd                   	std
+  100009:	4f                   	dec    %edi
+  10000a:	52                   	push   %edx
+  10000b:	e4                 	in     $0xbc,%al
+
+0010000c <loader>:
+  10000c:	bc 00 50 10 00       	mov    $0x105000,%esp
+  100011:	89 e4                	mov    %esp,%esp
+  100013:	53                   	push   %ebx
+  100014:	e8 03 00 00 00       	call   10001c <kmain>
+  100019:	5b                   	pop    %ebx
+
+0010001a <loader.loop>:
+  10001a:	eb fe                	jmp    10001a <loader.loop>
+
+0010001c <kmain>:
+  10001c:	55                   	push   %ebp
+  10001d:	89 e5                	mov    %esp,%ebp
+  10001f:	83 ec 38             	sub    $0x38,%esp
+  100022:	e8 9e 05 00 00       	call   1005c5 <vga_initialize>
+  100027:	e8 ff 07 00 00       	call   10082b <serial_initialize>
+  10002c:	e8 30 09 00 00       	call   100961 <gdt_init>
+  100031:	e8 dc 0d 00 00       	call   100e12 <idt_init>
+  100036:	e8 49 16 00 00       	call   101684 <init_interrupt>
+  10003b:	e8 1f 16 00 00       	call   10165f <pic_init>
+  100040:	e8 a3 18 00 00       	call   1018e8 <keyboard_init>
+  100045:	e8 40 19 00 00       	call   10198a <paging_init>
+  10004a:	e8 28 0c 00 00       	call   100c77 <enable_interrupts>
+  10004f:	83 ec 0c             	sub    $0xc,%esp
+  100052:	68 00 20 10 00       	push   $0x102000
+  100057:	e8 ec 10 00 00       	call   101148 <printf>
+  10005c:	83 c4 10             	add    $0x10,%esp
+  10005f:	83 ec 0c             	sub    $0xc,%esp
+  100062:	68 15 20 10 00       	push   $0x102015
+  100067:	e8 dc 10 00 00       	call   101148 <printf>
+  10006c:	83 c4 10             	add    $0x10,%esp
+  10006f:	83 ec 0c             	sub    $0xc,%esp
+  100072:	68 1f 20 10 00       	push   $0x10201f
+  100077:	e8 cc 10 00 00       	call   101148 <printf>
+  10007c:	83 c4 10             	add    $0x10,%esp
+  10007f:	83 ec 0c             	sub    $0xc,%esp
+  100082:	68 29 20 10 00       	push   $0x102029
+  100087:	e8 bc 10 00 00       	call   101148 <printf>
+  10008c:	83 c4 10             	add    $0x10,%esp
+  10008f:	83 ec 0c             	sub    $0xc,%esp
+  100092:	68 33 20 10 00       	push   $0x102033
+  100097:	e8 ac 10 00 00       	call   101148 <printf>
+  10009c:	83 c4 10             	add    $0x10,%esp
+  10009f:	83 ec 0c             	sub    $0xc,%esp
+  1000a2:	68 3d 20 10 00       	push   $0x10203d
+  1000a7:	e8 9c 10 00 00       	call   101148 <printf>
+  1000ac:	83 c4 10             	add    $0x10,%esp
+  1000af:	83 ec 0c             	sub    $0xc,%esp
+  1000b2:	68 48 20 10 00       	push   $0x102048
+  1000b7:	e8 ed 11 00 00       	call   1012a9 <sprintf>
+  1000bc:	83 c4 10             	add    $0x10,%esp
+  1000bf:	8b 45 08             	mov    0x8(%ebp),%eax
+  1000c2:	89 45 ec             	mov    %eax,-0x14(%ebp)
+  1000c5:	8b 45 ec             	mov    -0x14(%ebp),%eax
+  1000c8:	8b 40 18             	mov    0x18(%eax),%eax
+  1000cb:	89 45 e8             	mov    %eax,-0x18(%ebp)
+  1000ce:	8b 45 ec             	mov    -0x14(%ebp),%eax
+  1000d1:	8b 40 14             	mov    0x14(%eax),%eax
+  1000d4:	89 45 e4             	mov    %eax,-0x1c(%ebp)
+  1000d7:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%ebp)
+  1000de:	eb 5e                	jmp    10013e <kmain+0x122>
+  1000e0:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  1000e3:	c1 e0 04             	shl    $0x4,%eax
+  1000e6:	89 c2                	mov    %eax,%edx
+  1000e8:	8b 45 e8             	mov    -0x18(%ebp),%eax
+  1000eb:	01 d0                	add    %edx,%eax
+  1000ed:	89 45 e0             	mov    %eax,-0x20(%ebp)
+  1000f0:	8b 45 e0             	mov    -0x20(%ebp),%eax
+  1000f3:	8b 00                	mov    (%eax),%eax
+  1000f5:	89 45 dc             	mov    %eax,-0x24(%ebp)
+  1000f8:	8b 45 e0             	mov    -0x20(%ebp),%eax
+  1000fb:	8b 40 04             	mov    0x4(%eax),%eax
+  1000fe:	89 45 d8             	mov    %eax,-0x28(%ebp)
+  100101:	83 ec 04             	sub    $0x4,%esp
+  100104:	ff 75 d8             	push   -0x28(%ebp)
+  100107:	ff 75 dc             	push   -0x24(%ebp)
+  10010a:	68 60 20 10 00       	push   $0x102060
+  10010f:	e8 95 11 00 00       	call   1012a9 <sprintf>
+  100114:	83 c4 10             	add    $0x10,%esp
+  100117:	8b 45 d8             	mov    -0x28(%ebp),%eax
+  10011a:	3b 45 dc             	cmp    -0x24(%ebp),%eax
+  10011d:	76 1b                	jbe    10013a <kmain+0x11e>
+  10011f:	8b 45 dc             	mov    -0x24(%ebp),%eax
+  100122:	89 45 d4             	mov    %eax,-0x2c(%ebp)
+  100125:	8b 45 d4             	mov    -0x2c(%ebp),%eax
+  100128:	ff d0                	call   *%eax
+  10012a:	83 ec 0c             	sub    $0xc,%esp
+  10012d:	68 82 20 10 00       	push   $0x102082
+  100132:	e8 72 11 00 00       	call   1012a9 <sprintf>
+  100137:	83 c4 10             	add    $0x10,%esp
+  10013a:	83 45 f4 01          	addl   $0x1,-0xc(%ebp)
+  10013e:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  100141:	3b 45 e4             	cmp    -0x1c(%ebp),%eax
+  100144:	72 9a                	jb     1000e0 <kmain+0xc4>
+  100146:	8b 45 ec             	mov    -0x14(%ebp),%eax
+  100149:	8b 40 04             	mov    0x4(%eax),%eax
+  10014c:	83 ec 08             	sub    $0x8,%esp
+  10014f:	50                   	push   %eax
+  100150:	68 93 20 10 00       	push   $0x102093
+  100155:	e8 ee 0f 00 00       	call   101148 <printf>
+  10015a:	83 c4 10             	add    $0x10,%esp
+  10015d:	8b 45 ec             	mov    -0x14(%ebp),%eax
+  100160:	8b 40 08             	mov    0x8(%eax),%eax
+  100163:	83 ec 08             	sub    $0x8,%esp
+  100166:	50                   	push   %eax
+  100167:	68 ad 20 10 00       	push   $0x1020ad
+  10016c:	e8 d7 0f 00 00       	call   101148 <printf>
+  100171:	83 c4 10             	add    $0x10,%esp
+  100174:	83 ec 0c             	sub    $0xc,%esp
+  100177:	68 c8 20 10 00       	push   $0x1020c8
+  10017c:	e8 c7 0f 00 00       	call   101148 <printf>
+  100181:	83 c4 10             	add    $0x10,%esp
+  100184:	c6 45 f3 01          	movb   $0x1,-0xd(%ebp)
+  100188:	eb 34                	jmp    1001be <kmain+0x1a2>
+  10018a:	0f b6 45 f3          	movzbl -0xd(%ebp),%eax
+  10018e:	83 ec 0c             	sub    $0xc,%esp
+  100191:	50                   	push   %eax
+  100192:	e8 5b 05 00 00       	call   1006f2 <vga_setcolor>
+  100197:	83 c4 10             	add    $0x10,%esp
+  10019a:	83 ec 04             	sub    $0x4,%esp
+  10019d:	68 db 00 00 00       	push   $0xdb
+  1001a2:	68 db 00 00 00       	push   $0xdb
+  1001a7:	68 e4 20 10 00       	push   $0x1020e4
+  1001ac:	e8 97 0f 00 00       	call   101148 <printf>
+  1001b1:	83 c4 10             	add    $0x10,%esp
+  1001b4:	0f b6 45 f3          	movzbl -0xd(%ebp),%eax
+  1001b8:	83 c0 01             	add    $0x1,%eax
+  1001bb:	88 45 f3             	mov    %al,-0xd(%ebp)
+  1001be:	80 7d f3 0f          	cmpb   $0xf,-0xd(%ebp)
+  1001c2:	76 c6                	jbe    10018a <kmain+0x16e>
+  1001c4:	83 ec 0c             	sub    $0xc,%esp
+  1001c7:	6a 07                	push   $0x7
+  1001c9:	e8 24 05 00 00       	call   1006f2 <vga_setcolor>
+  1001ce:	83 c4 10             	add    $0x10,%esp
+  1001d1:	90                   	nop
+  1001d2:	c9                   	leave
+  1001d3:	c3                   	ret
+  1001d4:	66 90                	xchg   %ax,%ax
+  1001d6:	66 90                	xchg   %ax,%ax
+  1001d8:	66 90                	xchg   %ax,%ax
+  1001da:	66 90                	xchg   %ax,%ax
+  1001dc:	66 90                	xchg   %ax,%ax
+  1001de:	66 90                	xchg   %ax,%ax
+
+001001e0 <outb>:
+  1001e0:	8a 44 24 08          	mov    0x8(%esp),%al
+  1001e4:	66 8b 54 24 04       	mov    0x4(%esp),%dx
+  1001e9:	ee                   	out    %al,(%dx)
+  1001ea:	c3                   	ret
+
+001001eb <inb>:
+  1001eb:	66 8b 54 24 04       	mov    0x4(%esp),%dx
+  1001f0:	ec                   	in     (%dx),%al
+  1001f1:	c3                   	ret
+
+001001f2 <vga_entry_color>:
+  1001f2:	55                   	push   %ebp
+  1001f3:	89 e5                	mov    %esp,%ebp
+  1001f5:	e8 c6 17 00 00       	call   1019c0 <__x86.get_pc_thunk.ax>
+  1001fa:	05 86 2e 00 00       	add    $0x2e86,%eax
+  1001ff:	8b 45 0c             	mov    0xc(%ebp),%eax
+  100202:	c1 e0 04             	shl    $0x4,%eax
+  100205:	89 c2                	mov    %eax,%edx
+  100207:	8b 45 08             	mov    0x8(%ebp),%eax
+  10020a:	09 d0                	or     %edx,%eax
+  10020c:	5d                   	pop    %ebp
+  10020d:	c3                   	ret
+
+0010020e <vga_entry>:
+  10020e:	55                   	push   %ebp
+  10020f:	89 e5                	mov    %esp,%ebp
+  100211:	83 ec 08             	sub    $0x8,%esp
+  100214:	e8 a7 17 00 00       	call   1019c0 <__x86.get_pc_thunk.ax>
+  100219:	05 67 2e 00 00       	add    $0x2e67,%eax
+  10021e:	8b 55 08             	mov    0x8(%ebp),%edx
+  100221:	8b 45 0c             	mov    0xc(%ebp),%eax
+  100224:	88 55 fc             	mov    %dl,-0x4(%ebp)
+  100227:	88 45 f8             	mov    %al,-0x8(%ebp)
+  10022a:	0f b6 55 fc          	movzbl -0x4(%ebp),%edx
+  10022e:	0f b6 45 f8          	movzbl -0x8(%ebp),%eax
+  100232:	c1 e0 08             	shl    $0x8,%eax
+  100235:	09 d0                	or     %edx,%eax
+  100237:	c9                   	leave
+  100238:	c3                   	ret
+
+00100239 <vga_move_cursor>:
+  100239:	55                   	push   %ebp
+  10023a:	89 e5                	mov    %esp,%ebp
+  10023c:	53                   	push   %ebx
+  10023d:	83 ec 14             	sub    $0x14,%esp
+  100240:	e8 83 17 00 00       	call   1019c8 <__x86.get_pc_thunk.bx>
+  100245:	81 c3 3b 2e 00 00    	add    $0x2e3b,%ebx
+  10024b:	8b 45 08             	mov    0x8(%ebp),%eax
+  10024e:	66 89 45 f4          	mov    %ax,-0xc(%ebp)
+  100252:	83 ec 08             	sub    $0x8,%esp
+  100255:	6a 0e                	push   $0xe
+  100257:	68 d4 03 00 00       	push   $0x3d4
+  10025c:	e8 7f ff ff ff       	call   1001e0 <outb>
+  100261:	83 c4 10             	add    $0x10,%esp
+  100264:	0f b7 45 f4          	movzwl -0xc(%ebp),%eax
+  100268:	66 c1 e8 08          	shr    $0x8,%ax
+  10026c:	0f b6 c0             	movzbl %al,%eax
+  10026f:	83 ec 08             	sub    $0x8,%esp
+  100272:	50                   	push   %eax
+  100273:	68 d5 03 00 00       	push   $0x3d5
+  100278:	e8 63 ff ff ff       	call   1001e0 <outb>
+  10027d:	83 c4 10             	add    $0x10,%esp
+  100280:	83 ec 08             	sub    $0x8,%esp
+  100283:	6a 0f                	push   $0xf
+  100285:	68 d4 03 00 00       	push   $0x3d4
+  10028a:	e8 51 ff ff ff       	call   1001e0 <outb>
+  10028f:	83 c4 10             	add    $0x10,%esp
+  100292:	0f b7 45 f4          	movzwl -0xc(%ebp),%eax
+  100296:	0f b6 c0             	movzbl %al,%eax
+  100299:	83 ec 08             	sub    $0x8,%esp
+  10029c:	50                   	push   %eax
+  10029d:	68 d5 03 00 00       	push   $0x3d5
+  1002a2:	e8 39 ff ff ff       	call   1001e0 <outb>
+  1002a7:	83 c4 10             	add    $0x10,%esp
+  1002aa:	90                   	nop
+  1002ab:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  1002ae:	c9                   	leave
+  1002af:	c3                   	ret
+
+001002b0 <vga_putentryat>:
+  1002b0:	55                   	push   %ebp
+  1002b1:	89 e5                	mov    %esp,%ebp
+  1002b3:	53                   	push   %ebx
+  1002b4:	83 ec 18             	sub    $0x18,%esp
+  1002b7:	e8 08 17 00 00       	call   1019c4 <__x86.get_pc_thunk.cx>
+  1002bc:	81 c1 c4 2d 00 00    	add    $0x2dc4,%ecx
+  1002c2:	8b 55 08             	mov    0x8(%ebp),%edx
+  1002c5:	8b 45 0c             	mov    0xc(%ebp),%eax
+  1002c8:	88 55 e8             	mov    %dl,-0x18(%ebp)
+  1002cb:	88 45 e4             	mov    %al,-0x1c(%ebp)
+  1002ce:	b8 50 00 00 00       	mov    $0x50,%eax
+  1002d3:	0f af 45 14          	imul   0x14(%ebp),%eax
+  1002d7:	89 c2                	mov    %eax,%edx
+  1002d9:	8b 45 10             	mov    0x10(%ebp),%eax
+  1002dc:	01 d0                	add    %edx,%eax
+  1002de:	89 45 f8             	mov    %eax,-0x8(%ebp)
+  1002e1:	0f b6 55 e4          	movzbl -0x1c(%ebp),%edx
+  1002e5:	0f b6 45 e8          	movzbl -0x18(%ebp),%eax
+  1002e9:	8b 89 8c 1f 00 00    	mov    0x1f8c(%ecx),%ecx
+  1002ef:	8b 5d f8             	mov    -0x8(%ebp),%ebx
+  1002f2:	01 db                	add    %ebx,%ebx
+  1002f4:	01 cb                	add    %ecx,%ebx
+  1002f6:	52                   	push   %edx
+  1002f7:	50                   	push   %eax
+  1002f8:	e8 11 ff ff ff       	call   10020e <vga_entry>
+  1002fd:	83 c4 08             	add    $0x8,%esp
+  100300:	66 89 03             	mov    %ax,(%ebx)
+  100303:	90                   	nop
+  100304:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  100307:	c9                   	leave
+  100308:	c3                   	ret
+
+00100309 <vga_shift_up>:
+  100309:	55                   	push   %ebp
+  10030a:	89 e5                	mov    %esp,%ebp
+  10030c:	53                   	push   %ebx
+  10030d:	83 ec 24             	sub    $0x24,%esp
+  100310:	e8 ab 16 00 00       	call   1019c0 <__x86.get_pc_thunk.ax>
+  100315:	05 6b 2d 00 00       	add    $0x2d6b,%eax
+  10031a:	c7 45 f4 01 00 00 00 	movl   $0x1,-0xc(%ebp)
+  100321:	eb 64                	jmp    100387 <vga_shift_up+0x7e>
+  100323:	c7 45 f0 00 00 00 00 	movl   $0x0,-0x10(%ebp)
+  10032a:	eb 4d                	jmp    100379 <vga_shift_up+0x70>
+  10032c:	ba 50 00 00 00       	mov    $0x50,%edx
+  100331:	89 d1                	mov    %edx,%ecx
+  100333:	0f af 4d f4          	imul   -0xc(%ebp),%ecx
+  100337:	8b 55 f0             	mov    -0x10(%ebp),%edx
+  10033a:	01 ca                	add    %ecx,%edx
+  10033c:	89 55 e4             	mov    %edx,-0x1c(%ebp)
+  10033f:	8b 55 f4             	mov    -0xc(%ebp),%edx
+  100342:	83 ea 01             	sub    $0x1,%edx
+  100345:	b9 50 00 00 00       	mov    $0x50,%ecx
+  10034a:	0f af ca             	imul   %edx,%ecx
+  10034d:	8b 55 f0             	mov    -0x10(%ebp),%edx
+  100350:	01 ca                	add    %ecx,%edx
+  100352:	89 55 e0             	mov    %edx,-0x20(%ebp)
+  100355:	8b 90 8c 1f 00 00    	mov    0x1f8c(%eax),%edx
+  10035b:	8b 4d e4             	mov    -0x1c(%ebp),%ecx
+  10035e:	01 c9                	add    %ecx,%ecx
+  100360:	01 ca                	add    %ecx,%edx
+  100362:	8b 88 8c 1f 00 00    	mov    0x1f8c(%eax),%ecx
+  100368:	8b 5d e0             	mov    -0x20(%ebp),%ebx
+  10036b:	01 db                	add    %ebx,%ebx
+  10036d:	01 d9                	add    %ebx,%ecx
+  10036f:	0f b7 12             	movzwl (%edx),%edx
+  100372:	66 89 11             	mov    %dx,(%ecx)
+  100375:	83 45 f0 01          	addl   $0x1,-0x10(%ebp)
+  100379:	ba 50 00 00 00       	mov    $0x50,%edx
+  10037e:	39 55 f0             	cmp    %edx,-0x10(%ebp)
+  100381:	72 a9                	jb     10032c <vga_shift_up+0x23>
+  100383:	83 45 f4 01          	addl   $0x1,-0xc(%ebp)
+  100387:	ba 19 00 00 00       	mov    $0x19,%edx
+  10038c:	39 55 f4             	cmp    %edx,-0xc(%ebp)
+  10038f:	72 92                	jb     100323 <vga_shift_up+0x1a>
+  100391:	c7 45 ec 00 00 00 00 	movl   $0x0,-0x14(%ebp)
+  100398:	eb 2e                	jmp    1003c8 <vga_shift_up+0xbf>
+  10039a:	ba 19 00 00 00       	mov    $0x19,%edx
+  10039f:	83 ea 01             	sub    $0x1,%edx
+  1003a2:	b9 50 00 00 00       	mov    $0x50,%ecx
+  1003a7:	0f af ca             	imul   %edx,%ecx
+  1003aa:	8b 55 ec             	mov    -0x14(%ebp),%edx
+  1003ad:	01 ca                	add    %ecx,%edx
+  1003af:	89 55 e8             	mov    %edx,-0x18(%ebp)
+  1003b2:	8b 90 8c 1f 00 00    	mov    0x1f8c(%eax),%edx
+  1003b8:	8b 4d e8             	mov    -0x18(%ebp),%ecx
+  1003bb:	01 c9                	add    %ecx,%ecx
+  1003bd:	01 ca                	add    %ecx,%edx
+  1003bf:	66 c7 02 20 00       	movw   $0x20,(%edx)
+  1003c4:	83 45 ec 01          	addl   $0x1,-0x14(%ebp)
+  1003c8:	ba 50 00 00 00       	mov    $0x50,%edx
+  1003cd:	39 55 ec             	cmp    %edx,-0x14(%ebp)
+  1003d0:	72 c8                	jb     10039a <vga_shift_up+0x91>
+  1003d2:	ba 19 00 00 00       	mov    $0x19,%edx
+  1003d7:	83 ea 01             	sub    $0x1,%edx
+  1003da:	89 90 84 1f 00 00    	mov    %edx,0x1f84(%eax)
+  1003e0:	c7 80 80 1f 00 00 00 	movl   $0x0,0x1f80(%eax)
+  1003e7:	00 00 00 
+  1003ea:	8b 90 84 1f 00 00    	mov    0x1f84(%eax),%edx
+  1003f0:	89 d1                	mov    %edx,%ecx
+  1003f2:	ba 50 00 00 00       	mov    $0x50,%edx
+  1003f7:	0f af d1             	imul   %ecx,%edx
+  1003fa:	8b 80 80 1f 00 00    	mov    0x1f80(%eax),%eax
+  100400:	01 d0                	add    %edx,%eax
+  100402:	0f b7 c0             	movzwl %ax,%eax
+  100405:	83 ec 0c             	sub    $0xc,%esp
+  100408:	50                   	push   %eax
+  100409:	e8 2b fe ff ff       	call   100239 <vga_move_cursor>
+  10040e:	83 c4 10             	add    $0x10,%esp
+  100411:	90                   	nop
+  100412:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  100415:	c9                   	leave
+  100416:	c3                   	ret
+
+00100417 <vga_backspace>:
+  100417:	55                   	push   %ebp
+  100418:	89 e5                	mov    %esp,%ebp
+  10041a:	53                   	push   %ebx
+  10041b:	83 ec 04             	sub    $0x4,%esp
+  10041e:	e8 a5 15 00 00       	call   1019c8 <__x86.get_pc_thunk.bx>
+  100423:	81 c3 5d 2c 00 00    	add    $0x2c5d,%ebx
+  100429:	8b 83 80 1f 00 00    	mov    0x1f80(%ebx),%eax
+  10042f:	85 c0                	test   %eax,%eax
+  100431:	74 11                	je     100444 <vga_backspace+0x2d>
+  100433:	8b 83 80 1f 00 00    	mov    0x1f80(%ebx),%eax
+  100439:	83 e8 01             	sub    $0x1,%eax
+  10043c:	89 83 80 1f 00 00    	mov    %eax,0x1f80(%ebx)
+  100442:	eb 27                	jmp    10046b <vga_backspace+0x54>
+  100444:	8b 83 84 1f 00 00    	mov    0x1f84(%ebx),%eax
+  10044a:	85 c0                	test   %eax,%eax
+  10044c:	74 1d                	je     10046b <vga_backspace+0x54>
+  10044e:	8b 83 84 1f 00 00    	mov    0x1f84(%ebx),%eax
+  100454:	83 e8 01             	sub    $0x1,%eax
+  100457:	89 83 84 1f 00 00    	mov    %eax,0x1f84(%ebx)
+  10045d:	b8 50 00 00 00       	mov    $0x50,%eax
+  100462:	83 e8 01             	sub    $0x1,%eax
+  100465:	89 83 80 1f 00 00    	mov    %eax,0x1f80(%ebx)
+  10046b:	8b 8b 84 1f 00 00    	mov    0x1f84(%ebx),%ecx
+  100471:	8b 93 80 1f 00 00    	mov    0x1f80(%ebx),%edx
+  100477:	0f b6 83 88 1f 00 00 	movzbl 0x1f88(%ebx),%eax
+  10047e:	0f b6 c0             	movzbl %al,%eax
+  100481:	51                   	push   %ecx
+  100482:	52                   	push   %edx
+  100483:	50                   	push   %eax
+  100484:	6a 00                	push   $0x0
+  100486:	e8 25 fe ff ff       	call   1002b0 <vga_putentryat>
+  10048b:	83 c4 10             	add    $0x10,%esp
+  10048e:	8b 83 84 1f 00 00    	mov    0x1f84(%ebx),%eax
+  100494:	89 c2                	mov    %eax,%edx
+  100496:	b8 50 00 00 00       	mov    $0x50,%eax
+  10049b:	0f af c2             	imul   %edx,%eax
+  10049e:	8b 93 80 1f 00 00    	mov    0x1f80(%ebx),%edx
+  1004a4:	01 d0                	add    %edx,%eax
+  1004a6:	0f b7 c0             	movzwl %ax,%eax
+  1004a9:	83 ec 0c             	sub    $0xc,%esp
+  1004ac:	50                   	push   %eax
+  1004ad:	e8 87 fd ff ff       	call   100239 <vga_move_cursor>
+  1004b2:	83 c4 10             	add    $0x10,%esp
+  1004b5:	90                   	nop
+  1004b6:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  1004b9:	c9                   	leave
+  1004ba:	c3                   	ret
+
+001004bb <vga_putchar>:
+  1004bb:	55                   	push   %ebp
+  1004bc:	89 e5                	mov    %esp,%ebp
+  1004be:	56                   	push   %esi
+  1004bf:	53                   	push   %ebx
+  1004c0:	83 ec 20             	sub    $0x20,%esp
+  1004c3:	e8 00 15 00 00       	call   1019c8 <__x86.get_pc_thunk.bx>
+  1004c8:	81 c3 b8 2b 00 00    	add    $0x2bb8,%ebx
+  1004ce:	8b 45 08             	mov    0x8(%ebp),%eax
+  1004d1:	88 45 e4             	mov    %al,-0x1c(%ebp)
+  1004d4:	0f b6 45 e4          	movzbl -0x1c(%ebp),%eax
+  1004d8:	88 45 f7             	mov    %al,-0x9(%ebp)
+  1004db:	80 7d f7 0a          	cmpb   $0xa,-0x9(%ebp)
+  1004df:	75 33                	jne    100514 <vga_putchar+0x59>
+  1004e1:	8b 83 84 1f 00 00    	mov    0x1f84(%ebx),%eax
+  1004e7:	83 c0 01             	add    $0x1,%eax
+  1004ea:	89 83 84 1f 00 00    	mov    %eax,0x1f84(%ebx)
+  1004f0:	c7 83 80 1f 00 00 00 	movl   $0x0,0x1f80(%ebx)
+  1004f7:	00 00 00 
+  1004fa:	8b 83 84 1f 00 00    	mov    0x1f84(%ebx),%eax
+  100500:	ba 19 00 00 00       	mov    $0x19,%edx
+  100505:	39 d0                	cmp    %edx,%eax
+  100507:	0f 85 85 00 00 00    	jne    100592 <vga_putchar+0xd7>
+  10050d:	e8 f7 fd ff ff       	call   100309 <vga_shift_up>
+  100512:	eb 7e                	jmp    100592 <vga_putchar+0xd7>
+  100514:	80 7d f7 08          	cmpb   $0x8,-0x9(%ebp)
+  100518:	75 07                	jne    100521 <vga_putchar+0x66>
+  10051a:	e8 f8 fe ff ff       	call   100417 <vga_backspace>
+  10051f:	eb 71                	jmp    100592 <vga_putchar+0xd7>
+  100521:	8b b3 84 1f 00 00    	mov    0x1f84(%ebx),%esi
+  100527:	8b 8b 80 1f 00 00    	mov    0x1f80(%ebx),%ecx
+  10052d:	0f b6 83 88 1f 00 00 	movzbl 0x1f88(%ebx),%eax
+  100534:	0f b6 d0             	movzbl %al,%edx
+  100537:	0f b6 45 f7          	movzbl -0x9(%ebp),%eax
+  10053b:	56                   	push   %esi
+  10053c:	51                   	push   %ecx
+  10053d:	52                   	push   %edx
+  10053e:	50                   	push   %eax
+  10053f:	e8 6c fd ff ff       	call   1002b0 <vga_putentryat>
+  100544:	83 c4 10             	add    $0x10,%esp
+  100547:	8b 83 80 1f 00 00    	mov    0x1f80(%ebx),%eax
+  10054d:	83 c0 01             	add    $0x1,%eax
+  100550:	89 83 80 1f 00 00    	mov    %eax,0x1f80(%ebx)
+  100556:	8b 83 80 1f 00 00    	mov    0x1f80(%ebx),%eax
+  10055c:	ba 50 00 00 00       	mov    $0x50,%edx
+  100561:	39 d0                	cmp    %edx,%eax
+  100563:	75 2d                	jne    100592 <vga_putchar+0xd7>
+  100565:	c7 83 80 1f 00 00 00 	movl   $0x0,0x1f80(%ebx)
+  10056c:	00 00 00 
+  10056f:	8b 83 84 1f 00 00    	mov    0x1f84(%ebx),%eax
+  100575:	83 c0 01             	add    $0x1,%eax
+  100578:	89 83 84 1f 00 00    	mov    %eax,0x1f84(%ebx)
+  10057e:	8b 83 84 1f 00 00    	mov    0x1f84(%ebx),%eax
+  100584:	ba 19 00 00 00       	mov    $0x19,%edx
+  100589:	39 d0                	cmp    %edx,%eax
+  10058b:	75 05                	jne    100592 <vga_putchar+0xd7>
+  10058d:	e8 77 fd ff ff       	call   100309 <vga_shift_up>
+  100592:	8b 83 84 1f 00 00    	mov    0x1f84(%ebx),%eax
+  100598:	ba 50 00 00 00       	mov    $0x50,%edx
+  10059d:	0f af d0             	imul   %eax,%edx
+  1005a0:	8b 83 80 1f 00 00    	mov    0x1f80(%ebx),%eax
+  1005a6:	01 d0                	add    %edx,%eax
+  1005a8:	89 45 f0             	mov    %eax,-0x10(%ebp)
+  1005ab:	8b 45 f0             	mov    -0x10(%ebp),%eax
+  1005ae:	0f b7 c0             	movzwl %ax,%eax
+  1005b1:	83 ec 0c             	sub    $0xc,%esp
+  1005b4:	50                   	push   %eax
+  1005b5:	e8 7f fc ff ff       	call   100239 <vga_move_cursor>
+  1005ba:	83 c4 10             	add    $0x10,%esp
+  1005bd:	90                   	nop
+  1005be:	8d 65 f8             	lea    -0x8(%ebp),%esp
+  1005c1:	5b                   	pop    %ebx
+  1005c2:	5e                   	pop    %esi
+  1005c3:	5d                   	pop    %ebp
+  1005c4:	c3                   	ret
+
+001005c5 <vga_initialize>:
+  1005c5:	55                   	push   %ebp
+  1005c6:	89 e5                	mov    %esp,%ebp
+  1005c8:	56                   	push   %esi
+  1005c9:	53                   	push   %ebx
+  1005ca:	83 ec 10             	sub    $0x10,%esp
+  1005cd:	e8 f6 13 00 00       	call   1019c8 <__x86.get_pc_thunk.bx>
+  1005d2:	81 c3 ae 2a 00 00    	add    $0x2aae,%ebx
+  1005d8:	c7 83 84 1f 00 00 00 	movl   $0x0,0x1f84(%ebx)
+  1005df:	00 00 00 
+  1005e2:	c7 83 80 1f 00 00 00 	movl   $0x0,0x1f80(%ebx)
+  1005e9:	00 00 00 
+  1005ec:	6a 00                	push   $0x0
+  1005ee:	6a 07                	push   $0x7
+  1005f0:	e8 fd fb ff ff       	call   1001f2 <vga_entry_color>
+  1005f5:	83 c4 08             	add    $0x8,%esp
+  1005f8:	88 83 88 1f 00 00    	mov    %al,0x1f88(%ebx)
+  1005fe:	b8 00 80 0b 00       	mov    $0xb8000,%eax
+  100603:	89 83 8c 1f 00 00    	mov    %eax,0x1f8c(%ebx)
+  100609:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%ebp)
+  100610:	eb 54                	jmp    100666 <vga_initialize+0xa1>
+  100612:	c7 45 f0 00 00 00 00 	movl   $0x0,-0x10(%ebp)
+  100619:	eb 3d                	jmp    100658 <vga_initialize+0x93>
+  10061b:	b8 50 00 00 00       	mov    $0x50,%eax
+  100620:	0f af 45 f4          	imul   -0xc(%ebp),%eax
+  100624:	89 c2                	mov    %eax,%edx
+  100626:	8b 45 f0             	mov    -0x10(%ebp),%eax
+  100629:	01 d0                	add    %edx,%eax
+  10062b:	89 45 ec             	mov    %eax,-0x14(%ebp)
+  10062e:	0f b6 83 88 1f 00 00 	movzbl 0x1f88(%ebx),%eax
+  100635:	0f b6 c0             	movzbl %al,%eax
+  100638:	8b 93 8c 1f 00 00    	mov    0x1f8c(%ebx),%edx
+  10063e:	8b 4d ec             	mov    -0x14(%ebp),%ecx
+  100641:	01 c9                	add    %ecx,%ecx
+  100643:	8d 34 0a             	lea    (%edx,%ecx,1),%esi
+  100646:	50                   	push   %eax
+  100647:	6a 20                	push   $0x20
+  100649:	e8 c0 fb ff ff       	call   10020e <vga_entry>
+  10064e:	83 c4 08             	add    $0x8,%esp
+  100651:	66 89 06             	mov    %ax,(%esi)
+  100654:	83 45 f0 01          	addl   $0x1,-0x10(%ebp)
+  100658:	b8 50 00 00 00       	mov    $0x50,%eax
+  10065d:	39 45 f0             	cmp    %eax,-0x10(%ebp)
+  100660:	72 b9                	jb     10061b <vga_initialize+0x56>
+  100662:	83 45 f4 01          	addl   $0x1,-0xc(%ebp)
+  100666:	b8 19 00 00 00       	mov    $0x19,%eax
+  10066b:	39 45 f4             	cmp    %eax,-0xc(%ebp)
+  10066e:	72 a2                	jb     100612 <vga_initialize+0x4d>
+  100670:	90                   	nop
+  100671:	90                   	nop
+  100672:	8d 65 f8             	lea    -0x8(%ebp),%esp
+  100675:	5b                   	pop    %ebx
+  100676:	5e                   	pop    %esi
+  100677:	5d                   	pop    %ebp
+  100678:	c3                   	ret
+
+00100679 <vga_write>:
+  100679:	55                   	push   %ebp
+  10067a:	89 e5                	mov    %esp,%ebp
+  10067c:	83 ec 18             	sub    $0x18,%esp
+  10067f:	e8 3c 13 00 00       	call   1019c0 <__x86.get_pc_thunk.ax>
+  100684:	05 fc 29 00 00       	add    $0x29fc,%eax
+  100689:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%ebp)
+  100690:	eb 1e                	jmp    1006b0 <vga_write+0x37>
+  100692:	8b 55 08             	mov    0x8(%ebp),%edx
+  100695:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  100698:	01 d0                	add    %edx,%eax
+  10069a:	0f b6 00             	movzbl (%eax),%eax
+  10069d:	0f be c0             	movsbl %al,%eax
+  1006a0:	83 ec 0c             	sub    $0xc,%esp
+  1006a3:	50                   	push   %eax
+  1006a4:	e8 12 fe ff ff       	call   1004bb <vga_putchar>
+  1006a9:	83 c4 10             	add    $0x10,%esp
+  1006ac:	83 45 f4 01          	addl   $0x1,-0xc(%ebp)
+  1006b0:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  1006b3:	3b 45 0c             	cmp    0xc(%ebp),%eax
+  1006b6:	72 da                	jb     100692 <vga_write+0x19>
+  1006b8:	90                   	nop
+  1006b9:	90                   	nop
+  1006ba:	c9                   	leave
+  1006bb:	c3                   	ret
+
+001006bc <vga_writestring>:
+  1006bc:	55                   	push   %ebp
+  1006bd:	89 e5                	mov    %esp,%ebp
+  1006bf:	53                   	push   %ebx
+  1006c0:	83 ec 04             	sub    $0x4,%esp
+  1006c3:	e8 f8 12 00 00       	call   1019c0 <__x86.get_pc_thunk.ax>
+  1006c8:	05 b8 29 00 00       	add    $0x29b8,%eax
+  1006cd:	83 ec 0c             	sub    $0xc,%esp
+  1006d0:	ff 75 08             	push   0x8(%ebp)
+  1006d3:	89 c3                	mov    %eax,%ebx
+  1006d5:	e8 40 00 00 00       	call   10071a <strlen>
+  1006da:	83 c4 10             	add    $0x10,%esp
+  1006dd:	83 ec 08             	sub    $0x8,%esp
+  1006e0:	50                   	push   %eax
+  1006e1:	ff 75 08             	push   0x8(%ebp)
+  1006e4:	e8 90 ff ff ff       	call   100679 <vga_write>
+  1006e9:	83 c4 10             	add    $0x10,%esp
+  1006ec:	90                   	nop
+  1006ed:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  1006f0:	c9                   	leave
+  1006f1:	c3                   	ret
+
+001006f2 <vga_setcolor>:
+  1006f2:	55                   	push   %ebp
+  1006f3:	89 e5                	mov    %esp,%ebp
+  1006f5:	53                   	push   %ebx
+  1006f6:	e8 cd 12 00 00       	call   1019c8 <__x86.get_pc_thunk.bx>
+  1006fb:	81 c3 85 29 00 00    	add    $0x2985,%ebx
+  100701:	6a 00                	push   $0x0
+  100703:	ff 75 08             	push   0x8(%ebp)
+  100706:	e8 e7 fa ff ff       	call   1001f2 <vga_entry_color>
+  10070b:	83 c4 08             	add    $0x8,%esp
+  10070e:	88 83 88 1f 00 00    	mov    %al,0x1f88(%ebx)
+  100714:	90                   	nop
+  100715:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  100718:	c9                   	leave
+  100719:	c3                   	ret
+
+0010071a <strlen>:
+  10071a:	55                   	push   %ebp
+  10071b:	89 e5                	mov    %esp,%ebp
+  10071d:	83 ec 10             	sub    $0x10,%esp
+  100720:	e8 9b 12 00 00       	call   1019c0 <__x86.get_pc_thunk.ax>
+  100725:	05 5b 29 00 00       	add    $0x295b,%eax
+  10072a:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%ebp)
+  100731:	eb 04                	jmp    100737 <strlen+0x1d>
+  100733:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
+  100737:	8b 55 08             	mov    0x8(%ebp),%edx
+  10073a:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  10073d:	01 d0                	add    %edx,%eax
+  10073f:	0f b6 00             	movzbl (%eax),%eax
+  100742:	84 c0                	test   %al,%al
+  100744:	75 ed                	jne    100733 <strlen+0x19>
+  100746:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  100749:	c9                   	leave
+  10074a:	c3                   	ret
+
+0010074b <serial_configure_baud_rate>:
+  10074b:	55                   	push   %ebp
+  10074c:	89 e5                	mov    %esp,%ebp
+  10074e:	53                   	push   %ebx
+  10074f:	83 ec 14             	sub    $0x14,%esp
+  100752:	e8 71 12 00 00       	call   1019c8 <__x86.get_pc_thunk.bx>
+  100757:	81 c3 29 29 00 00    	add    $0x2929,%ebx
+  10075d:	8b 55 08             	mov    0x8(%ebp),%edx
+  100760:	8b 45 0c             	mov    0xc(%ebp),%eax
+  100763:	66 89 55 f4          	mov    %dx,-0xc(%ebp)
+  100767:	66 89 45 f0          	mov    %ax,-0x10(%ebp)
+  10076b:	0f b7 45 f4          	movzwl -0xc(%ebp),%eax
+  10076f:	83 c0 03             	add    $0x3,%eax
+  100772:	0f b7 c0             	movzwl %ax,%eax
+  100775:	83 ec 08             	sub    $0x8,%esp
+  100778:	68 80 00 00 00       	push   $0x80
+  10077d:	50                   	push   %eax
+  10077e:	e8 5d fa ff ff       	call   1001e0 <outb>
+  100783:	83 c4 10             	add    $0x10,%esp
+  100786:	0f b7 45 f0          	movzwl -0x10(%ebp),%eax
+  10078a:	66 c1 e8 08          	shr    $0x8,%ax
+  10078e:	0f b6 d0             	movzbl %al,%edx
+  100791:	0f b7 45 f4          	movzwl -0xc(%ebp),%eax
+  100795:	83 ec 08             	sub    $0x8,%esp
+  100798:	52                   	push   %edx
+  100799:	50                   	push   %eax
+  10079a:	e8 41 fa ff ff       	call   1001e0 <outb>
+  10079f:	83 c4 10             	add    $0x10,%esp
+  1007a2:	0f b7 45 f0          	movzwl -0x10(%ebp),%eax
+  1007a6:	0f b6 d0             	movzbl %al,%edx
+  1007a9:	0f b7 45 f4          	movzwl -0xc(%ebp),%eax
+  1007ad:	83 ec 08             	sub    $0x8,%esp
+  1007b0:	52                   	push   %edx
+  1007b1:	50                   	push   %eax
+  1007b2:	e8 29 fa ff ff       	call   1001e0 <outb>
+  1007b7:	83 c4 10             	add    $0x10,%esp
+  1007ba:	90                   	nop
+  1007bb:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  1007be:	c9                   	leave
+  1007bf:	c3                   	ret
+
+001007c0 <serial_configure_line>:
+  1007c0:	55                   	push   %ebp
+  1007c1:	89 e5                	mov    %esp,%ebp
+  1007c3:	53                   	push   %ebx
+  1007c4:	83 ec 14             	sub    $0x14,%esp
+  1007c7:	e8 f4 11 00 00       	call   1019c0 <__x86.get_pc_thunk.ax>
+  1007cc:	05 b4 28 00 00       	add    $0x28b4,%eax
+  1007d1:	8b 55 08             	mov    0x8(%ebp),%edx
+  1007d4:	66 89 55 f4          	mov    %dx,-0xc(%ebp)
+  1007d8:	0f b7 55 f4          	movzwl -0xc(%ebp),%edx
+  1007dc:	83 c2 03             	add    $0x3,%edx
+  1007df:	0f b7 d2             	movzwl %dx,%edx
+  1007e2:	83 ec 08             	sub    $0x8,%esp
+  1007e5:	6a 03                	push   $0x3
+  1007e7:	52                   	push   %edx
+  1007e8:	89 c3                	mov    %eax,%ebx
+  1007ea:	e8 f1 f9 ff ff       	call   1001e0 <outb>
+  1007ef:	83 c4 10             	add    $0x10,%esp
+  1007f2:	90                   	nop
+  1007f3:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  1007f6:	c9                   	leave
+  1007f7:	c3                   	ret
+
+001007f8 <serial_is_transmit_fifo_empty>:
+  1007f8:	55                   	push   %ebp
+  1007f9:	89 e5                	mov    %esp,%ebp
+  1007fb:	53                   	push   %ebx
+  1007fc:	83 ec 04             	sub    $0x4,%esp
+  1007ff:	e8 bc 11 00 00       	call   1019c0 <__x86.get_pc_thunk.ax>
+  100804:	05 7c 28 00 00       	add    $0x287c,%eax
+  100809:	8b 55 08             	mov    0x8(%ebp),%edx
+  10080c:	83 c2 05             	add    $0x5,%edx
+  10080f:	0f b7 d2             	movzwl %dx,%edx
+  100812:	83 ec 0c             	sub    $0xc,%esp
+  100815:	52                   	push   %edx
+  100816:	89 c3                	mov    %eax,%ebx
+  100818:	e8 ce f9 ff ff       	call   1001eb <inb>
+  10081d:	83 c4 10             	add    $0x10,%esp
+  100820:	0f b6 c0             	movzbl %al,%eax
+  100823:	83 e0 20             	and    $0x20,%eax
+  100826:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  100829:	c9                   	leave
+  10082a:	c3                   	ret
+
+0010082b <serial_initialize>:
+  10082b:	55                   	push   %ebp
+  10082c:	89 e5                	mov    %esp,%ebp
+  10082e:	83 ec 08             	sub    $0x8,%esp
+  100831:	e8 8a 11 00 00       	call   1019c0 <__x86.get_pc_thunk.ax>
+  100836:	05 4a 28 00 00       	add    $0x284a,%eax
+  10083b:	83 ec 08             	sub    $0x8,%esp
+  10083e:	6a 01                	push   $0x1
+  100840:	68 f8 03 00 00       	push   $0x3f8
+  100845:	e8 01 ff ff ff       	call   10074b <serial_configure_baud_rate>
+  10084a:	83 c4 10             	add    $0x10,%esp
+  10084d:	83 ec 0c             	sub    $0xc,%esp
+  100850:	68 f8 03 00 00       	push   $0x3f8
+  100855:	e8 66 ff ff ff       	call   1007c0 <serial_configure_line>
+  10085a:	83 c4 10             	add    $0x10,%esp
+  10085d:	90                   	nop
+  10085e:	c9                   	leave
+  10085f:	c3                   	ret
+
+00100860 <serial_putchar>:
+  100860:	55                   	push   %ebp
+  100861:	89 e5                	mov    %esp,%ebp
+  100863:	53                   	push   %ebx
+  100864:	83 ec 14             	sub    $0x14,%esp
+  100867:	e8 5c 11 00 00       	call   1019c8 <__x86.get_pc_thunk.bx>
+  10086c:	81 c3 14 28 00 00    	add    $0x2814,%ebx
+  100872:	8b 45 08             	mov    0x8(%ebp),%eax
+  100875:	88 45 f4             	mov    %al,-0xc(%ebp)
+  100878:	90                   	nop
+  100879:	83 ec 0c             	sub    $0xc,%esp
+  10087c:	68 f8 03 00 00       	push   $0x3f8
+  100881:	e8 72 ff ff ff       	call   1007f8 <serial_is_transmit_fifo_empty>
+  100886:	83 c4 10             	add    $0x10,%esp
+  100889:	85 c0                	test   %eax,%eax
+  10088b:	74 ec                	je     100879 <serial_putchar+0x19>
+  10088d:	0f b6 45 f4          	movzbl -0xc(%ebp),%eax
+  100891:	0f b6 c0             	movzbl %al,%eax
+  100894:	83 ec 08             	sub    $0x8,%esp
+  100897:	50                   	push   %eax
+  100898:	68 f8 03 00 00       	push   $0x3f8
+  10089d:	e8 3e f9 ff ff       	call   1001e0 <outb>
+  1008a2:	83 c4 10             	add    $0x10,%esp
+  1008a5:	90                   	nop
+  1008a6:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  1008a9:	c9                   	leave
+  1008aa:	c3                   	ret
+
+001008ab <serial_write>:
+  1008ab:	55                   	push   %ebp
+  1008ac:	89 e5                	mov    %esp,%ebp
+  1008ae:	83 ec 18             	sub    $0x18,%esp
+  1008b1:	e8 0a 11 00 00       	call   1019c0 <__x86.get_pc_thunk.ax>
+  1008b6:	05 ca 27 00 00       	add    $0x27ca,%eax
+  1008bb:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%ebp)
+  1008c2:	eb 1e                	jmp    1008e2 <serial_write+0x37>
+  1008c4:	8b 55 08             	mov    0x8(%ebp),%edx
+  1008c7:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  1008ca:	01 d0                	add    %edx,%eax
+  1008cc:	0f b6 00             	movzbl (%eax),%eax
+  1008cf:	0f be c0             	movsbl %al,%eax
+  1008d2:	83 ec 0c             	sub    $0xc,%esp
+  1008d5:	50                   	push   %eax
+  1008d6:	e8 85 ff ff ff       	call   100860 <serial_putchar>
+  1008db:	83 c4 10             	add    $0x10,%esp
+  1008de:	83 45 f4 01          	addl   $0x1,-0xc(%ebp)
+  1008e2:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  1008e5:	3b 45 0c             	cmp    0xc(%ebp),%eax
+  1008e8:	72 da                	jb     1008c4 <serial_write+0x19>
+  1008ea:	90                   	nop
+  1008eb:	90                   	nop
+  1008ec:	c9                   	leave
+  1008ed:	c3                   	ret
+
+001008ee <serial_writestring>:
+  1008ee:	55                   	push   %ebp
+  1008ef:	89 e5                	mov    %esp,%ebp
+  1008f1:	53                   	push   %ebx
+  1008f2:	83 ec 04             	sub    $0x4,%esp
+  1008f5:	e8 c6 10 00 00       	call   1019c0 <__x86.get_pc_thunk.ax>
+  1008fa:	05 86 27 00 00       	add    $0x2786,%eax
+  1008ff:	83 ec 0c             	sub    $0xc,%esp
+  100902:	ff 75 08             	push   0x8(%ebp)
+  100905:	89 c3                	mov    %eax,%ebx
+  100907:	e8 0e fe ff ff       	call   10071a <strlen>
+  10090c:	83 c4 10             	add    $0x10,%esp
+  10090f:	83 ec 08             	sub    $0x8,%esp
+  100912:	50                   	push   %eax
+  100913:	ff 75 08             	push   0x8(%ebp)
+  100916:	e8 90 ff ff ff       	call   1008ab <serial_write>
+  10091b:	83 c4 10             	add    $0x10,%esp
+  10091e:	90                   	nop
+  10091f:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  100922:	c9                   	leave
+  100923:	c3                   	ret
+
+00100924 <serial_writeint>:
+  100924:	55                   	push   %ebp
+  100925:	89 e5                	mov    %esp,%ebp
+  100927:	53                   	push   %ebx
+  100928:	83 ec 24             	sub    $0x24,%esp
+  10092b:	e8 90 10 00 00       	call   1019c0 <__x86.get_pc_thunk.ax>
+  100930:	05 50 27 00 00       	add    $0x2750,%eax
+  100935:	83 ec 04             	sub    $0x4,%esp
+  100938:	ff 75 0c             	push   0xc(%ebp)
+  10093b:	8d 55 d8             	lea    -0x28(%ebp),%edx
+  10093e:	52                   	push   %edx
+  10093f:	ff 75 08             	push   0x8(%ebp)
+  100942:	89 c3                	mov    %eax,%ebx
+  100944:	e8 e7 01 00 00       	call   100b30 <itoa>
+  100949:	83 c4 10             	add    $0x10,%esp
+  10094c:	83 ec 0c             	sub    $0xc,%esp
+  10094f:	8d 45 d8             	lea    -0x28(%ebp),%eax
+  100952:	50                   	push   %eax
+  100953:	e8 96 ff ff ff       	call   1008ee <serial_writestring>
+  100958:	83 c4 10             	add    $0x10,%esp
+  10095b:	90                   	nop
+  10095c:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  10095f:	c9                   	leave
+  100960:	c3                   	ret
+
+00100961 <gdt_init>:
+  100961:	55                   	push   %ebp
+  100962:	89 e5                	mov    %esp,%ebp
+  100964:	53                   	push   %ebx
+  100965:	83 ec 14             	sub    $0x14,%esp
+  100968:	e8 5b 10 00 00       	call   1019c8 <__x86.get_pc_thunk.bx>
+  10096d:	81 c3 13 27 00 00    	add    $0x2713,%ebx
+  100973:	66 c7 45 f2 18 00    	movw   $0x18,-0xe(%ebp)
+  100979:	8d 83 90 1f 00 00    	lea    0x1f90(%ebx),%eax
+  10097f:	89 45 f4             	mov    %eax,-0xc(%ebp)
+  100982:	83 ec 04             	sub    $0x4,%esp
+  100985:	6a 00                	push   $0x0
+  100987:	6a 00                	push   $0x0
+  100989:	6a 00                	push   $0x0
+  10098b:	e8 3a 00 00 00       	call   1009ca <gdt_create_entry>
+  100990:	83 c4 10             	add    $0x10,%esp
+  100993:	83 ec 04             	sub    $0x4,%esp
+  100996:	6a 0a                	push   $0xa
+  100998:	6a 00                	push   $0x0
+  10099a:	6a 01                	push   $0x1
+  10099c:	e8 29 00 00 00       	call   1009ca <gdt_create_entry>
+  1009a1:	83 c4 10             	add    $0x10,%esp
+  1009a4:	83 ec 04             	sub    $0x4,%esp
+  1009a7:	6a 02                	push   $0x2
+  1009a9:	6a 00                	push   $0x0
+  1009ab:	6a 02                	push   $0x2
+  1009ad:	e8 18 00 00 00       	call   1009ca <gdt_create_entry>
+  1009b2:	83 c4 10             	add    $0x10,%esp
+  1009b5:	83 ec 0c             	sub    $0xc,%esp
+  1009b8:	8d 45 f2             	lea    -0xe(%ebp),%eax
+  1009bb:	50                   	push   %eax
+  1009bc:	e8 9f 00 00 00       	call   100a60 <gdt_load_and_set>
+  1009c1:	83 c4 10             	add    $0x10,%esp
+  1009c4:	90                   	nop
+  1009c5:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  1009c8:	c9                   	leave
+  1009c9:	c3                   	ret
+
+001009ca <gdt_create_entry>:
+  1009ca:	55                   	push   %ebp
+  1009cb:	89 e5                	mov    %esp,%ebp
+  1009cd:	83 ec 08             	sub    $0x8,%esp
+  1009d0:	e8 eb 0f 00 00       	call   1019c0 <__x86.get_pc_thunk.ax>
+  1009d5:	05 ab 26 00 00       	add    $0x26ab,%eax
+  1009da:	8b 4d 0c             	mov    0xc(%ebp),%ecx
+  1009dd:	8b 55 10             	mov    0x10(%ebp),%edx
+  1009e0:	88 4d fc             	mov    %cl,-0x4(%ebp)
+  1009e3:	88 55 f8             	mov    %dl,-0x8(%ebp)
+  1009e6:	8b 55 08             	mov    0x8(%ebp),%edx
+  1009e9:	66 c7 84 d0 92 1f 00 	movw   $0x0,0x1f92(%eax,%edx,8)
+  1009f0:	00 00 00 
+  1009f3:	8b 55 08             	mov    0x8(%ebp),%edx
+  1009f6:	c6 84 d0 94 1f 00 00 	movb   $0x0,0x1f94(%eax,%edx,8)
+  1009fd:	00 
+  1009fe:	8b 55 08             	mov    0x8(%ebp),%edx
+  100a01:	c6 84 d0 97 1f 00 00 	movb   $0x0,0x1f97(%eax,%edx,8)
+  100a08:	00 
+  100a09:	8b 55 08             	mov    0x8(%ebp),%edx
+  100a0c:	66 c7 84 d0 90 1f 00 	movw   $0xffff,0x1f90(%eax,%edx,8)
+  100a13:	00 ff ff 
+  100a16:	8b 55 08             	mov    0x8(%ebp),%edx
+  100a19:	0f b6 94 d0 96 1f 00 	movzbl 0x1f96(%eax,%edx,8),%edx
+  100a20:	00 
+  100a21:	89 d1                	mov    %edx,%ecx
+  100a23:	83 c9 cf             	or     $0xffffffcf,%ecx
+  100a26:	8b 55 08             	mov    0x8(%ebp),%edx
+  100a29:	88 8c d0 96 1f 00 00 	mov    %cl,0x1f96(%eax,%edx,8)
+  100a30:	0f b6 55 fc          	movzbl -0x4(%ebp),%edx
+  100a34:	c1 e2 05             	shl    $0x5,%edx
+  100a37:	83 e2 60             	and    $0x60,%edx
+  100a3a:	89 d1                	mov    %edx,%ecx
+  100a3c:	83 c9 90             	or     $0xffffff90,%ecx
+  100a3f:	0f b6 55 f8          	movzbl -0x8(%ebp),%edx
+  100a43:	83 e2 0f             	and    $0xf,%edx
+  100a46:	09 ca                	or     %ecx,%edx
+  100a48:	89 d1                	mov    %edx,%ecx
+  100a4a:	8b 55 08             	mov    0x8(%ebp),%edx
+  100a4d:	88 8c d0 95 1f 00 00 	mov    %cl,0x1f95(%eax,%edx,8)
+  100a54:	90                   	nop
+  100a55:	c9                   	leave
+  100a56:	c3                   	ret
+  100a57:	66 90                	xchg   %ax,%ax
+  100a59:	66 90                	xchg   %ax,%ax
+  100a5b:	66 90                	xchg   %ax,%ax
+  100a5d:	66 90                	xchg   %ax,%ax
+  100a5f:	90                   	nop
+
+00100a60 <gdt_load_and_set>:
+  100a60:	8b 44 24 04          	mov    0x4(%esp),%eax
+  100a64:	0f 01 10             	lgdtl  (%eax)
+  100a67:	ea 6e 0a 10 00 08 00 	ljmp   $0x8,$0x100a6e
+
+00100a6e <gdt_load_and_set.reload_segments>:
+  100a6e:	66 b8 10 00          	mov    $0x10,%ax
+  100a72:	8e d8                	mov    %eax,%ds
+  100a74:	8e d0                	mov    %eax,%ss
+  100a76:	8e c0                	mov    %eax,%es
+  100a78:	8e e8                	mov    %eax,%gs
+  100a7a:	8e e0                	mov    %eax,%fs
+  100a7c:	c3                   	ret
+
+00100a7d <atoi>:
+  100a7d:	55                   	push   %ebp
+  100a7e:	89 e5                	mov    %esp,%ebp
+  100a80:	83 ec 10             	sub    $0x10,%esp
+  100a83:	e8 38 0f 00 00       	call   1019c0 <__x86.get_pc_thunk.ax>
+  100a88:	05 f8 25 00 00       	add    $0x25f8,%eax
+  100a8d:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%ebp)
+  100a94:	c7 45 f8 00 00 00 00 	movl   $0x0,-0x8(%ebp)
+  100a9b:	eb 04                	jmp    100aa1 <atoi+0x24>
+  100a9d:	83 45 08 01          	addl   $0x1,0x8(%ebp)
+  100aa1:	8b 45 08             	mov    0x8(%ebp),%eax
+  100aa4:	0f b6 00             	movzbl (%eax),%eax
+  100aa7:	3c 20                	cmp    $0x20,%al
+  100aa9:	74 f2                	je     100a9d <atoi+0x20>
+  100aab:	8b 45 08             	mov    0x8(%ebp),%eax
+  100aae:	0f b6 00             	movzbl (%eax),%eax
+  100ab1:	3c 09                	cmp    $0x9,%al
+  100ab3:	74 e8                	je     100a9d <atoi+0x20>
+  100ab5:	8b 45 08             	mov    0x8(%ebp),%eax
+  100ab8:	0f b6 00             	movzbl (%eax),%eax
+  100abb:	3c 0a                	cmp    $0xa,%al
+  100abd:	74 de                	je     100a9d <atoi+0x20>
+  100abf:	8b 45 08             	mov    0x8(%ebp),%eax
+  100ac2:	0f b6 00             	movzbl (%eax),%eax
+  100ac5:	3c 0d                	cmp    $0xd,%al
+  100ac7:	74 d4                	je     100a9d <atoi+0x20>
+  100ac9:	8b 45 08             	mov    0x8(%ebp),%eax
+  100acc:	0f b6 00             	movzbl (%eax),%eax
+  100acf:	3c 2d                	cmp    $0x2d,%al
+  100ad1:	75 0d                	jne    100ae0 <atoi+0x63>
+  100ad3:	c7 45 f8 ff ff ff ff 	movl   $0xffffffff,-0x8(%ebp)
+  100ada:	83 45 08 01          	addl   $0x1,0x8(%ebp)
+  100ade:	eb 33                	jmp    100b13 <atoi+0x96>
+  100ae0:	8b 45 08             	mov    0x8(%ebp),%eax
+  100ae3:	0f b6 00             	movzbl (%eax),%eax
+  100ae6:	3c 2b                	cmp    $0x2b,%al
+  100ae8:	75 29                	jne    100b13 <atoi+0x96>
+  100aea:	83 45 08 01          	addl   $0x1,0x8(%ebp)
+  100aee:	eb 23                	jmp    100b13 <atoi+0x96>
+  100af0:	8b 55 fc             	mov    -0x4(%ebp),%edx
+  100af3:	89 d0                	mov    %edx,%eax
+  100af5:	c1 e0 02             	shl    $0x2,%eax
+  100af8:	01 d0                	add    %edx,%eax
+  100afa:	01 c0                	add    %eax,%eax
+  100afc:	89 c2                	mov    %eax,%edx
+  100afe:	8b 45 08             	mov    0x8(%ebp),%eax
+  100b01:	0f b6 00             	movzbl (%eax),%eax
+  100b04:	0f be c0             	movsbl %al,%eax
+  100b07:	83 e8 30             	sub    $0x30,%eax
+  100b0a:	01 d0                	add    %edx,%eax
+  100b0c:	89 45 fc             	mov    %eax,-0x4(%ebp)
+  100b0f:	83 45 08 01          	addl   $0x1,0x8(%ebp)
+  100b13:	8b 45 08             	mov    0x8(%ebp),%eax
+  100b16:	0f b6 00             	movzbl (%eax),%eax
+  100b19:	3c 2f                	cmp    $0x2f,%al
+  100b1b:	7e 0a                	jle    100b27 <atoi+0xaa>
+  100b1d:	8b 45 08             	mov    0x8(%ebp),%eax
+  100b20:	0f b6 00             	movzbl (%eax),%eax
+  100b23:	3c 39                	cmp    $0x39,%al
+  100b25:	7e c9                	jle    100af0 <atoi+0x73>
+  100b27:	8b 45 f8             	mov    -0x8(%ebp),%eax
+  100b2a:	0f af 45 fc          	imul   -0x4(%ebp),%eax
+  100b2e:	c9                   	leave
+  100b2f:	c3                   	ret
+
+00100b30 <itoa>:
+  100b30:	55                   	push   %ebp
+  100b31:	89 e5                	mov    %esp,%ebp
+  100b33:	83 ec 20             	sub    $0x20,%esp
+  100b36:	e8 85 0e 00 00       	call   1019c0 <__x86.get_pc_thunk.ax>
+  100b3b:	05 45 25 00 00       	add    $0x2545,%eax
+  100b40:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%ebp)
+  100b47:	c7 45 f8 00 00 00 00 	movl   $0x0,-0x8(%ebp)
+  100b4e:	83 7d 08 00          	cmpl   $0x0,0x8(%ebp)
+  100b52:	75 23                	jne    100b77 <itoa+0x47>
+  100b54:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  100b57:	8d 50 01             	lea    0x1(%eax),%edx
+  100b5a:	89 55 fc             	mov    %edx,-0x4(%ebp)
+  100b5d:	89 c2                	mov    %eax,%edx
+  100b5f:	8b 45 0c             	mov    0xc(%ebp),%eax
+  100b62:	01 d0                	add    %edx,%eax
+  100b64:	c6 00 30             	movb   $0x30,(%eax)
+  100b67:	8b 55 fc             	mov    -0x4(%ebp),%edx
+  100b6a:	8b 45 0c             	mov    0xc(%ebp),%eax
+  100b6d:	01 d0                	add    %edx,%eax
+  100b6f:	c6 00 00             	movb   $0x0,(%eax)
+  100b72:	e9 e5 00 00 00       	jmp    100c5c <itoa+0x12c>
+  100b77:	83 7d 08 00          	cmpl   $0x0,0x8(%ebp)
+  100b7b:	79 62                	jns    100bdf <itoa+0xaf>
+  100b7d:	83 7d 10 0a          	cmpl   $0xa,0x10(%ebp)
+  100b81:	75 5c                	jne    100bdf <itoa+0xaf>
+  100b83:	c7 45 f8 01 00 00 00 	movl   $0x1,-0x8(%ebp)
+  100b8a:	f7 5d 08             	negl   0x8(%ebp)
+  100b8d:	eb 50                	jmp    100bdf <itoa+0xaf>
+  100b8f:	8b 45 08             	mov    0x8(%ebp),%eax
+  100b92:	99                   	cltd
+  100b93:	f7 7d 10             	idivl  0x10(%ebp)
+  100b96:	89 55 e8             	mov    %edx,-0x18(%ebp)
+  100b99:	83 7d e8 09          	cmpl   $0x9,-0x18(%ebp)
+  100b9d:	7e 1c                	jle    100bbb <itoa+0x8b>
+  100b9f:	8b 45 e8             	mov    -0x18(%ebp),%eax
+  100ba2:	8d 48 57             	lea    0x57(%eax),%ecx
+  100ba5:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  100ba8:	8d 50 01             	lea    0x1(%eax),%edx
+  100bab:	89 55 fc             	mov    %edx,-0x4(%ebp)
+  100bae:	89 c2                	mov    %eax,%edx
+  100bb0:	8b 45 0c             	mov    0xc(%ebp),%eax
+  100bb3:	01 d0                	add    %edx,%eax
+  100bb5:	89 ca                	mov    %ecx,%edx
+  100bb7:	88 10                	mov    %dl,(%eax)
+  100bb9:	eb 1a                	jmp    100bd5 <itoa+0xa5>
+  100bbb:	8b 45 e8             	mov    -0x18(%ebp),%eax
+  100bbe:	8d 48 30             	lea    0x30(%eax),%ecx
+  100bc1:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  100bc4:	8d 50 01             	lea    0x1(%eax),%edx
+  100bc7:	89 55 fc             	mov    %edx,-0x4(%ebp)
+  100bca:	89 c2                	mov    %eax,%edx
+  100bcc:	8b 45 0c             	mov    0xc(%ebp),%eax
+  100bcf:	01 d0                	add    %edx,%eax
+  100bd1:	89 ca                	mov    %ecx,%edx
+  100bd3:	88 10                	mov    %dl,(%eax)
+  100bd5:	8b 45 08             	mov    0x8(%ebp),%eax
+  100bd8:	99                   	cltd
+  100bd9:	f7 7d 10             	idivl  0x10(%ebp)
+  100bdc:	89 45 08             	mov    %eax,0x8(%ebp)
+  100bdf:	83 7d 08 00          	cmpl   $0x0,0x8(%ebp)
+  100be3:	75 aa                	jne    100b8f <itoa+0x5f>
+  100be5:	83 7d f8 00          	cmpl   $0x0,-0x8(%ebp)
+  100be9:	74 13                	je     100bfe <itoa+0xce>
+  100beb:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  100bee:	8d 50 01             	lea    0x1(%eax),%edx
+  100bf1:	89 55 fc             	mov    %edx,-0x4(%ebp)
+  100bf4:	89 c2                	mov    %eax,%edx
+  100bf6:	8b 45 0c             	mov    0xc(%ebp),%eax
+  100bf9:	01 d0                	add    %edx,%eax
+  100bfb:	c6 00 2d             	movb   $0x2d,(%eax)
+  100bfe:	8b 55 fc             	mov    -0x4(%ebp),%edx
+  100c01:	8b 45 0c             	mov    0xc(%ebp),%eax
+  100c04:	01 d0                	add    %edx,%eax
+  100c06:	c6 00 00             	movb   $0x0,(%eax)
+  100c09:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%ebp)
+  100c10:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  100c13:	83 e8 01             	sub    $0x1,%eax
+  100c16:	89 45 f0             	mov    %eax,-0x10(%ebp)
+  100c19:	eb 39                	jmp    100c54 <itoa+0x124>
+  100c1b:	8b 55 f4             	mov    -0xc(%ebp),%edx
+  100c1e:	8b 45 0c             	mov    0xc(%ebp),%eax
+  100c21:	01 d0                	add    %edx,%eax
+  100c23:	0f b6 00             	movzbl (%eax),%eax
+  100c26:	88 45 ef             	mov    %al,-0x11(%ebp)
+  100c29:	8b 55 f0             	mov    -0x10(%ebp),%edx
+  100c2c:	8b 45 0c             	mov    0xc(%ebp),%eax
+  100c2f:	01 d0                	add    %edx,%eax
+  100c31:	8b 4d f4             	mov    -0xc(%ebp),%ecx
+  100c34:	8b 55 0c             	mov    0xc(%ebp),%edx
+  100c37:	01 ca                	add    %ecx,%edx
+  100c39:	0f b6 00             	movzbl (%eax),%eax
+  100c3c:	88 02                	mov    %al,(%edx)
+  100c3e:	8b 55 f0             	mov    -0x10(%ebp),%edx
+  100c41:	8b 45 0c             	mov    0xc(%ebp),%eax
+  100c44:	01 c2                	add    %eax,%edx
+  100c46:	0f b6 45 ef          	movzbl -0x11(%ebp),%eax
+  100c4a:	88 02                	mov    %al,(%edx)
+  100c4c:	83 45 f4 01          	addl   $0x1,-0xc(%ebp)
+  100c50:	83 6d f0 01          	subl   $0x1,-0x10(%ebp)
+  100c54:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  100c57:	3b 45 f0             	cmp    -0x10(%ebp),%eax
+  100c5a:	7c bf                	jl     100c1b <itoa+0xeb>
+  100c5c:	c9                   	leave
+  100c5d:	c3                   	ret
+  100c5e:	66 90                	xchg   %ax,%ax
+
+00100c60 <common_interrupt_handler>:
+  100c60:	50                   	push   %eax
+  100c61:	53                   	push   %ebx
+  100c62:	51                   	push   %ecx
+  100c63:	52                   	push   %edx
+  100c64:	55                   	push   %ebp
+  100c65:	56                   	push   %esi
+  100c66:	57                   	push   %edi
+  100c67:	e8 7f 0a 00 00       	call   1016eb <interrupt_handler>
+  100c6c:	5f                   	pop    %edi
+  100c6d:	5e                   	pop    %esi
+  100c6e:	5d                   	pop    %ebp
+  100c6f:	5a                   	pop    %edx
+  100c70:	59                   	pop    %ecx
+  100c71:	5b                   	pop    %ebx
+  100c72:	58                   	pop    %eax
+  100c73:	83 c4 08             	add    $0x8,%esp
+  100c76:	cf                   	iret
+
+00100c77 <enable_interrupts>:
+  100c77:	fb                   	sti
+  100c78:	c3                   	ret
+
+00100c79 <disable_interrupts>:
+  100c79:	fa                   	cli
+  100c7a:	c3                   	ret
+
+00100c7b <interrupt_handler_0>:
+  100c7b:	6a 00                	push   $0x0
+  100c7d:	6a 00                	push   $0x0
+  100c7f:	eb df                	jmp    100c60 <common_interrupt_handler>
+
+00100c81 <interrupt_handler_1>:
+  100c81:	6a 00                	push   $0x0
+  100c83:	6a 01                	push   $0x1
+  100c85:	eb d9                	jmp    100c60 <common_interrupt_handler>
+
+00100c87 <interrupt_handler_2>:
+  100c87:	6a 00                	push   $0x0
+  100c89:	6a 02                	push   $0x2
+  100c8b:	eb d3                	jmp    100c60 <common_interrupt_handler>
+
+00100c8d <interrupt_handler_3>:
+  100c8d:	6a 00                	push   $0x0
+  100c8f:	6a 03                	push   $0x3
+  100c91:	eb cd                	jmp    100c60 <common_interrupt_handler>
+
+00100c93 <interrupt_handler_4>:
+  100c93:	6a 00                	push   $0x0
+  100c95:	6a 04                	push   $0x4
+  100c97:	eb c7                	jmp    100c60 <common_interrupt_handler>
+
+00100c99 <interrupt_handler_5>:
+  100c99:	6a 00                	push   $0x0
+  100c9b:	6a 05                	push   $0x5
+  100c9d:	eb c1                	jmp    100c60 <common_interrupt_handler>
+
+00100c9f <interrupt_handler_6>:
+  100c9f:	6a 00                	push   $0x0
+  100ca1:	6a 06                	push   $0x6
+  100ca3:	eb bb                	jmp    100c60 <common_interrupt_handler>
+
+00100ca5 <interrupt_handler_7>:
+  100ca5:	6a 00                	push   $0x0
+  100ca7:	6a 07                	push   $0x7
+  100ca9:	eb b5                	jmp    100c60 <common_interrupt_handler>
+
+00100cab <interrupt_handler_8>:
+  100cab:	6a 00                	push   $0x0
+  100cad:	6a 08                	push   $0x8
+  100caf:	eb af                	jmp    100c60 <common_interrupt_handler>
+
+00100cb1 <interrupt_handler_9>:
+  100cb1:	6a 00                	push   $0x0
+  100cb3:	6a 09                	push   $0x9
+  100cb5:	eb a9                	jmp    100c60 <common_interrupt_handler>
+
+00100cb7 <interrupt_handler_10>:
+  100cb7:	6a 00                	push   $0x0
+  100cb9:	6a 0a                	push   $0xa
+  100cbb:	eb a3                	jmp    100c60 <common_interrupt_handler>
+
+00100cbd <interrupt_handler_11>:
+  100cbd:	6a 00                	push   $0x0
+  100cbf:	6a 0b                	push   $0xb
+  100cc1:	eb 9d                	jmp    100c60 <common_interrupt_handler>
+
+00100cc3 <interrupt_handler_12>:
+  100cc3:	6a 00                	push   $0x0
+  100cc5:	6a 0c                	push   $0xc
+  100cc7:	eb 97                	jmp    100c60 <common_interrupt_handler>
+
+00100cc9 <interrupt_handler_13>:
+  100cc9:	6a 00                	push   $0x0
+  100ccb:	6a 0d                	push   $0xd
+  100ccd:	eb 91                	jmp    100c60 <common_interrupt_handler>
+
+00100ccf <interrupt_handler_14>:
+  100ccf:	6a 00                	push   $0x0
+  100cd1:	6a 0e                	push   $0xe
+  100cd3:	eb 8b                	jmp    100c60 <common_interrupt_handler>
+
+00100cd5 <interrupt_handler_15>:
+  100cd5:	6a 00                	push   $0x0
+  100cd7:	6a 0f                	push   $0xf
+  100cd9:	eb 85                	jmp    100c60 <common_interrupt_handler>
+
+00100cdb <interrupt_handler_16>:
+  100cdb:	6a 00                	push   $0x0
+  100cdd:	6a 10                	push   $0x10
+  100cdf:	e9 7c ff ff ff       	jmp    100c60 <common_interrupt_handler>
+
+00100ce4 <interrupt_handler_17>:
+  100ce4:	6a 00                	push   $0x0
+  100ce6:	6a 11                	push   $0x11
+  100ce8:	e9 73 ff ff ff       	jmp    100c60 <common_interrupt_handler>
+
+00100ced <interrupt_handler_18>:
+  100ced:	6a 00                	push   $0x0
+  100cef:	6a 12                	push   $0x12
+  100cf1:	e9 6a ff ff ff       	jmp    100c60 <common_interrupt_handler>
+
+00100cf6 <interrupt_handler_19>:
+  100cf6:	6a 00                	push   $0x0
+  100cf8:	6a 13                	push   $0x13
+  100cfa:	e9 61 ff ff ff       	jmp    100c60 <common_interrupt_handler>
+
+00100cff <interrupt_handler_32>:
+  100cff:	6a 00                	push   $0x0
+  100d01:	6a 20                	push   $0x20
+  100d03:	e9 58 ff ff ff       	jmp    100c60 <common_interrupt_handler>
+
+00100d08 <interrupt_handler_33>:
+  100d08:	6a 00                	push   $0x0
+  100d0a:	6a 21                	push   $0x21
+  100d0c:	e9 4f ff ff ff       	jmp    100c60 <common_interrupt_handler>
+
+00100d11 <interrupt_handler_34>:
+  100d11:	6a 00                	push   $0x0
+  100d13:	6a 22                	push   $0x22
+  100d15:	e9 46 ff ff ff       	jmp    100c60 <common_interrupt_handler>
+
+00100d1a <interrupt_handler_35>:
+  100d1a:	6a 00                	push   $0x0
+  100d1c:	6a 23                	push   $0x23
+  100d1e:	e9 3d ff ff ff       	jmp    100c60 <common_interrupt_handler>
+
+00100d23 <interrupt_handler_36>:
+  100d23:	6a 00                	push   $0x0
+  100d25:	6a 24                	push   $0x24
+  100d27:	e9 34 ff ff ff       	jmp    100c60 <common_interrupt_handler>
+
+00100d2c <interrupt_handler_37>:
+  100d2c:	6a 00                	push   $0x0
+  100d2e:	6a 25                	push   $0x25
+  100d30:	e9 2b ff ff ff       	jmp    100c60 <common_interrupt_handler>
+
+00100d35 <interrupt_handler_38>:
+  100d35:	6a 00                	push   $0x0
+  100d37:	6a 26                	push   $0x26
+  100d39:	e9 22 ff ff ff       	jmp    100c60 <common_interrupt_handler>
+
+00100d3e <interrupt_handler_39>:
+  100d3e:	6a 00                	push   $0x0
+  100d40:	6a 27                	push   $0x27
+  100d42:	e9 19 ff ff ff       	jmp    100c60 <common_interrupt_handler>
+
+00100d47 <interrupt_handler_40>:
+  100d47:	6a 00                	push   $0x0
+  100d49:	6a 28                	push   $0x28
+  100d4b:	e9 10 ff ff ff       	jmp    100c60 <common_interrupt_handler>
+
+00100d50 <interrupt_handler_41>:
+  100d50:	6a 00                	push   $0x0
+  100d52:	6a 29                	push   $0x29
+  100d54:	e9 07 ff ff ff       	jmp    100c60 <common_interrupt_handler>
+
+00100d59 <interrupt_handler_42>:
+  100d59:	6a 00                	push   $0x0
+  100d5b:	6a 2a                	push   $0x2a
+  100d5d:	e9 fe fe ff ff       	jmp    100c60 <common_interrupt_handler>
+
+00100d62 <interrupt_handler_43>:
+  100d62:	6a 00                	push   $0x0
+  100d64:	6a 2b                	push   $0x2b
+  100d66:	e9 f5 fe ff ff       	jmp    100c60 <common_interrupt_handler>
+
+00100d6b <interrupt_handler_44>:
+  100d6b:	6a 00                	push   $0x0
+  100d6d:	6a 2c                	push   $0x2c
+  100d6f:	e9 ec fe ff ff       	jmp    100c60 <common_interrupt_handler>
+
+00100d74 <interrupt_handler_45>:
+  100d74:	6a 00                	push   $0x0
+  100d76:	6a 2d                	push   $0x2d
+  100d78:	e9 e3 fe ff ff       	jmp    100c60 <common_interrupt_handler>
+
+00100d7d <interrupt_handler_46>:
+  100d7d:	6a 00                	push   $0x0
+  100d7f:	6a 2e                	push   $0x2e
+  100d81:	e9 da fe ff ff       	jmp    100c60 <common_interrupt_handler>
+
+00100d86 <interrupt_handler_47>:
+  100d86:	6a 00                	push   $0x0
+  100d88:	6a 2f                	push   $0x2f
+  100d8a:	e9 d1 fe ff ff       	jmp    100c60 <common_interrupt_handler>
+
+00100d8f <create_idt_gate>:
+  100d8f:	55                   	push   %ebp
+  100d90:	89 e5                	mov    %esp,%ebp
+  100d92:	53                   	push   %ebx
+  100d93:	83 ec 0c             	sub    $0xc,%esp
+  100d96:	e8 25 0c 00 00       	call   1019c0 <__x86.get_pc_thunk.ax>
+  100d9b:	05 e5 22 00 00       	add    $0x22e5,%eax
+  100da0:	8b 5d 08             	mov    0x8(%ebp),%ebx
+  100da3:	8b 4d 10             	mov    0x10(%ebp),%ecx
+  100da6:	8b 55 14             	mov    0x14(%ebp),%edx
+  100da9:	88 5d f8             	mov    %bl,-0x8(%ebp)
+  100dac:	88 4d f4             	mov    %cl,-0xc(%ebp)
+  100daf:	88 55 f0             	mov    %dl,-0x10(%ebp)
+  100db2:	0f b6 55 f8          	movzbl -0x8(%ebp),%edx
+  100db6:	8b 4d 0c             	mov    0xc(%ebp),%ecx
+  100db9:	66 89 8c d0 c0 1f 00 	mov    %cx,0x1fc0(%eax,%edx,8)
+  100dc0:	00 
+  100dc1:	8b 55 0c             	mov    0xc(%ebp),%edx
+  100dc4:	89 d1                	mov    %edx,%ecx
+  100dc6:	c1 e9 10             	shr    $0x10,%ecx
+  100dc9:	0f b6 55 f8          	movzbl -0x8(%ebp),%edx
+  100dcd:	66 89 8c d0 c6 1f 00 	mov    %cx,0x1fc6(%eax,%edx,8)
+  100dd4:	00 
+  100dd5:	0f b6 55 f8          	movzbl -0x8(%ebp),%edx
+  100dd9:	66 c7 84 d0 c2 1f 00 	movw   $0x8,0x1fc2(%eax,%edx,8)
+  100de0:	00 08 00 
+  100de3:	0f b6 55 f8          	movzbl -0x8(%ebp),%edx
+  100de7:	c6 84 d0 c4 1f 00 00 	movb   $0x0,0x1fc4(%eax,%edx,8)
+  100dee:	00 
+  100def:	0f b6 55 f0          	movzbl -0x10(%ebp),%edx
+  100df3:	c1 e2 05             	shl    $0x5,%edx
+  100df6:	83 e2 60             	and    $0x60,%edx
+  100df9:	89 d1                	mov    %edx,%ecx
+  100dfb:	0a 4d f4             	or     -0xc(%ebp),%cl
+  100dfe:	0f b6 55 f8          	movzbl -0x8(%ebp),%edx
+  100e02:	83 c9 8e             	or     $0xffffff8e,%ecx
+  100e05:	88 8c d0 c5 1f 00 00 	mov    %cl,0x1fc5(%eax,%edx,8)
+  100e0c:	90                   	nop
+  100e0d:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  100e10:	c9                   	leave
+  100e11:	c3                   	ret
+
+00100e12 <idt_init>:
+  100e12:	55                   	push   %ebp
+  100e13:	89 e5                	mov    %esp,%ebp
+  100e15:	53                   	push   %ebx
+  100e16:	83 ec 14             	sub    $0x14,%esp
+  100e19:	e8 aa 0b 00 00       	call   1019c8 <__x86.get_pc_thunk.bx>
+  100e1e:	81 c3 62 22 00 00    	add    $0x2262,%ebx
+  100e24:	66 c7 45 f2 1f 01    	movw   $0x11f,-0xe(%ebp)
+  100e2a:	8d 83 c0 1f 00 00    	lea    0x1fc0(%ebx),%eax
+  100e30:	89 45 f4             	mov    %eax,-0xc(%ebp)
+  100e33:	c7 c0 7b 0c 10 00    	mov    $0x100c7b,%eax
+  100e39:	6a 00                	push   $0x0
+  100e3b:	6a 01                	push   $0x1
+  100e3d:	50                   	push   %eax
+  100e3e:	6a 00                	push   $0x0
+  100e40:	e8 4a ff ff ff       	call   100d8f <create_idt_gate>
+  100e45:	83 c4 10             	add    $0x10,%esp
+  100e48:	c7 c0 81 0c 10 00    	mov    $0x100c81,%eax
+  100e4e:	6a 00                	push   $0x0
+  100e50:	6a 01                	push   $0x1
+  100e52:	50                   	push   %eax
+  100e53:	6a 01                	push   $0x1
+  100e55:	e8 35 ff ff ff       	call   100d8f <create_idt_gate>
+  100e5a:	83 c4 10             	add    $0x10,%esp
+  100e5d:	c7 c0 87 0c 10 00    	mov    $0x100c87,%eax
+  100e63:	6a 00                	push   $0x0
+  100e65:	6a 01                	push   $0x1
+  100e67:	50                   	push   %eax
+  100e68:	6a 02                	push   $0x2
+  100e6a:	e8 20 ff ff ff       	call   100d8f <create_idt_gate>
+  100e6f:	83 c4 10             	add    $0x10,%esp
+  100e72:	c7 c0 8d 0c 10 00    	mov    $0x100c8d,%eax
+  100e78:	6a 00                	push   $0x0
+  100e7a:	6a 01                	push   $0x1
+  100e7c:	50                   	push   %eax
+  100e7d:	6a 03                	push   $0x3
+  100e7f:	e8 0b ff ff ff       	call   100d8f <create_idt_gate>
+  100e84:	83 c4 10             	add    $0x10,%esp
+  100e87:	c7 c0 93 0c 10 00    	mov    $0x100c93,%eax
+  100e8d:	6a 00                	push   $0x0
+  100e8f:	6a 01                	push   $0x1
+  100e91:	50                   	push   %eax
+  100e92:	6a 04                	push   $0x4
+  100e94:	e8 f6 fe ff ff       	call   100d8f <create_idt_gate>
+  100e99:	83 c4 10             	add    $0x10,%esp
+  100e9c:	c7 c0 99 0c 10 00    	mov    $0x100c99,%eax
+  100ea2:	6a 00                	push   $0x0
+  100ea4:	6a 01                	push   $0x1
+  100ea6:	50                   	push   %eax
+  100ea7:	6a 05                	push   $0x5
+  100ea9:	e8 e1 fe ff ff       	call   100d8f <create_idt_gate>
+  100eae:	83 c4 10             	add    $0x10,%esp
+  100eb1:	c7 c0 9f 0c 10 00    	mov    $0x100c9f,%eax
+  100eb7:	6a 00                	push   $0x0
+  100eb9:	6a 01                	push   $0x1
+  100ebb:	50                   	push   %eax
+  100ebc:	6a 06                	push   $0x6
+  100ebe:	e8 cc fe ff ff       	call   100d8f <create_idt_gate>
+  100ec3:	83 c4 10             	add    $0x10,%esp
+  100ec6:	c7 c0 a5 0c 10 00    	mov    $0x100ca5,%eax
+  100ecc:	6a 00                	push   $0x0
+  100ece:	6a 01                	push   $0x1
+  100ed0:	50                   	push   %eax
+  100ed1:	6a 07                	push   $0x7
+  100ed3:	e8 b7 fe ff ff       	call   100d8f <create_idt_gate>
+  100ed8:	83 c4 10             	add    $0x10,%esp
+  100edb:	c7 c0 ab 0c 10 00    	mov    $0x100cab,%eax
+  100ee1:	6a 00                	push   $0x0
+  100ee3:	6a 01                	push   $0x1
+  100ee5:	50                   	push   %eax
+  100ee6:	6a 08                	push   $0x8
+  100ee8:	e8 a2 fe ff ff       	call   100d8f <create_idt_gate>
+  100eed:	83 c4 10             	add    $0x10,%esp
+  100ef0:	c7 c0 b1 0c 10 00    	mov    $0x100cb1,%eax
+  100ef6:	6a 00                	push   $0x0
+  100ef8:	6a 01                	push   $0x1
+  100efa:	50                   	push   %eax
+  100efb:	6a 09                	push   $0x9
+  100efd:	e8 8d fe ff ff       	call   100d8f <create_idt_gate>
+  100f02:	83 c4 10             	add    $0x10,%esp
+  100f05:	c7 c0 b7 0c 10 00    	mov    $0x100cb7,%eax
+  100f0b:	6a 00                	push   $0x0
+  100f0d:	6a 01                	push   $0x1
+  100f0f:	50                   	push   %eax
+  100f10:	6a 0a                	push   $0xa
+  100f12:	e8 78 fe ff ff       	call   100d8f <create_idt_gate>
+  100f17:	83 c4 10             	add    $0x10,%esp
+  100f1a:	c7 c0 bd 0c 10 00    	mov    $0x100cbd,%eax
+  100f20:	6a 00                	push   $0x0
+  100f22:	6a 01                	push   $0x1
+  100f24:	50                   	push   %eax
+  100f25:	6a 0b                	push   $0xb
+  100f27:	e8 63 fe ff ff       	call   100d8f <create_idt_gate>
+  100f2c:	83 c4 10             	add    $0x10,%esp
+  100f2f:	c7 c0 c3 0c 10 00    	mov    $0x100cc3,%eax
+  100f35:	6a 00                	push   $0x0
+  100f37:	6a 01                	push   $0x1
+  100f39:	50                   	push   %eax
+  100f3a:	6a 0c                	push   $0xc
+  100f3c:	e8 4e fe ff ff       	call   100d8f <create_idt_gate>
+  100f41:	83 c4 10             	add    $0x10,%esp
+  100f44:	c7 c0 c9 0c 10 00    	mov    $0x100cc9,%eax
+  100f4a:	6a 00                	push   $0x0
+  100f4c:	6a 01                	push   $0x1
+  100f4e:	50                   	push   %eax
+  100f4f:	6a 0d                	push   $0xd
+  100f51:	e8 39 fe ff ff       	call   100d8f <create_idt_gate>
+  100f56:	83 c4 10             	add    $0x10,%esp
+  100f59:	c7 c0 cf 0c 10 00    	mov    $0x100ccf,%eax
+  100f5f:	6a 00                	push   $0x0
+  100f61:	6a 01                	push   $0x1
+  100f63:	50                   	push   %eax
+  100f64:	6a 0e                	push   $0xe
+  100f66:	e8 24 fe ff ff       	call   100d8f <create_idt_gate>
+  100f6b:	83 c4 10             	add    $0x10,%esp
+  100f6e:	c7 c0 d5 0c 10 00    	mov    $0x100cd5,%eax
+  100f74:	6a 00                	push   $0x0
+  100f76:	6a 01                	push   $0x1
+  100f78:	50                   	push   %eax
+  100f79:	6a 0f                	push   $0xf
+  100f7b:	e8 0f fe ff ff       	call   100d8f <create_idt_gate>
+  100f80:	83 c4 10             	add    $0x10,%esp
+  100f83:	c7 c0 db 0c 10 00    	mov    $0x100cdb,%eax
+  100f89:	6a 00                	push   $0x0
+  100f8b:	6a 01                	push   $0x1
+  100f8d:	50                   	push   %eax
+  100f8e:	6a 10                	push   $0x10
+  100f90:	e8 fa fd ff ff       	call   100d8f <create_idt_gate>
+  100f95:	83 c4 10             	add    $0x10,%esp
+  100f98:	c7 c0 e4 0c 10 00    	mov    $0x100ce4,%eax
+  100f9e:	6a 00                	push   $0x0
+  100fa0:	6a 01                	push   $0x1
+  100fa2:	50                   	push   %eax
+  100fa3:	6a 11                	push   $0x11
+  100fa5:	e8 e5 fd ff ff       	call   100d8f <create_idt_gate>
+  100faa:	83 c4 10             	add    $0x10,%esp
+  100fad:	c7 c0 ed 0c 10 00    	mov    $0x100ced,%eax
+  100fb3:	6a 00                	push   $0x0
+  100fb5:	6a 01                	push   $0x1
+  100fb7:	50                   	push   %eax
+  100fb8:	6a 12                	push   $0x12
+  100fba:	e8 d0 fd ff ff       	call   100d8f <create_idt_gate>
+  100fbf:	83 c4 10             	add    $0x10,%esp
+  100fc2:	c7 c0 f6 0c 10 00    	mov    $0x100cf6,%eax
+  100fc8:	6a 00                	push   $0x0
+  100fca:	6a 01                	push   $0x1
+  100fcc:	50                   	push   %eax
+  100fcd:	6a 13                	push   $0x13
+  100fcf:	e8 bb fd ff ff       	call   100d8f <create_idt_gate>
+  100fd4:	83 c4 10             	add    $0x10,%esp
+  100fd7:	c7 c0 ff 0c 10 00    	mov    $0x100cff,%eax
+  100fdd:	6a 00                	push   $0x0
+  100fdf:	6a 01                	push   $0x1
+  100fe1:	50                   	push   %eax
+  100fe2:	6a 20                	push   $0x20
+  100fe4:	e8 a6 fd ff ff       	call   100d8f <create_idt_gate>
+  100fe9:	83 c4 10             	add    $0x10,%esp
+  100fec:	c7 c0 08 0d 10 00    	mov    $0x100d08,%eax
+  100ff2:	6a 00                	push   $0x0
+  100ff4:	6a 01                	push   $0x1
+  100ff6:	50                   	push   %eax
+  100ff7:	6a 21                	push   $0x21
+  100ff9:	e8 91 fd ff ff       	call   100d8f <create_idt_gate>
+  100ffe:	83 c4 10             	add    $0x10,%esp
+  101001:	c7 c0 11 0d 10 00    	mov    $0x100d11,%eax
+  101007:	6a 00                	push   $0x0
+  101009:	6a 01                	push   $0x1
+  10100b:	50                   	push   %eax
+  10100c:	6a 22                	push   $0x22
+  10100e:	e8 7c fd ff ff       	call   100d8f <create_idt_gate>
+  101013:	83 c4 10             	add    $0x10,%esp
+  101016:	c7 c0 1a 0d 10 00    	mov    $0x100d1a,%eax
+  10101c:	6a 00                	push   $0x0
+  10101e:	6a 01                	push   $0x1
+  101020:	50                   	push   %eax
+  101021:	6a 23                	push   $0x23
+  101023:	e8 67 fd ff ff       	call   100d8f <create_idt_gate>
+  101028:	83 c4 10             	add    $0x10,%esp
+  10102b:	c7 c0 23 0d 10 00    	mov    $0x100d23,%eax
+  101031:	6a 00                	push   $0x0
+  101033:	6a 01                	push   $0x1
+  101035:	50                   	push   %eax
+  101036:	6a 24                	push   $0x24
+  101038:	e8 52 fd ff ff       	call   100d8f <create_idt_gate>
+  10103d:	83 c4 10             	add    $0x10,%esp
+  101040:	c7 c0 2c 0d 10 00    	mov    $0x100d2c,%eax
+  101046:	6a 00                	push   $0x0
+  101048:	6a 01                	push   $0x1
+  10104a:	50                   	push   %eax
+  10104b:	6a 25                	push   $0x25
+  10104d:	e8 3d fd ff ff       	call   100d8f <create_idt_gate>
+  101052:	83 c4 10             	add    $0x10,%esp
+  101055:	c7 c0 35 0d 10 00    	mov    $0x100d35,%eax
+  10105b:	6a 00                	push   $0x0
+  10105d:	6a 01                	push   $0x1
+  10105f:	50                   	push   %eax
+  101060:	6a 26                	push   $0x26
+  101062:	e8 28 fd ff ff       	call   100d8f <create_idt_gate>
+  101067:	83 c4 10             	add    $0x10,%esp
+  10106a:	c7 c0 3e 0d 10 00    	mov    $0x100d3e,%eax
+  101070:	6a 00                	push   $0x0
+  101072:	6a 01                	push   $0x1
+  101074:	50                   	push   %eax
+  101075:	6a 27                	push   $0x27
+  101077:	e8 13 fd ff ff       	call   100d8f <create_idt_gate>
+  10107c:	83 c4 10             	add    $0x10,%esp
+  10107f:	c7 c0 47 0d 10 00    	mov    $0x100d47,%eax
+  101085:	6a 00                	push   $0x0
+  101087:	6a 01                	push   $0x1
+  101089:	50                   	push   %eax
+  10108a:	6a 28                	push   $0x28
+  10108c:	e8 fe fc ff ff       	call   100d8f <create_idt_gate>
+  101091:	83 c4 10             	add    $0x10,%esp
+  101094:	c7 c0 50 0d 10 00    	mov    $0x100d50,%eax
+  10109a:	6a 00                	push   $0x0
+  10109c:	6a 01                	push   $0x1
+  10109e:	50                   	push   %eax
+  10109f:	6a 29                	push   $0x29
+  1010a1:	e8 e9 fc ff ff       	call   100d8f <create_idt_gate>
+  1010a6:	83 c4 10             	add    $0x10,%esp
+  1010a9:	c7 c0 59 0d 10 00    	mov    $0x100d59,%eax
+  1010af:	6a 00                	push   $0x0
+  1010b1:	6a 01                	push   $0x1
+  1010b3:	50                   	push   %eax
+  1010b4:	6a 2a                	push   $0x2a
+  1010b6:	e8 d4 fc ff ff       	call   100d8f <create_idt_gate>
+  1010bb:	83 c4 10             	add    $0x10,%esp
+  1010be:	c7 c0 62 0d 10 00    	mov    $0x100d62,%eax
+  1010c4:	6a 00                	push   $0x0
+  1010c6:	6a 01                	push   $0x1
+  1010c8:	50                   	push   %eax
+  1010c9:	6a 2b                	push   $0x2b
+  1010cb:	e8 bf fc ff ff       	call   100d8f <create_idt_gate>
+  1010d0:	83 c4 10             	add    $0x10,%esp
+  1010d3:	c7 c0 6b 0d 10 00    	mov    $0x100d6b,%eax
+  1010d9:	6a 00                	push   $0x0
+  1010db:	6a 01                	push   $0x1
+  1010dd:	50                   	push   %eax
+  1010de:	6a 2c                	push   $0x2c
+  1010e0:	e8 aa fc ff ff       	call   100d8f <create_idt_gate>
+  1010e5:	83 c4 10             	add    $0x10,%esp
+  1010e8:	c7 c0 74 0d 10 00    	mov    $0x100d74,%eax
+  1010ee:	6a 00                	push   $0x0
+  1010f0:	6a 01                	push   $0x1
+  1010f2:	50                   	push   %eax
+  1010f3:	6a 2d                	push   $0x2d
+  1010f5:	e8 95 fc ff ff       	call   100d8f <create_idt_gate>
+  1010fa:	83 c4 10             	add    $0x10,%esp
+  1010fd:	c7 c0 7d 0d 10 00    	mov    $0x100d7d,%eax
+  101103:	6a 00                	push   $0x0
+  101105:	6a 01                	push   $0x1
+  101107:	50                   	push   %eax
+  101108:	6a 2e                	push   $0x2e
+  10110a:	e8 80 fc ff ff       	call   100d8f <create_idt_gate>
+  10110f:	83 c4 10             	add    $0x10,%esp
+  101112:	c7 c0 86 0d 10 00    	mov    $0x100d86,%eax
+  101118:	6a 00                	push   $0x0
+  10111a:	6a 01                	push   $0x1
+  10111c:	50                   	push   %eax
+  10111d:	6a 2f                	push   $0x2f
+  10111f:	e8 6b fc ff ff       	call   100d8f <create_idt_gate>
+  101124:	83 c4 10             	add    $0x10,%esp
+  101127:	83 ec 0c             	sub    $0xc,%esp
+  10112a:	8d 45 f2             	lea    -0xe(%ebp),%eax
+  10112d:	50                   	push   %eax
+  10112e:	e8 0d 00 00 00       	call   101140 <load_idt>
+  101133:	83 c4 10             	add    $0x10,%esp
+  101136:	90                   	nop
+  101137:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  10113a:	c9                   	leave
+  10113b:	c3                   	ret
+  10113c:	66 90                	xchg   %ax,%ax
+  10113e:	66 90                	xchg   %ax,%ax
+
+00101140 <load_idt>:
+  101140:	8b 44 24 04          	mov    0x4(%esp),%eax
+  101144:	0f 01 18             	lidtl  (%eax)
+  101147:	c3                   	ret
+
+00101148 <printf>:
+  101148:	55                   	push   %ebp
+  101149:	89 e5                	mov    %esp,%ebp
+  10114b:	53                   	push   %ebx
+  10114c:	83 ec 44             	sub    $0x44,%esp
+  10114f:	e8 74 08 00 00       	call   1019c8 <__x86.get_pc_thunk.bx>
+  101154:	81 c3 2c 1f 00 00    	add    $0x1f2c,%ebx
+  10115a:	8d 45 0c             	lea    0xc(%ebp),%eax
+  10115d:	89 45 f4             	mov    %eax,-0xc(%ebp)
+  101160:	e9 29 01 00 00       	jmp    10128e <printf+0x146>
+  101165:	8b 45 08             	mov    0x8(%ebp),%eax
+  101168:	0f b6 00             	movzbl (%eax),%eax
+  10116b:	3c 25                	cmp    $0x25,%al
+  10116d:	0f 85 fd 00 00 00    	jne    101270 <printf+0x128>
+  101173:	8b 45 08             	mov    0x8(%ebp),%eax
+  101176:	83 c0 01             	add    $0x1,%eax
+  101179:	89 45 08             	mov    %eax,0x8(%ebp)
+  10117c:	8b 45 08             	mov    0x8(%ebp),%eax
+  10117f:	0f b6 00             	movzbl (%eax),%eax
+  101182:	3c 64                	cmp    $0x64,%al
+  101184:	75 35                	jne    1011bb <printf+0x73>
+  101186:	83 45 f4 04          	addl   $0x4,-0xc(%ebp)
+  10118a:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  10118d:	8b 40 fc             	mov    -0x4(%eax),%eax
+  101190:	89 45 e4             	mov    %eax,-0x1c(%ebp)
+  101193:	83 ec 04             	sub    $0x4,%esp
+  101196:	6a 0a                	push   $0xa
+  101198:	8d 45 c4             	lea    -0x3c(%ebp),%eax
+  10119b:	50                   	push   %eax
+  10119c:	ff 75 e4             	push   -0x1c(%ebp)
+  10119f:	e8 8c f9 ff ff       	call   100b30 <itoa>
+  1011a4:	83 c4 10             	add    $0x10,%esp
+  1011a7:	83 ec 0c             	sub    $0xc,%esp
+  1011aa:	8d 45 c4             	lea    -0x3c(%ebp),%eax
+  1011ad:	50                   	push   %eax
+  1011ae:	e8 09 f5 ff ff       	call   1006bc <vga_writestring>
+  1011b3:	83 c4 10             	add    $0x10,%esp
+  1011b6:	e9 ca 00 00 00       	jmp    101285 <printf+0x13d>
+  1011bb:	8b 45 08             	mov    0x8(%ebp),%eax
+  1011be:	0f b6 00             	movzbl (%eax),%eax
+  1011c1:	3c 78                	cmp    $0x78,%al
+  1011c3:	75 35                	jne    1011fa <printf+0xb2>
+  1011c5:	83 45 f4 04          	addl   $0x4,-0xc(%ebp)
+  1011c9:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  1011cc:	8b 40 fc             	mov    -0x4(%eax),%eax
+  1011cf:	89 45 e8             	mov    %eax,-0x18(%ebp)
+  1011d2:	83 ec 04             	sub    $0x4,%esp
+  1011d5:	6a 10                	push   $0x10
+  1011d7:	8d 45 c4             	lea    -0x3c(%ebp),%eax
+  1011da:	50                   	push   %eax
+  1011db:	ff 75 e8             	push   -0x18(%ebp)
+  1011de:	e8 4d f9 ff ff       	call   100b30 <itoa>
+  1011e3:	83 c4 10             	add    $0x10,%esp
+  1011e6:	83 ec 0c             	sub    $0xc,%esp
+  1011e9:	8d 45 c4             	lea    -0x3c(%ebp),%eax
+  1011ec:	50                   	push   %eax
+  1011ed:	e8 ca f4 ff ff       	call   1006bc <vga_writestring>
+  1011f2:	83 c4 10             	add    $0x10,%esp
+  1011f5:	e9 8b 00 00 00       	jmp    101285 <printf+0x13d>
+  1011fa:	8b 45 08             	mov    0x8(%ebp),%eax
+  1011fd:	0f b6 00             	movzbl (%eax),%eax
+  101200:	3c 73                	cmp    $0x73,%al
+  101202:	75 1d                	jne    101221 <printf+0xd9>
+  101204:	83 45 f4 04          	addl   $0x4,-0xc(%ebp)
+  101208:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  10120b:	8b 40 fc             	mov    -0x4(%eax),%eax
+  10120e:	89 45 ec             	mov    %eax,-0x14(%ebp)
+  101211:	83 ec 0c             	sub    $0xc,%esp
+  101214:	ff 75 ec             	push   -0x14(%ebp)
+  101217:	e8 a0 f4 ff ff       	call   1006bc <vga_writestring>
+  10121c:	83 c4 10             	add    $0x10,%esp
+  10121f:	eb 64                	jmp    101285 <printf+0x13d>
+  101221:	8b 45 08             	mov    0x8(%ebp),%eax
+  101224:	0f b6 00             	movzbl (%eax),%eax
+  101227:	3c 63                	cmp    $0x63,%al
+  101229:	75 21                	jne    10124c <printf+0x104>
+  10122b:	83 45 f4 04          	addl   $0x4,-0xc(%ebp)
+  10122f:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  101232:	83 e8 04             	sub    $0x4,%eax
+  101235:	8b 00                	mov    (%eax),%eax
+  101237:	88 45 f3             	mov    %al,-0xd(%ebp)
+  10123a:	0f be 45 f3          	movsbl -0xd(%ebp),%eax
+  10123e:	83 ec 0c             	sub    $0xc,%esp
+  101241:	50                   	push   %eax
+  101242:	e8 74 f2 ff ff       	call   1004bb <vga_putchar>
+  101247:	83 c4 10             	add    $0x10,%esp
+  10124a:	eb 39                	jmp    101285 <printf+0x13d>
+  10124c:	83 ec 0c             	sub    $0xc,%esp
+  10124f:	6a 25                	push   $0x25
+  101251:	e8 65 f2 ff ff       	call   1004bb <vga_putchar>
+  101256:	83 c4 10             	add    $0x10,%esp
+  101259:	8b 45 08             	mov    0x8(%ebp),%eax
+  10125c:	0f b6 00             	movzbl (%eax),%eax
+  10125f:	0f be c0             	movsbl %al,%eax
+  101262:	83 ec 0c             	sub    $0xc,%esp
+  101265:	50                   	push   %eax
+  101266:	e8 50 f2 ff ff       	call   1004bb <vga_putchar>
+  10126b:	83 c4 10             	add    $0x10,%esp
+  10126e:	eb 15                	jmp    101285 <printf+0x13d>
+  101270:	8b 45 08             	mov    0x8(%ebp),%eax
+  101273:	0f b6 00             	movzbl (%eax),%eax
+  101276:	0f be c0             	movsbl %al,%eax
+  101279:	83 ec 0c             	sub    $0xc,%esp
+  10127c:	50                   	push   %eax
+  10127d:	e8 39 f2 ff ff       	call   1004bb <vga_putchar>
+  101282:	83 c4 10             	add    $0x10,%esp
+  101285:	8b 45 08             	mov    0x8(%ebp),%eax
+  101288:	83 c0 01             	add    $0x1,%eax
+  10128b:	89 45 08             	mov    %eax,0x8(%ebp)
+  10128e:	8b 45 08             	mov    0x8(%ebp),%eax
+  101291:	0f b6 00             	movzbl (%eax),%eax
+  101294:	84 c0                	test   %al,%al
+  101296:	0f 85 c9 fe ff ff    	jne    101165 <printf+0x1d>
+  10129c:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%ebp)
+  1012a3:	90                   	nop
+  1012a4:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  1012a7:	c9                   	leave
+  1012a8:	c3                   	ret
+
+001012a9 <sprintf>:
+  1012a9:	55                   	push   %ebp
+  1012aa:	89 e5                	mov    %esp,%ebp
+  1012ac:	53                   	push   %ebx
+  1012ad:	83 ec 44             	sub    $0x44,%esp
+  1012b0:	e8 13 07 00 00       	call   1019c8 <__x86.get_pc_thunk.bx>
+  1012b5:	81 c3 cb 1d 00 00    	add    $0x1dcb,%ebx
+  1012bb:	8d 45 0c             	lea    0xc(%ebp),%eax
+  1012be:	89 45 f4             	mov    %eax,-0xc(%ebp)
+  1012c1:	e9 29 01 00 00       	jmp    1013ef <sprintf+0x146>
+  1012c6:	8b 45 08             	mov    0x8(%ebp),%eax
+  1012c9:	0f b6 00             	movzbl (%eax),%eax
+  1012cc:	3c 25                	cmp    $0x25,%al
+  1012ce:	0f 85 fd 00 00 00    	jne    1013d1 <sprintf+0x128>
+  1012d4:	8b 45 08             	mov    0x8(%ebp),%eax
+  1012d7:	83 c0 01             	add    $0x1,%eax
+  1012da:	89 45 08             	mov    %eax,0x8(%ebp)
+  1012dd:	8b 45 08             	mov    0x8(%ebp),%eax
+  1012e0:	0f b6 00             	movzbl (%eax),%eax
+  1012e3:	3c 64                	cmp    $0x64,%al
+  1012e5:	75 35                	jne    10131c <sprintf+0x73>
+  1012e7:	83 45 f4 04          	addl   $0x4,-0xc(%ebp)
+  1012eb:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  1012ee:	8b 40 fc             	mov    -0x4(%eax),%eax
+  1012f1:	89 45 e4             	mov    %eax,-0x1c(%ebp)
+  1012f4:	83 ec 04             	sub    $0x4,%esp
+  1012f7:	6a 0a                	push   $0xa
+  1012f9:	8d 45 c4             	lea    -0x3c(%ebp),%eax
+  1012fc:	50                   	push   %eax
+  1012fd:	ff 75 e4             	push   -0x1c(%ebp)
+  101300:	e8 2b f8 ff ff       	call   100b30 <itoa>
+  101305:	83 c4 10             	add    $0x10,%esp
+  101308:	83 ec 0c             	sub    $0xc,%esp
+  10130b:	8d 45 c4             	lea    -0x3c(%ebp),%eax
+  10130e:	50                   	push   %eax
+  10130f:	e8 da f5 ff ff       	call   1008ee <serial_writestring>
+  101314:	83 c4 10             	add    $0x10,%esp
+  101317:	e9 ca 00 00 00       	jmp    1013e6 <sprintf+0x13d>
+  10131c:	8b 45 08             	mov    0x8(%ebp),%eax
+  10131f:	0f b6 00             	movzbl (%eax),%eax
+  101322:	3c 78                	cmp    $0x78,%al
+  101324:	75 35                	jne    10135b <sprintf+0xb2>
+  101326:	83 45 f4 04          	addl   $0x4,-0xc(%ebp)
+  10132a:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  10132d:	8b 40 fc             	mov    -0x4(%eax),%eax
+  101330:	89 45 e8             	mov    %eax,-0x18(%ebp)
+  101333:	83 ec 04             	sub    $0x4,%esp
+  101336:	6a 10                	push   $0x10
+  101338:	8d 45 c4             	lea    -0x3c(%ebp),%eax
+  10133b:	50                   	push   %eax
+  10133c:	ff 75 e8             	push   -0x18(%ebp)
+  10133f:	e8 ec f7 ff ff       	call   100b30 <itoa>
+  101344:	83 c4 10             	add    $0x10,%esp
+  101347:	83 ec 0c             	sub    $0xc,%esp
+  10134a:	8d 45 c4             	lea    -0x3c(%ebp),%eax
+  10134d:	50                   	push   %eax
+  10134e:	e8 9b f5 ff ff       	call   1008ee <serial_writestring>
+  101353:	83 c4 10             	add    $0x10,%esp
+  101356:	e9 8b 00 00 00       	jmp    1013e6 <sprintf+0x13d>
+  10135b:	8b 45 08             	mov    0x8(%ebp),%eax
+  10135e:	0f b6 00             	movzbl (%eax),%eax
+  101361:	3c 73                	cmp    $0x73,%al
+  101363:	75 1d                	jne    101382 <sprintf+0xd9>
+  101365:	83 45 f4 04          	addl   $0x4,-0xc(%ebp)
+  101369:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  10136c:	8b 40 fc             	mov    -0x4(%eax),%eax
+  10136f:	89 45 ec             	mov    %eax,-0x14(%ebp)
+  101372:	83 ec 0c             	sub    $0xc,%esp
+  101375:	ff 75 ec             	push   -0x14(%ebp)
+  101378:	e8 71 f5 ff ff       	call   1008ee <serial_writestring>
+  10137d:	83 c4 10             	add    $0x10,%esp
+  101380:	eb 64                	jmp    1013e6 <sprintf+0x13d>
+  101382:	8b 45 08             	mov    0x8(%ebp),%eax
+  101385:	0f b6 00             	movzbl (%eax),%eax
+  101388:	3c 63                	cmp    $0x63,%al
+  10138a:	75 21                	jne    1013ad <sprintf+0x104>
+  10138c:	83 45 f4 04          	addl   $0x4,-0xc(%ebp)
+  101390:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  101393:	83 e8 04             	sub    $0x4,%eax
+  101396:	8b 00                	mov    (%eax),%eax
+  101398:	88 45 f3             	mov    %al,-0xd(%ebp)
+  10139b:	0f be 45 f3          	movsbl -0xd(%ebp),%eax
+  10139f:	83 ec 0c             	sub    $0xc,%esp
+  1013a2:	50                   	push   %eax
+  1013a3:	e8 b8 f4 ff ff       	call   100860 <serial_putchar>
+  1013a8:	83 c4 10             	add    $0x10,%esp
+  1013ab:	eb 39                	jmp    1013e6 <sprintf+0x13d>
+  1013ad:	83 ec 0c             	sub    $0xc,%esp
+  1013b0:	6a 25                	push   $0x25
+  1013b2:	e8 a9 f4 ff ff       	call   100860 <serial_putchar>
+  1013b7:	83 c4 10             	add    $0x10,%esp
+  1013ba:	8b 45 08             	mov    0x8(%ebp),%eax
+  1013bd:	0f b6 00             	movzbl (%eax),%eax
+  1013c0:	0f be c0             	movsbl %al,%eax
+  1013c3:	83 ec 0c             	sub    $0xc,%esp
+  1013c6:	50                   	push   %eax
+  1013c7:	e8 94 f4 ff ff       	call   100860 <serial_putchar>
+  1013cc:	83 c4 10             	add    $0x10,%esp
+  1013cf:	eb 15                	jmp    1013e6 <sprintf+0x13d>
+  1013d1:	8b 45 08             	mov    0x8(%ebp),%eax
+  1013d4:	0f b6 00             	movzbl (%eax),%eax
+  1013d7:	0f be c0             	movsbl %al,%eax
+  1013da:	83 ec 0c             	sub    $0xc,%esp
+  1013dd:	50                   	push   %eax
+  1013de:	e8 7d f4 ff ff       	call   100860 <serial_putchar>
+  1013e3:	83 c4 10             	add    $0x10,%esp
+  1013e6:	8b 45 08             	mov    0x8(%ebp),%eax
+  1013e9:	83 c0 01             	add    $0x1,%eax
+  1013ec:	89 45 08             	mov    %eax,0x8(%ebp)
+  1013ef:	8b 45 08             	mov    0x8(%ebp),%eax
+  1013f2:	0f b6 00             	movzbl (%eax),%eax
+  1013f5:	84 c0                	test   %al,%al
+  1013f7:	0f 85 c9 fe ff ff    	jne    1012c6 <sprintf+0x1d>
+  1013fd:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%ebp)
+  101404:	90                   	nop
+  101405:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  101408:	c9                   	leave
+  101409:	c3                   	ret
+
+0010140a <io_wait>:
+  10140a:	55                   	push   %ebp
+  10140b:	89 e5                	mov    %esp,%ebp
+  10140d:	53                   	push   %ebx
+  10140e:	83 ec 04             	sub    $0x4,%esp
+  101411:	e8 aa 05 00 00       	call   1019c0 <__x86.get_pc_thunk.ax>
+  101416:	05 6a 1c 00 00       	add    $0x1c6a,%eax
+  10141b:	83 ec 08             	sub    $0x8,%esp
+  10141e:	6a 00                	push   $0x0
+  101420:	68 80 00 00 00       	push   $0x80
+  101425:	89 c3                	mov    %eax,%ebx
+  101427:	e8 b4 ed ff ff       	call   1001e0 <outb>
+  10142c:	83 c4 10             	add    $0x10,%esp
+  10142f:	90                   	nop
+  101430:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  101433:	c9                   	leave
+  101434:	c3                   	ret
+
+00101435 <PIC_sendEOI>:
+  101435:	55                   	push   %ebp
+  101436:	89 e5                	mov    %esp,%ebp
+  101438:	53                   	push   %ebx
+  101439:	83 ec 14             	sub    $0x14,%esp
+  10143c:	e8 87 05 00 00       	call   1019c8 <__x86.get_pc_thunk.bx>
+  101441:	81 c3 3f 1c 00 00    	add    $0x1c3f,%ebx
+  101447:	8b 45 08             	mov    0x8(%ebp),%eax
+  10144a:	88 45 f4             	mov    %al,-0xc(%ebp)
+  10144d:	80 7d f4 1f          	cmpb   $0x1f,-0xc(%ebp)
+  101451:	76 18                	jbe    10146b <PIC_sendEOI+0x36>
+  101453:	80 7d f4 2f          	cmpb   $0x2f,-0xc(%ebp)
+  101457:	77 12                	ja     10146b <PIC_sendEOI+0x36>
+  101459:	83 ec 08             	sub    $0x8,%esp
+  10145c:	6a 20                	push   $0x20
+  10145e:	68 a0 00 00 00       	push   $0xa0
+  101463:	e8 78 ed ff ff       	call   1001e0 <outb>
+  101468:	83 c4 10             	add    $0x10,%esp
+  10146b:	83 ec 08             	sub    $0x8,%esp
+  10146e:	6a 20                	push   $0x20
+  101470:	6a 20                	push   $0x20
+  101472:	e8 69 ed ff ff       	call   1001e0 <outb>
+  101477:	83 c4 10             	add    $0x10,%esp
+  10147a:	90                   	nop
+  10147b:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  10147e:	c9                   	leave
+  10147f:	c3                   	ret
+
+00101480 <PIC_remap>:
+  101480:	55                   	push   %ebp
+  101481:	89 e5                	mov    %esp,%ebp
+  101483:	53                   	push   %ebx
+  101484:	83 ec 04             	sub    $0x4,%esp
+  101487:	e8 3c 05 00 00       	call   1019c8 <__x86.get_pc_thunk.bx>
+  10148c:	81 c3 f4 1b 00 00    	add    $0x1bf4,%ebx
+  101492:	83 ec 08             	sub    $0x8,%esp
+  101495:	6a 11                	push   $0x11
+  101497:	6a 20                	push   $0x20
+  101499:	e8 42 ed ff ff       	call   1001e0 <outb>
+  10149e:	83 c4 10             	add    $0x10,%esp
+  1014a1:	e8 64 ff ff ff       	call   10140a <io_wait>
+  1014a6:	83 ec 08             	sub    $0x8,%esp
+  1014a9:	6a 11                	push   $0x11
+  1014ab:	68 a0 00 00 00       	push   $0xa0
+  1014b0:	e8 2b ed ff ff       	call   1001e0 <outb>
+  1014b5:	83 c4 10             	add    $0x10,%esp
+  1014b8:	e8 4d ff ff ff       	call   10140a <io_wait>
+  1014bd:	8b 45 08             	mov    0x8(%ebp),%eax
+  1014c0:	0f b6 c0             	movzbl %al,%eax
+  1014c3:	83 ec 08             	sub    $0x8,%esp
+  1014c6:	50                   	push   %eax
+  1014c7:	6a 21                	push   $0x21
+  1014c9:	e8 12 ed ff ff       	call   1001e0 <outb>
+  1014ce:	83 c4 10             	add    $0x10,%esp
+  1014d1:	e8 34 ff ff ff       	call   10140a <io_wait>
+  1014d6:	8b 45 0c             	mov    0xc(%ebp),%eax
+  1014d9:	0f b6 c0             	movzbl %al,%eax
+  1014dc:	83 ec 08             	sub    $0x8,%esp
+  1014df:	50                   	push   %eax
+  1014e0:	68 a1 00 00 00       	push   $0xa1
+  1014e5:	e8 f6 ec ff ff       	call   1001e0 <outb>
+  1014ea:	83 c4 10             	add    $0x10,%esp
+  1014ed:	e8 18 ff ff ff       	call   10140a <io_wait>
+  1014f2:	83 ec 08             	sub    $0x8,%esp
+  1014f5:	6a 04                	push   $0x4
+  1014f7:	6a 21                	push   $0x21
+  1014f9:	e8 e2 ec ff ff       	call   1001e0 <outb>
+  1014fe:	83 c4 10             	add    $0x10,%esp
+  101501:	e8 04 ff ff ff       	call   10140a <io_wait>
+  101506:	83 ec 08             	sub    $0x8,%esp
+  101509:	6a 02                	push   $0x2
+  10150b:	68 a1 00 00 00       	push   $0xa1
+  101510:	e8 cb ec ff ff       	call   1001e0 <outb>
+  101515:	83 c4 10             	add    $0x10,%esp
+  101518:	e8 ed fe ff ff       	call   10140a <io_wait>
+  10151d:	83 ec 08             	sub    $0x8,%esp
+  101520:	6a 01                	push   $0x1
+  101522:	6a 21                	push   $0x21
+  101524:	e8 b7 ec ff ff       	call   1001e0 <outb>
+  101529:	83 c4 10             	add    $0x10,%esp
+  10152c:	e8 d9 fe ff ff       	call   10140a <io_wait>
+  101531:	83 ec 08             	sub    $0x8,%esp
+  101534:	6a 01                	push   $0x1
+  101536:	68 a1 00 00 00       	push   $0xa1
+  10153b:	e8 a0 ec ff ff       	call   1001e0 <outb>
+  101540:	83 c4 10             	add    $0x10,%esp
+  101543:	e8 c2 fe ff ff       	call   10140a <io_wait>
+  101548:	83 ec 08             	sub    $0x8,%esp
+  10154b:	68 fd 00 00 00       	push   $0xfd
+  101550:	6a 21                	push   $0x21
+  101552:	e8 89 ec ff ff       	call   1001e0 <outb>
+  101557:	83 c4 10             	add    $0x10,%esp
+  10155a:	83 ec 08             	sub    $0x8,%esp
+  10155d:	68 ff 00 00 00       	push   $0xff
+  101562:	68 a1 00 00 00       	push   $0xa1
+  101567:	e8 74 ec ff ff       	call   1001e0 <outb>
+  10156c:	83 c4 10             	add    $0x10,%esp
+  10156f:	90                   	nop
+  101570:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  101573:	c9                   	leave
+  101574:	c3                   	ret
+
+00101575 <IRQ_set_mask>:
+  101575:	55                   	push   %ebp
+  101576:	89 e5                	mov    %esp,%ebp
+  101578:	56                   	push   %esi
+  101579:	53                   	push   %ebx
+  10157a:	83 ec 20             	sub    $0x20,%esp
+  10157d:	e8 46 04 00 00       	call   1019c8 <__x86.get_pc_thunk.bx>
+  101582:	81 c3 fe 1a 00 00    	add    $0x1afe,%ebx
+  101588:	8b 45 08             	mov    0x8(%ebp),%eax
+  10158b:	88 45 e4             	mov    %al,-0x1c(%ebp)
+  10158e:	80 7d e4 07          	cmpb   $0x7,-0x1c(%ebp)
+  101592:	77 08                	ja     10159c <IRQ_set_mask+0x27>
+  101594:	66 c7 45 f6 21 00    	movw   $0x21,-0xa(%ebp)
+  10159a:	eb 0a                	jmp    1015a6 <IRQ_set_mask+0x31>
+  10159c:	66 c7 45 f6 a1 00    	movw   $0xa1,-0xa(%ebp)
+  1015a2:	80 6d e4 08          	subb   $0x8,-0x1c(%ebp)
+  1015a6:	0f b7 45 f6          	movzwl -0xa(%ebp),%eax
+  1015aa:	83 ec 0c             	sub    $0xc,%esp
+  1015ad:	50                   	push   %eax
+  1015ae:	e8 38 ec ff ff       	call   1001eb <inb>
+  1015b3:	83 c4 10             	add    $0x10,%esp
+  1015b6:	89 c6                	mov    %eax,%esi
+  1015b8:	0f b6 45 e4          	movzbl -0x1c(%ebp),%eax
+  1015bc:	ba 01 00 00 00       	mov    $0x1,%edx
+  1015c1:	89 c1                	mov    %eax,%ecx
+  1015c3:	d3 e2                	shl    %cl,%edx
+  1015c5:	89 d0                	mov    %edx,%eax
+  1015c7:	09 f0                	or     %esi,%eax
+  1015c9:	88 45 f5             	mov    %al,-0xb(%ebp)
+  1015cc:	0f b6 55 f5          	movzbl -0xb(%ebp),%edx
+  1015d0:	0f b7 45 f6          	movzwl -0xa(%ebp),%eax
+  1015d4:	83 ec 08             	sub    $0x8,%esp
+  1015d7:	52                   	push   %edx
+  1015d8:	50                   	push   %eax
+  1015d9:	e8 02 ec ff ff       	call   1001e0 <outb>
+  1015de:	83 c4 10             	add    $0x10,%esp
+  1015e1:	90                   	nop
+  1015e2:	8d 65 f8             	lea    -0x8(%ebp),%esp
+  1015e5:	5b                   	pop    %ebx
+  1015e6:	5e                   	pop    %esi
+  1015e7:	5d                   	pop    %ebp
+  1015e8:	c3                   	ret
+
+001015e9 <IRQ_clear_mask>:
+  1015e9:	55                   	push   %ebp
+  1015ea:	89 e5                	mov    %esp,%ebp
+  1015ec:	56                   	push   %esi
+  1015ed:	53                   	push   %ebx
+  1015ee:	83 ec 20             	sub    $0x20,%esp
+  1015f1:	e8 d2 03 00 00       	call   1019c8 <__x86.get_pc_thunk.bx>
+  1015f6:	81 c3 8a 1a 00 00    	add    $0x1a8a,%ebx
+  1015fc:	8b 45 08             	mov    0x8(%ebp),%eax
+  1015ff:	88 45 e4             	mov    %al,-0x1c(%ebp)
+  101602:	80 7d e4 07          	cmpb   $0x7,-0x1c(%ebp)
+  101606:	77 08                	ja     101610 <IRQ_clear_mask+0x27>
+  101608:	66 c7 45 f6 21 00    	movw   $0x21,-0xa(%ebp)
+  10160e:	eb 0a                	jmp    10161a <IRQ_clear_mask+0x31>
+  101610:	66 c7 45 f6 a1 00    	movw   $0xa1,-0xa(%ebp)
+  101616:	80 6d e4 08          	subb   $0x8,-0x1c(%ebp)
+  10161a:	0f b7 45 f6          	movzwl -0xa(%ebp),%eax
+  10161e:	83 ec 0c             	sub    $0xc,%esp
+  101621:	50                   	push   %eax
+  101622:	e8 c4 eb ff ff       	call   1001eb <inb>
+  101627:	83 c4 10             	add    $0x10,%esp
+  10162a:	89 c6                	mov    %eax,%esi
+  10162c:	0f b6 45 e4          	movzbl -0x1c(%ebp),%eax
+  101630:	ba 01 00 00 00       	mov    $0x1,%edx
+  101635:	89 c1                	mov    %eax,%ecx
+  101637:	d3 e2                	shl    %cl,%edx
+  101639:	89 d0                	mov    %edx,%eax
+  10163b:	f7 d0                	not    %eax
+  10163d:	21 f0                	and    %esi,%eax
+  10163f:	88 45 f5             	mov    %al,-0xb(%ebp)
+  101642:	0f b6 55 f5          	movzbl -0xb(%ebp),%edx
+  101646:	0f b7 45 f6          	movzwl -0xa(%ebp),%eax
+  10164a:	83 ec 08             	sub    $0x8,%esp
+  10164d:	52                   	push   %edx
+  10164e:	50                   	push   %eax
+  10164f:	e8 8c eb ff ff       	call   1001e0 <outb>
+  101654:	83 c4 10             	add    $0x10,%esp
+  101657:	90                   	nop
+  101658:	8d 65 f8             	lea    -0x8(%ebp),%esp
+  10165b:	5b                   	pop    %ebx
+  10165c:	5e                   	pop    %esi
+  10165d:	5d                   	pop    %ebp
+  10165e:	c3                   	ret
+
+0010165f <pic_init>:
+  10165f:	55                   	push   %ebp
+  101660:	89 e5                	mov    %esp,%ebp
+  101662:	83 ec 08             	sub    $0x8,%esp
+  101665:	e8 56 03 00 00       	call   1019c0 <__x86.get_pc_thunk.ax>
+  10166a:	05 16 1a 00 00       	add    $0x1a16,%eax
+  10166f:	83 ec 08             	sub    $0x8,%esp
+  101672:	68 a0 00 00 00       	push   $0xa0
+  101677:	6a 20                	push   $0x20
+  101679:	e8 02 fe ff ff       	call   101480 <PIC_remap>
+  10167e:	83 c4 10             	add    $0x10,%esp
+  101681:	90                   	nop
+  101682:	c9                   	leave
+  101683:	c3                   	ret
+
+00101684 <init_interrupt>:
+  101684:	55                   	push   %ebp
+  101685:	89 e5                	mov    %esp,%ebp
+  101687:	83 ec 10             	sub    $0x10,%esp
+  10168a:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%ebp)
+  101691:	eb 12                	jmp    1016a5 <init_interrupt+0x21>
+  101693:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  101696:	c7 04 85 60 51 10 00 	movl   $0x0,0x105160(,%eax,4)
+  10169d:	00 00 00 00 
+  1016a1:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
+  1016a5:	83 7d fc 23          	cmpl   $0x23,-0x4(%ebp)
+  1016a9:	7e e8                	jle    101693 <init_interrupt+0xf>
+  1016ab:	90                   	nop
+  1016ac:	90                   	nop
+  1016ad:	c9                   	leave
+  1016ae:	c3                   	ret
+
+001016af <register_interrupt_handler>:
+  1016af:	55                   	push   %ebp
+  1016b0:	89 e5                	mov    %esp,%ebp
+  1016b2:	81 7d 08 ff 00 00 00 	cmpl   $0xff,0x8(%ebp)
+  1016b9:	76 07                	jbe    1016c2 <register_interrupt_handler+0x13>
+  1016bb:	b8 01 00 00 00       	mov    $0x1,%eax
+  1016c0:	eb 27                	jmp    1016e9 <register_interrupt_handler+0x3a>
+  1016c2:	8b 45 08             	mov    0x8(%ebp),%eax
+  1016c5:	8b 04 85 60 51 10 00 	mov    0x105160(,%eax,4),%eax
+  1016cc:	85 c0                	test   %eax,%eax
+  1016ce:	74 07                	je     1016d7 <register_interrupt_handler+0x28>
+  1016d0:	b8 01 00 00 00       	mov    $0x1,%eax
+  1016d5:	eb 12                	jmp    1016e9 <register_interrupt_handler+0x3a>
+  1016d7:	8b 45 08             	mov    0x8(%ebp),%eax
+  1016da:	8b 55 0c             	mov    0xc(%ebp),%edx
+  1016dd:	89 14 85 60 51 10 00 	mov    %edx,0x105160(,%eax,4)
+  1016e4:	b8 00 00 00 00       	mov    $0x0,%eax
+  1016e9:	5d                   	pop    %ebp
+  1016ea:	c3                   	ret
+
+001016eb <interrupt_handler>:
+  1016eb:	55                   	push   %ebp
+  1016ec:	89 e5                	mov    %esp,%ebp
+  1016ee:	83 ec 08             	sub    $0x8,%esp
+  1016f1:	8b 45 24             	mov    0x24(%ebp),%eax
+  1016f4:	83 ec 08             	sub    $0x8,%esp
+  1016f7:	50                   	push   %eax
+  1016f8:	68 f8 20 10 00       	push   $0x1020f8
+  1016fd:	e8 a7 fb ff ff       	call   1012a9 <sprintf>
+  101702:	83 c4 10             	add    $0x10,%esp
+  101705:	8b 45 28             	mov    0x28(%ebp),%eax
+  101708:	83 ec 08             	sub    $0x8,%esp
+  10170b:	50                   	push   %eax
+  10170c:	68 0e 21 10 00       	push   $0x10210e
+  101711:	e8 93 fb ff ff       	call   1012a9 <sprintf>
+  101716:	83 c4 10             	add    $0x10,%esp
+  101719:	8b 45 2c             	mov    0x2c(%ebp),%eax
+  10171c:	83 ec 08             	sub    $0x8,%esp
+  10171f:	50                   	push   %eax
+  101720:	68 1e 21 10 00       	push   $0x10211e
+  101725:	e8 7f fb ff ff       	call   1012a9 <sprintf>
+  10172a:	83 c4 10             	add    $0x10,%esp
+  10172d:	8b 45 20             	mov    0x20(%ebp),%eax
+  101730:	83 ec 08             	sub    $0x8,%esp
+  101733:	50                   	push   %eax
+  101734:	68 27 21 10 00       	push   $0x102127
+  101739:	e8 6b fb ff ff       	call   1012a9 <sprintf>
+  10173e:	83 c4 10             	add    $0x10,%esp
+  101741:	8b 45 10             	mov    0x10(%ebp),%eax
+  101744:	83 ec 08             	sub    $0x8,%esp
+  101747:	50                   	push   %eax
+  101748:	68 30 21 10 00       	push   $0x102130
+  10174d:	e8 57 fb ff ff       	call   1012a9 <sprintf>
+  101752:	83 c4 10             	add    $0x10,%esp
+  101755:	8b 45 1c             	mov    0x1c(%ebp),%eax
+  101758:	83 ec 08             	sub    $0x8,%esp
+  10175b:	50                   	push   %eax
+  10175c:	68 39 21 10 00       	push   $0x102139
+  101761:	e8 43 fb ff ff       	call   1012a9 <sprintf>
+  101766:	83 c4 10             	add    $0x10,%esp
+  101769:	8b 45 0c             	mov    0xc(%ebp),%eax
+  10176c:	83 ec 08             	sub    $0x8,%esp
+  10176f:	50                   	push   %eax
+  101770:	68 42 21 10 00       	push   $0x102142
+  101775:	e8 2f fb ff ff       	call   1012a9 <sprintf>
+  10177a:	83 c4 10             	add    $0x10,%esp
+  10177d:	8b 45 24             	mov    0x24(%ebp),%eax
+  101780:	8b 04 85 60 51 10 00 	mov    0x105160(,%eax,4),%eax
+  101787:	83 ec 08             	sub    $0x8,%esp
+  10178a:	50                   	push   %eax
+  10178b:	68 4b 21 10 00       	push   $0x10214b
+  101790:	e8 14 fb ff ff       	call   1012a9 <sprintf>
+  101795:	83 c4 10             	add    $0x10,%esp
+  101798:	8b 45 24             	mov    0x24(%ebp),%eax
+  10179b:	8b 04 85 60 51 10 00 	mov    0x105160(,%eax,4),%eax
+  1017a2:	85 c0                	test   %eax,%eax
+  1017a4:	74 33                	je     1017d9 <interrupt_handler+0xee>
+  1017a6:	8b 45 24             	mov    0x24(%ebp),%eax
+  1017a9:	8b 04 85 60 51 10 00 	mov    0x105160(,%eax,4),%eax
+  1017b0:	ff 75 34             	push   0x34(%ebp)
+  1017b3:	ff 75 30             	push   0x30(%ebp)
+  1017b6:	ff 75 2c             	push   0x2c(%ebp)
+  1017b9:	ff 75 28             	push   0x28(%ebp)
+  1017bc:	ff 75 24             	push   0x24(%ebp)
+  1017bf:	ff 75 20             	push   0x20(%ebp)
+  1017c2:	ff 75 1c             	push   0x1c(%ebp)
+  1017c5:	ff 75 18             	push   0x18(%ebp)
+  1017c8:	ff 75 14             	push   0x14(%ebp)
+  1017cb:	ff 75 10             	push   0x10(%ebp)
+  1017ce:	ff 75 0c             	push   0xc(%ebp)
+  1017d1:	ff 75 08             	push   0x8(%ebp)
+  1017d4:	ff d0                	call   *%eax
+  1017d6:	83 c4 30             	add    $0x30,%esp
+  1017d9:	90                   	nop
+  1017da:	c9                   	leave
+  1017db:	c3                   	ret
+
+001017dc <read_scan_code>:
+  1017dc:	55                   	push   %ebp
+  1017dd:	89 e5                	mov    %esp,%ebp
+  1017df:	53                   	push   %ebx
+  1017e0:	83 ec 04             	sub    $0x4,%esp
+  1017e3:	e8 d8 01 00 00       	call   1019c0 <__x86.get_pc_thunk.ax>
+  1017e8:	05 98 18 00 00       	add    $0x1898,%eax
+  1017ed:	83 ec 0c             	sub    $0xc,%esp
+  1017f0:	6a 60                	push   $0x60
+  1017f2:	89 c3                	mov    %eax,%ebx
+  1017f4:	e8 f2 e9 ff ff       	call   1001eb <inb>
+  1017f9:	83 c4 10             	add    $0x10,%esp
+  1017fc:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  1017ff:	c9                   	leave
+  101800:	c3                   	ret
+
+00101801 <keyboard_interrupt_handler>:
+  101801:	55                   	push   %ebp
+  101802:	89 e5                	mov    %esp,%ebp
+  101804:	53                   	push   %ebx
+  101805:	83 ec 14             	sub    $0x14,%esp
+  101808:	e8 bb 01 00 00       	call   1019c8 <__x86.get_pc_thunk.bx>
+  10180d:	81 c3 73 18 00 00    	add    $0x1873,%ebx
+  101813:	e8 c4 ff ff ff       	call   1017dc <read_scan_code>
+  101818:	88 45 f6             	mov    %al,-0xa(%ebp)
+  10181b:	80 7d f6 2a          	cmpb   $0x2a,-0xa(%ebp)
+  10181f:	74 06                	je     101827 <keyboard_interrupt_handler+0x26>
+  101821:	80 7d f6 36          	cmpb   $0x36,-0xa(%ebp)
+  101825:	75 09                	jne    101830 <keyboard_interrupt_handler+0x2f>
+  101827:	c6 83 70 21 00 00 01 	movb   $0x1,0x2170(%ebx)
+  10182e:	eb 13                	jmp    101843 <keyboard_interrupt_handler+0x42>
+  101830:	80 7d f6 aa          	cmpb   $0xaa,-0xa(%ebp)
+  101834:	74 06                	je     10183c <keyboard_interrupt_handler+0x3b>
+  101836:	80 7d f6 b6          	cmpb   $0xb6,-0xa(%ebp)
+  10183a:	75 07                	jne    101843 <keyboard_interrupt_handler+0x42>
+  10183c:	c6 83 70 21 00 00 00 	movb   $0x0,0x2170(%ebx)
+  101843:	80 7d f6 0e          	cmpb   $0xe,-0xa(%ebp)
+  101847:	75 28                	jne    101871 <keyboard_interrupt_handler+0x70>
+  101849:	83 ec 08             	sub    $0x8,%esp
+  10184c:	6a 08                	push   $0x8
+  10184e:	8d 83 df f0 ff ff    	lea    -0xf21(%ebx),%eax
+  101854:	50                   	push   %eax
+  101855:	e8 ee f8 ff ff       	call   101148 <printf>
+  10185a:	83 c4 10             	add    $0x10,%esp
+  10185d:	8b 45 24             	mov    0x24(%ebp),%eax
+  101860:	0f b6 c0             	movzbl %al,%eax
+  101863:	83 ec 0c             	sub    $0xc,%esp
+  101866:	50                   	push   %eax
+  101867:	e8 c9 fb ff ff       	call   101435 <PIC_sendEOI>
+  10186c:	83 c4 10             	add    $0x10,%esp
+  10186f:	eb 72                	jmp    1018e3 <keyboard_interrupt_handler+0xe2>
+  101871:	0f b6 45 f6          	movzbl -0xa(%ebp),%eax
+  101875:	84 c0                	test   %al,%al
+  101877:	78 57                	js     1018d0 <keyboard_interrupt_handler+0xcf>
+  101879:	0f b6 45 f6          	movzbl -0xa(%ebp),%eax
+  10187d:	0f b6 84 03 80 ff ff 	movzbl -0x80(%ebx,%eax,1),%eax
+  101884:	ff 
+  101885:	84 c0                	test   %al,%al
+  101887:	74 47                	je     1018d0 <keyboard_interrupt_handler+0xcf>
+  101889:	0f b6 45 f6          	movzbl -0xa(%ebp),%eax
+  10188d:	0f b6 84 03 80 ff ff 	movzbl -0x80(%ebx,%eax,1),%eax
+  101894:	ff 
+  101895:	88 45 f7             	mov    %al,-0x9(%ebp)
+  101898:	0f b6 83 70 21 00 00 	movzbl 0x2170(%ebx),%eax
+  10189f:	84 c0                	test   %al,%al
+  1018a1:	74 16                	je     1018b9 <keyboard_interrupt_handler+0xb8>
+  1018a3:	80 7d f7 60          	cmpb   $0x60,-0x9(%ebp)
+  1018a7:	7e 10                	jle    1018b9 <keyboard_interrupt_handler+0xb8>
+  1018a9:	80 7d f7 7a          	cmpb   $0x7a,-0x9(%ebp)
+  1018ad:	7f 0a                	jg     1018b9 <keyboard_interrupt_handler+0xb8>
+  1018af:	0f b6 45 f7          	movzbl -0x9(%ebp),%eax
+  1018b3:	83 e8 20             	sub    $0x20,%eax
+  1018b6:	88 45 f7             	mov    %al,-0x9(%ebp)
+  1018b9:	0f be 45 f7          	movsbl -0x9(%ebp),%eax
+  1018bd:	83 ec 08             	sub    $0x8,%esp
+  1018c0:	50                   	push   %eax
+  1018c1:	8d 83 df f0 ff ff    	lea    -0xf21(%ebx),%eax
+  1018c7:	50                   	push   %eax
+  1018c8:	e8 7b f8 ff ff       	call   101148 <printf>
+  1018cd:	83 c4 10             	add    $0x10,%esp
+  1018d0:	8b 45 24             	mov    0x24(%ebp),%eax
+  1018d3:	0f b6 c0             	movzbl %al,%eax
+  1018d6:	83 ec 0c             	sub    $0xc,%esp
+  1018d9:	50                   	push   %eax
+  1018da:	e8 56 fb ff ff       	call   101435 <PIC_sendEOI>
+  1018df:	83 c4 10             	add    $0x10,%esp
+  1018e2:	90                   	nop
+  1018e3:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  1018e6:	c9                   	leave
+  1018e7:	c3                   	ret
+
+001018e8 <keyboard_init>:
+  1018e8:	55                   	push   %ebp
+  1018e9:	89 e5                	mov    %esp,%ebp
+  1018eb:	53                   	push   %ebx
+  1018ec:	83 ec 04             	sub    $0x4,%esp
+  1018ef:	e8 cc 00 00 00       	call   1019c0 <__x86.get_pc_thunk.ax>
+  1018f4:	05 8c 17 00 00       	add    $0x178c,%eax
+  1018f9:	83 ec 08             	sub    $0x8,%esp
+  1018fc:	8d 90 81 e7 ff ff    	lea    -0x187f(%eax),%edx
+  101902:	52                   	push   %edx
+  101903:	6a 21                	push   $0x21
+  101905:	89 c3                	mov    %eax,%ebx
+  101907:	e8 a3 fd ff ff       	call   1016af <register_interrupt_handler>
+  10190c:	83 c4 10             	add    $0x10,%esp
+  10190f:	90                   	nop
+  101910:	8b 5d fc             	mov    -0x4(%ebp),%ebx
+  101913:	c9                   	leave
+  101914:	c3                   	ret
+
+00101915 <load_page_directory>:
+  101915:	55                   	push   %ebp
+  101916:	89 e5                	mov    %esp,%ebp
+  101918:	83 ec 18             	sub    $0x18,%esp
+  10191b:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%ebp)
+  101922:	eb 12                	jmp    101936 <load_page_directory+0x21>
+  101924:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  101927:	c7 04 85 00 60 10 00 	movl   $0x2,0x106000(,%eax,4)
+  10192e:	02 00 00 00 
+  101932:	83 45 f4 01          	addl   $0x1,-0xc(%ebp)
+  101936:	81 7d f4 ff 03 00 00 	cmpl   $0x3ff,-0xc(%ebp)
+  10193d:	76 e5                	jbe    101924 <load_page_directory+0xf>
+  10193f:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%ebp)
+  101946:	eb 19                	jmp    101961 <load_page_directory+0x4c>
+  101948:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  10194b:	c1 e0 0c             	shl    $0xc,%eax
+  10194e:	83 c8 03             	or     $0x3,%eax
+  101951:	89 c2                	mov    %eax,%edx
+  101953:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  101956:	89 14 85 00 70 10 00 	mov    %edx,0x107000(,%eax,4)
+  10195d:	83 45 f4 01          	addl   $0x1,-0xc(%ebp)
+  101961:	81 7d f4 ff 03 00 00 	cmpl   $0x3ff,-0xc(%ebp)
+  101968:	76 de                	jbe    101948 <load_page_directory+0x33>
+  10196a:	b8 00 70 10 00       	mov    $0x107000,%eax
+  10196f:	83 c8 03             	or     $0x3,%eax
+  101972:	a3 00 60 10 00       	mov    %eax,0x106000
+  101977:	83 ec 0c             	sub    $0xc,%esp
+  10197a:	68 00 60 10 00       	push   $0x106000
+  10197f:	e8 1c 00 00 00       	call   1019a0 <loadPageDirectory>
+  101984:	83 c4 10             	add    $0x10,%esp
+  101987:	90                   	nop
+  101988:	c9                   	leave
+  101989:	c3                   	ret
+
+0010198a <paging_init>:
+  10198a:	55                   	push   %ebp
+  10198b:	89 e5                	mov    %esp,%ebp
+  10198d:	83 ec 08             	sub    $0x8,%esp
+  101990:	e8 80 ff ff ff       	call   101915 <load_page_directory>
+  101995:	e8 14 00 00 00       	call   1019ae <enablePaging>
+  10199a:	90                   	nop
+  10199b:	c9                   	leave
+  10199c:	c3                   	ret
+  10199d:	66 90                	xchg   %ax,%ax
+  10199f:	90                   	nop
+
+001019a0 <loadPageDirectory>:
+  1019a0:	55                   	push   %ebp
+  1019a1:	89 e5                	mov    %esp,%ebp
+  1019a3:	8b 44 24 08          	mov    0x8(%esp),%eax
+  1019a7:	0f 22 d8             	mov    %eax,%cr3
+  1019aa:	89 ec                	mov    %ebp,%esp
+  1019ac:	5d                   	pop    %ebp
+  1019ad:	c3                   	ret
+
+001019ae <enablePaging>:
+  1019ae:	55                   	push   %ebp
+  1019af:	89 e5                	mov    %esp,%ebp
+  1019b1:	0f 20 c0             	mov    %cr0,%eax
+  1019b4:	0d 00 00 00 80       	or     $0x80000000,%eax
+  1019b9:	0f 22 c0             	mov    %eax,%cr0
+  1019bc:	89 ec                	mov    %ebp,%esp
+  1019be:	5d                   	pop    %ebp
+  1019bf:	c3                   	ret
+
+Disassembly of section .text.__x86.get_pc_thunk.ax:
+
+001019c0 <__x86.get_pc_thunk.ax>:
+  1019c0:	8b 04 24             	mov    (%esp),%eax
+  1019c3:	c3                   	ret
+
+Disassembly of section .text.__x86.get_pc_thunk.cx:
+
+001019c4 <__x86.get_pc_thunk.cx>:
+  1019c4:	8b 0c 24             	mov    (%esp),%ecx
+  1019c7:	c3                   	ret
+
+Disassembly of section .text.__x86.get_pc_thunk.bx:
+
+001019c8 <__x86.get_pc_thunk.bx>:
+  1019c8:	8b 1c 24             	mov    (%esp),%ebx
+  1019cb:	c3                   	ret
+
+Disassembly of section .rodata:
+
+00102000 <VGA_WIDTH-0xec>:
+  102000:	57                   	push   %edi
+  102001:	65 6c                	gs insb (%dx),%es:(%edi)
+  102003:	63 6f 6d             	arpl   %ebp,0x6d(%edi)
+  102006:	65 20 74 6f 20       	and    %dh,%gs:0x20(%edi,%ebp,2)
+  10200b:	52                   	push   %edx
+  10200c:	75 6e                	jne    10207c <__x86.get_pc_thunk.bx+0x6b4>
+  10200e:	65 78 4f             	gs js  102060 <__x86.get_pc_thunk.bx+0x698>
+  102011:	53                   	push   %ebx
+  102012:	0a 0a                	or     (%edx),%cl
+  102014:	00 56 47             	add    %dl,0x47(%esi)
+  102017:	41                   	inc    %ecx
+  102018:	20 49 4e             	and    %cl,0x4e(%ecx)
+  10201b:	49                   	dec    %ecx
+  10201c:	54                   	push   %esp
+  10201d:	0a 00                	or     (%eax),%al
+  10201f:	43                   	inc    %ebx
+  102020:	4f                   	dec    %edi
+  102021:	4d                   	dec    %ebp
+  102022:	20 49 4e             	and    %cl,0x4e(%ecx)
+  102025:	49                   	dec    %ecx
+  102026:	54                   	push   %esp
+  102027:	0a 00                	or     (%eax),%al
+  102029:	47                   	inc    %edi
+  10202a:	44                   	inc    %esp
+  10202b:	54                   	push   %esp
+  10202c:	20 49 4e             	and    %cl,0x4e(%ecx)
+  10202f:	49                   	dec    %ecx
+  102030:	54                   	push   %esp
+  102031:	0a 00                	or     (%eax),%al
+  102033:	49                   	dec    %ecx
+  102034:	44                   	inc    %esp
+  102035:	54                   	push   %esp
+  102036:	20 49 4e             	and    %cl,0x4e(%ecx)
+  102039:	49                   	dec    %ecx
+  10203a:	54                   	push   %esp
+  10203b:	0a 00                	or     (%eax),%al
+  10203d:	4b                   	dec    %ebx
+  10203e:	42                   	inc    %edx
+  10203f:	44                   	inc    %esp
+  102040:	20 49 4e             	and    %cl,0x4e(%ecx)
+  102043:	49                   	dec    %ecx
+  102044:	54                   	push   %esp
+  102045:	0a 0a                	or     (%edx),%cl
+  102047:	00 54 65 73          	add    %dl,0x73(%ebp,%eiz,2)
+  10204b:	74 69                	je     1020b6 <__x86.get_pc_thunk.bx+0x6ee>
+  10204d:	6e                   	outsb  %ds:(%esi),(%dx)
+  10204e:	67 20 73 65          	and    %dh,0x65(%bp,%di)
+  102052:	72 69                	jb     1020bd <__x86.get_pc_thunk.bx+0x6f5>
+  102054:	61                   	popa
+  102055:	6c                   	insb   (%dx),%es:(%edi)
+  102056:	20 77 6f             	and    %dh,0x6f(%edi)
+  102059:	72 6b                	jb     1020c6 <__x86.get_pc_thunk.bx+0x6fe>
+  10205b:	73 0a                	jae    102067 <__x86.get_pc_thunk.bx+0x69f>
+  10205d:	00 00                	add    %al,(%eax)
+  10205f:	00 4c 6f 61          	add    %cl,0x61(%edi,%ebp,2)
+  102063:	64 69 6e 67 20 6d 6f 	imul   $0x646f6d20,%fs:0x67(%esi),%ebp
+  10206a:	64 
+  10206b:	75 6c                	jne    1020d9 <__x86.get_pc_thunk.bx+0x711>
+  10206d:	65 20 66 72          	and    %ah,%gs:0x72(%esi)
+  102071:	6f                   	outsl  %ds:(%esi),(%dx)
+  102072:	6d                   	insl   (%dx),%es:(%edi)
+  102073:	20 30                	and    %dh,(%eax)
+  102075:	78 25                	js     10209c <__x86.get_pc_thunk.bx+0x6d4>
+  102077:	78 20                	js     102099 <__x86.get_pc_thunk.bx+0x6d1>
+  102079:	74 6f                	je     1020ea <__x86.get_pc_thunk.bx+0x722>
+  10207b:	20 30                	and    %dh,(%eax)
+  10207d:	78 25                	js     1020a4 <__x86.get_pc_thunk.bx+0x6dc>
+  10207f:	78 0a                	js     10208b <__x86.get_pc_thunk.bx+0x6c3>
+  102081:	00 50 72             	add    %dl,0x72(%eax)
+  102084:	6f                   	outsl  %ds:(%esi),(%dx)
+  102085:	67 72 61             	addr16 jb 1020e9 <__x86.get_pc_thunk.bx+0x721>
+  102088:	6d                   	insl   (%dx),%es:(%edi)
+  102089:	20 68 61             	and    %ch,0x61(%eax)
+  10208c:	73 20                	jae    1020ae <__x86.get_pc_thunk.bx+0x6e6>
+  10208e:	72 75                	jb     102105 <VGA_MEMORY+0x11>
+  102090:	6e                   	outsb  %ds:(%esi),(%dx)
+  102091:	0a 00                	or     (%eax),%al
+  102093:	4d                   	dec    %ebp
+  102094:	75 6c                	jne    102102 <VGA_MEMORY+0xe>
+  102096:	74 69                	je     102101 <VGA_MEMORY+0xd>
+  102098:	6f                   	outsl  %ds:(%esi),(%dx)
+  102099:	6f                   	outsl  %ds:(%esi),(%dx)
+  10209a:	74 20                	je     1020bc <__x86.get_pc_thunk.bx+0x6f4>
+  10209c:	4d                   	dec    %ebp
+  10209d:	65 6d                	gs insl (%dx),%es:(%edi)
+  10209f:	20 4c 6f 77          	and    %cl,0x77(%edi,%ebp,2)
+  1020a3:	65 72 3a             	gs jb  1020e0 <__x86.get_pc_thunk.bx+0x718>
+  1020a6:	20 25 64 4b 42 0a    	and    %ah,0xa424b64
+  1020ac:	00 4d 75             	add    %cl,0x75(%ebp)
+  1020af:	6c                   	insb   (%dx),%es:(%edi)
+  1020b0:	74 69                	je     10211b <VGA_MEMORY+0x27>
+  1020b2:	6f                   	outsl  %ds:(%esi),(%dx)
+  1020b3:	6f                   	outsl  %ds:(%esi),(%dx)
+  1020b4:	74 20                	je     1020d6 <__x86.get_pc_thunk.bx+0x70e>
+  1020b6:	4d                   	dec    %ebp
+  1020b7:	65 6d                	gs insl (%dx),%es:(%edi)
+  1020b9:	20 55 70             	and    %dl,0x70(%ebp)
+  1020bc:	70 65                	jo     102123 <VGA_MEMORY+0x2f>
+  1020be:	72 3a                	jb     1020fa <VGA_MEMORY+0x6>
+  1020c0:	20 25 64 4b 42 0a    	and    %ah,0xa424b64
+  1020c6:	0a 00                	or     (%eax),%al
+  1020c8:	4c                   	dec    %esp
+  1020c9:	6f                   	outsl  %ds:(%esi),(%dx)
+  1020ca:	6f                   	outsl  %ds:(%esi),(%dx)
+  1020cb:	6b 20 61             	imul   $0x61,(%eax),%esp
+  1020ce:	74 20                	je     1020f0 <VGA_HEIGHT>
+  1020d0:	61                   	popa
+  1020d1:	6c                   	insb   (%dx),%es:(%edi)
+  1020d2:	6c                   	insb   (%dx),%es:(%edi)
+  1020d3:	20 74 68 65          	and    %dh,0x65(%eax,%ebp,2)
+  1020d7:	73 65                	jae    10213e <VGA_MEMORY+0x4a>
+  1020d9:	20 63 6f             	and    %ah,0x6f(%ebx)
+  1020dc:	6c                   	insb   (%dx),%es:(%edi)
+  1020dd:	6f                   	outsl  %ds:(%esi),(%dx)
+  1020de:	72 73                	jb     102153 <VGA_MEMORY+0x5f>
+  1020e0:	2e 0a 0a             	or     %cs:(%edx),%cl
+  1020e3:	00 25 63 25 63 00    	add    %ah,0x632563
+  1020e9:	00 00                	add    %al,(%eax)
+	...
+
+001020ec <VGA_WIDTH>:
+  1020ec:	50                   	push   %eax
+  1020ed:	00 00                	add    %al,(%eax)
+	...
+
+001020f0 <VGA_HEIGHT>:
+  1020f0:	19 00                	sbb    %eax,(%eax)
+	...
+
+001020f4 <VGA_MEMORY>:
+  1020f4:	00 80 0b 00 49 6e    	add    %al,0x6e49000b(%eax)
+  1020fa:	74 65                	je     102161 <VGA_MEMORY+0x6d>
+  1020fc:	72 72                	jb     102170 <VGA_MEMORY+0x7c>
+  1020fe:	75 70                	jne    102170 <VGA_MEMORY+0x7c>
+  102100:	74 20                	je     102122 <VGA_MEMORY+0x2e>
+  102102:	4e                   	dec    %esi
+  102103:	75 6d                	jne    102172 <VGA_MEMORY+0x7e>
+  102105:	62 65 72             	bound  %esp,0x72(%ebp)
+  102108:	3a 20                	cmp    (%eax),%ah
+  10210a:	25 64 0a 00 45       	and    $0x45000a64,%eax
+  10210f:	72 72                	jb     102183 <VGA_MEMORY+0x8f>
+  102111:	6f                   	outsl  %ds:(%esi),(%dx)
+  102112:	72 20                	jb     102134 <VGA_MEMORY+0x40>
+  102114:	43                   	inc    %ebx
+  102115:	6f                   	outsl  %ds:(%esi),(%dx)
+  102116:	64 65 3a 20          	fs cmp %gs:(%eax),%ah
+  10211a:	25 64 0a 00 45       	and    $0x45000a64,%eax
+  10211f:	49                   	dec    %ecx
+  102120:	50                   	push   %eax
+  102121:	3a 20                	cmp    (%eax),%ah
+  102123:	25 78 0a 00 45       	and    $0x45000a78,%eax
+  102128:	41                   	inc    %ecx
+  102129:	58                   	pop    %eax
+  10212a:	3a 20                	cmp    (%eax),%ah
+  10212c:	25 78 0a 00 45       	and    $0x45000a78,%eax
+  102131:	42                   	inc    %edx
+  102132:	50                   	push   %eax
+  102133:	3a 20                	cmp    (%eax),%ah
+  102135:	25 78 0a 00 45       	and    $0x45000a78,%eax
+  10213a:	42                   	inc    %edx
+  10213b:	58                   	pop    %eax
+  10213c:	3a 20                	cmp    (%eax),%ah
+  10213e:	25 78 0a 00 45       	and    $0x45000a78,%eax
+  102143:	53                   	push   %ebx
+  102144:	49                   	dec    %ecx
+  102145:	3a 20                	cmp    (%eax),%ah
+  102147:	25 78 0a 00 48       	and    $0x48000a78,%eax
+  10214c:	61                   	popa
+  10214d:	6e                   	outsb  %ds:(%esi),(%dx)
+  10214e:	64 6c                	fs insb (%dx),%es:(%edi)
+  102150:	65 72 20             	gs jb  102173 <VGA_MEMORY+0x7f>
+  102153:	50                   	push   %eax
+  102154:	74 72                	je     1021c8 <VGA_MEMORY+0xd4>
+  102156:	3a 20                	cmp    (%eax),%ah
+  102158:	30 78 25             	xor    %bh,0x25(%eax)
+  10215b:	78 0a                	js     102167 <VGA_MEMORY+0x73>
+  10215d:	0a 00                	or     (%eax),%al
+  10215f:	25                   	.byte 0x25
+  102160:	63 00                	arpl   %eax,(%eax)
+
+Disassembly of section .eh_frame:
+
+00102164 <.eh_frame>:
+  102164:	14 00                	adc    $0x0,%al
+  102166:	00 00                	add    %al,(%eax)
+  102168:	00 00                	add    %al,(%eax)
+  10216a:	00 00                	add    %al,(%eax)
+  10216c:	01 7a 52             	add    %edi,0x52(%edx)
+  10216f:	00 01                	add    %al,(%ecx)
+  102171:	7c 08                	jl     10217b <VGA_MEMORY+0x87>
+  102173:	01 1b                	add    %ebx,(%ebx)
+  102175:	0c 04                	or     $0x4,%al
+  102177:	04 88                	add    $0x88,%al
+  102179:	01 00                	add    %eax,(%eax)
+  10217b:	00 1c 00             	add    %bl,(%eax,%eax,1)
+  10217e:	00 00                	add    %al,(%eax)
+  102180:	1c 00                	sbb    $0x0,%al
+  102182:	00 00                	add    %al,(%eax)
+  102184:	6e                   	outsb  %ds:(%esi),(%dx)
+  102185:	e0 ff                	loopne 102186 <VGA_MEMORY+0x92>
+  102187:	ff 1c 00             	lcall  *(%eax,%eax,1)
+  10218a:	00 00                	add    %al,(%eax)
+  10218c:	00 41 0e             	add    %al,0xe(%ecx)
+  10218f:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  102195:	58                   	pop    %eax
+  102196:	c5 0c 04             	lds    (%esp,%eax,1),%ecx
+  102199:	04 00                	add    $0x0,%al
+  10219b:	00 1c 00             	add    %bl,(%eax,%eax,1)
+  10219e:	00 00                	add    %al,(%eax)
+  1021a0:	3c 00                	cmp    $0x0,%al
+  1021a2:	00 00                	add    %al,(%eax)
+  1021a4:	6a e0                	push   $0xffffffe0
+  1021a6:	ff                   	(bad)
+  1021a7:	ff 2b                	ljmp   *(%ebx)
+  1021a9:	00 00                	add    %al,(%eax)
+  1021ab:	00 00                	add    %al,(%eax)
+  1021ad:	41                   	inc    %ecx
+  1021ae:	0e                   	push   %cs
+  1021af:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  1021b5:	67 c5 0c             	lds    (%si),%ecx
+  1021b8:	04 04                	add    $0x4,%al
+  1021ba:	00 00                	add    %al,(%eax)
+  1021bc:	20 00                	and    %al,(%eax)
+  1021be:	00 00                	add    %al,(%eax)
+  1021c0:	5c                   	pop    %esp
+  1021c1:	00 00                	add    %al,(%eax)
+  1021c3:	00 75 e0             	add    %dh,-0x20(%ebp)
+  1021c6:	ff                   	(bad)
+  1021c7:	ff 77 00             	push   0x0(%edi)
+  1021ca:	00 00                	add    %al,(%eax)
+  1021cc:	00 41 0e             	add    %al,0xe(%ecx)
+  1021cf:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  1021d5:	44                   	inc    %esp
+  1021d6:	83 03 02             	addl   $0x2,(%ebx)
+  1021d9:	6f                   	outsl  %ds:(%esi),(%dx)
+  1021da:	c5 c3 0c             	(bad)
+  1021dd:	04 04                	add    $0x4,%al
+  1021df:	00 20                	add    %ah,(%eax)
+  1021e1:	00 00                	add    %al,(%eax)
+  1021e3:	00 80 00 00 00 c8    	add    %al,-0x38000000(%eax)
+  1021e9:	e0 ff                	loopne 1021ea <VGA_MEMORY+0xf6>
+  1021eb:	ff 59 00             	lcall  *0x0(%ecx)
+  1021ee:	00 00                	add    %al,(%eax)
+  1021f0:	00 41 0e             	add    %al,0xe(%ecx)
+  1021f3:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  1021f9:	44                   	inc    %esp
+  1021fa:	83 03 02             	addl   $0x2,(%ebx)
+  1021fd:	51                   	push   %ecx
+  1021fe:	c5 c3 0c             	(bad)
+  102201:	04 04                	add    $0x4,%al
+  102203:	00 20                	add    %ah,(%eax)
+  102205:	00 00                	add    %al,(%eax)
+  102207:	00 a4 00 00 00 fd e0 	add    %ah,-0x1f030000(%eax,%eax,1)
+  10220e:	ff                   	(bad)
+  10220f:	ff 0e                	decl   (%esi)
+  102211:	01 00                	add    %eax,(%eax)
+  102213:	00 00                	add    %al,(%eax)
+  102215:	41                   	inc    %ecx
+  102216:	0e                   	push   %cs
+  102217:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  10221d:	44                   	inc    %esp
+  10221e:	83 03 03             	addl   $0x3,(%ebx)
+  102221:	06                   	push   %es
+  102222:	01 c5                	add    %eax,%ebp
+  102224:	c3                   	ret
+  102225:	0c 04                	or     $0x4,%al
+  102227:	04 20                	add    $0x20,%al
+  102229:	00 00                	add    %al,(%eax)
+  10222b:	00 c8                	add    %cl,%al
+  10222d:	00 00                	add    %al,(%eax)
+  10222f:	00 e7                	add    %ah,%bh
+  102231:	e1 ff                	loope  102232 <VGA_MEMORY+0x13e>
+  102233:	ff a4 00 00 00 00 41 	jmp    *0x41000000(%eax,%eax,1)
+  10223a:	0e                   	push   %cs
+  10223b:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  102241:	44                   	inc    %esp
+  102242:	83 03 02             	addl   $0x2,(%ebx)
+  102245:	9c                   	pushf
+  102246:	c5 c3 0c             	(bad)
+  102249:	04 04                	add    $0x4,%al
+  10224b:	00 24 00             	add    %ah,(%eax,%eax,1)
+  10224e:	00 00                	add    %al,(%eax)
+  102250:	ec                   	in     (%dx),%al
+  102251:	00 00                	add    %al,(%eax)
+  102253:	00 67 e2             	add    %ah,-0x1e(%edi)
+  102256:	ff                   	(bad)
+  102257:	ff 0a                	decl   (%edx)
+  102259:	01 00                	add    %eax,(%eax)
+  10225b:	00 00                	add    %al,(%eax)
+  10225d:	41                   	inc    %ecx
+  10225e:	0e                   	push   %cs
+  10225f:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  102265:	45                   	inc    %ebp
+  102266:	86 03                	xchg   %al,(%ebx)
+  102268:	83 04 02 ff          	addl   $0xffffffff,(%edx,%eax,1)
+  10226c:	c3                   	ret
+  10226d:	41                   	inc    %ecx
+  10226e:	c6 41 c5 0c          	movb   $0xc,-0x3b(%ecx)
+  102272:	04 04                	add    $0x4,%al
+  102274:	24 00                	and    $0x0,%al
+  102276:	00 00                	add    %al,(%eax)
+  102278:	14 01                	adc    $0x1,%al
+  10227a:	00 00                	add    %al,(%eax)
+  10227c:	49                   	dec    %ecx
+  10227d:	e3 ff                	jecxz  10227e <VGA_MEMORY+0x18a>
+  10227f:	ff b4 00 00 00 00 41 	push   0x41000000(%eax,%eax,1)
+  102286:	0e                   	push   %cs
+  102287:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  10228d:	45                   	inc    %ebp
+  10228e:	86 03                	xchg   %al,(%ebx)
+  102290:	83 04 02 a9          	addl   $0xffffffa9,(%edx,%eax,1)
+  102294:	c3                   	ret
+  102295:	41                   	inc    %ecx
+  102296:	c6 41 c5 0c          	movb   $0xc,-0x3b(%ecx)
+  10229a:	04 04                	add    $0x4,%al
+  10229c:	1c 00                	sbb    $0x0,%al
+  10229e:	00 00                	add    %al,(%eax)
+  1022a0:	3c 01                	cmp    $0x1,%al
+  1022a2:	00 00                	add    %al,(%eax)
+  1022a4:	d5 e3                	aad    $0xe3
+  1022a6:	ff                   	(bad)
+  1022a7:	ff 43 00             	incl   0x0(%ebx)
+  1022aa:	00 00                	add    %al,(%eax)
+  1022ac:	00 41 0e             	add    %al,0xe(%ecx)
+  1022af:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  1022b5:	7f c5                	jg     10227c <VGA_MEMORY+0x188>
+  1022b7:	0c 04                	or     $0x4,%al
+  1022b9:	04 00                	add    $0x0,%al
+  1022bb:	00 20                	add    %ah,(%eax)
+  1022bd:	00 00                	add    %al,(%eax)
+  1022bf:	00 5c 01 00          	add    %bl,0x0(%ecx,%eax,1)
+  1022c3:	00 f8                	add    %bh,%al
+  1022c5:	e3 ff                	jecxz  1022c6 <VGA_MEMORY+0x1d2>
+  1022c7:	ff 36                	push   (%esi)
+  1022c9:	00 00                	add    %al,(%eax)
+  1022cb:	00 00                	add    %al,(%eax)
+  1022cd:	41                   	inc    %ecx
+  1022ce:	0e                   	push   %cs
+  1022cf:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  1022d5:	44                   	inc    %esp
+  1022d6:	83 03 6e             	addl   $0x6e,(%ebx)
+  1022d9:	c5 c3 0c             	(bad)
+  1022dc:	04 04                	add    $0x4,%al
+  1022de:	00 00                	add    %al,(%eax)
+  1022e0:	20 00                	and    %al,(%eax)
+  1022e2:	00 00                	add    %al,(%eax)
+  1022e4:	80 01 00             	addb   $0x0,(%ecx)
+  1022e7:	00 0a                	add    %cl,(%edx)
+  1022e9:	e4 ff                	in     $0xff,%al
+  1022eb:	ff 28                	ljmp   *(%eax)
+  1022ed:	00 00                	add    %al,(%eax)
+  1022ef:	00 00                	add    %al,(%eax)
+  1022f1:	41                   	inc    %ecx
+  1022f2:	0e                   	push   %cs
+  1022f3:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  1022f9:	41                   	inc    %ecx
+  1022fa:	83 03 63             	addl   $0x63,(%ebx)
+  1022fd:	c5 c3 0c             	(bad)
+  102300:	04 04                	add    $0x4,%al
+  102302:	00 00                	add    %al,(%eax)
+  102304:	10 00                	adc    %al,(%eax)
+  102306:	00 00                	add    %al,(%eax)
+  102308:	a4                   	movsb  %ds:(%esi),%es:(%edi)
+  102309:	01 00                	add    %eax,(%eax)
+  10230b:	00 b4 f6 ff ff 04 00 	add    %dh,0x4ffff(%esi,%esi,8)
+  102312:	00 00                	add    %al,(%eax)
+  102314:	00 00                	add    %al,(%eax)
+  102316:	00 00                	add    %al,(%eax)
+  102318:	10 00                	adc    %al,(%eax)
+  10231a:	00 00                	add    %al,(%eax)
+  10231c:	b8 01 00 00 a4       	mov    $0xa4000001,%eax
+  102321:	f6 ff                	idiv   %bh
+  102323:	ff 04 00             	incl   (%eax,%eax,1)
+  102326:	00 00                	add    %al,(%eax)
+  102328:	00 00                	add    %al,(%eax)
+  10232a:	00 00                	add    %al,(%eax)
+  10232c:	10 00                	adc    %al,(%eax)
+  10232e:	00 00                	add    %al,(%eax)
+  102330:	cc                   	int3
+  102331:	01 00                	add    %eax,(%eax)
+  102333:	00 94 f6 ff ff 04 00 	add    %dl,0x4ffff(%esi,%esi,8)
+  10233a:	00 00                	add    %al,(%eax)
+  10233c:	00 00                	add    %al,(%eax)
+  10233e:	00 00                	add    %al,(%eax)
+  102340:	1c 00                	sbb    $0x0,%al
+  102342:	00 00                	add    %al,(%eax)
+  102344:	e0 01                	loopne 102347 <VGA_MEMORY+0x253>
+  102346:	00 00                	add    %al,(%eax)
+  102348:	d2 e3                	shl    %cl,%bl
+  10234a:	ff                   	(bad)
+  10234b:	ff 31                	push   (%ecx)
+  10234d:	00 00                	add    %al,(%eax)
+  10234f:	00 00                	add    %al,(%eax)
+  102351:	41                   	inc    %ecx
+  102352:	0e                   	push   %cs
+  102353:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  102359:	6d                   	insl   (%dx),%es:(%edi)
+  10235a:	c5 0c 04             	lds    (%esp,%eax,1),%ecx
+  10235d:	04 00                	add    $0x0,%al
+  10235f:	00 20                	add    %ah,(%eax)
+  102361:	00 00                	add    %al,(%eax)
+  102363:	00 00                	add    %al,(%eax)
+  102365:	02 00                	add    (%eax),%al
+  102367:	00 e3                	add    %ah,%bl
+  102369:	e3 ff                	jecxz  10236a <VGA_MEMORY+0x276>
+  10236b:	ff 75 00             	push   0x0(%ebp)
+  10236e:	00 00                	add    %al,(%eax)
+  102370:	00 41 0e             	add    %al,0xe(%ecx)
+  102373:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  102379:	44                   	inc    %esp
+  10237a:	83 03 02             	addl   $0x2,(%ebx)
+  10237d:	6d                   	insl   (%dx),%es:(%edi)
+  10237e:	c5 c3 0c             	(bad)
+  102381:	04 04                	add    $0x4,%al
+  102383:	00 20                	add    %ah,(%eax)
+  102385:	00 00                	add    %al,(%eax)
+  102387:	00 24 02             	add    %ah,(%edx,%eax,1)
+  10238a:	00 00                	add    %al,(%eax)
+  10238c:	34 e4                	xor    $0xe4,%al
+  10238e:	ff                   	(bad)
+  10238f:	ff                   	(bad)
+  102390:	38 00                	cmp    %al,(%eax)
+  102392:	00 00                	add    %al,(%eax)
+  102394:	00 41 0e             	add    %al,0xe(%ecx)
+  102397:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  10239d:	44                   	inc    %esp
+  10239e:	83 03 70             	addl   $0x70,(%ebx)
+  1023a1:	c5 c3 0c             	(bad)
+  1023a4:	04 04                	add    $0x4,%al
+  1023a6:	00 00                	add    %al,(%eax)
+  1023a8:	20 00                	and    %al,(%eax)
+  1023aa:	00 00                	add    %al,(%eax)
+  1023ac:	48                   	dec    %eax
+  1023ad:	02 00                	add    (%eax),%al
+  1023af:	00 48 e4             	add    %cl,-0x1c(%eax)
+  1023b2:	ff                   	(bad)
+  1023b3:	ff 33                	push   (%ebx)
+  1023b5:	00 00                	add    %al,(%eax)
+  1023b7:	00 00                	add    %al,(%eax)
+  1023b9:	41                   	inc    %ecx
+  1023ba:	0e                   	push   %cs
+  1023bb:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  1023c1:	44                   	inc    %esp
+  1023c2:	83 03 6b             	addl   $0x6b,(%ebx)
+  1023c5:	c5 c3 0c             	(bad)
+  1023c8:	04 04                	add    $0x4,%al
+  1023ca:	00 00                	add    %al,(%eax)
+  1023cc:	1c 00                	sbb    $0x0,%al
+  1023ce:	00 00                	add    %al,(%eax)
+  1023d0:	6c                   	insb   (%dx),%es:(%edi)
+  1023d1:	02 00                	add    (%eax),%al
+  1023d3:	00 57 e4             	add    %dl,-0x1c(%edi)
+  1023d6:	ff                   	(bad)
+  1023d7:	ff 35 00 00 00 00    	push   0x0
+  1023dd:	41                   	inc    %ecx
+  1023de:	0e                   	push   %cs
+  1023df:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  1023e5:	71 c5                	jno    1023ac <VGA_MEMORY+0x2b8>
+  1023e7:	0c 04                	or     $0x4,%al
+  1023e9:	04 00                	add    $0x0,%al
+  1023eb:	00 20                	add    %ah,(%eax)
+  1023ed:	00 00                	add    %al,(%eax)
+  1023ef:	00 8c 02 00 00 6c e4 	add    %cl,-0x1b940000(%edx,%eax,1)
+  1023f6:	ff                   	(bad)
+  1023f7:	ff 4b 00             	decl   0x0(%ebx)
+  1023fa:	00 00                	add    %al,(%eax)
+  1023fc:	00 41 0e             	add    %al,0xe(%ecx)
+  1023ff:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  102405:	44                   	inc    %esp
+  102406:	83 03 02             	addl   $0x2,(%ebx)
+  102409:	43                   	inc    %ebx
+  10240a:	c5 c3 0c             	(bad)
+  10240d:	04 04                	add    $0x4,%al
+  10240f:	00 1c 00             	add    %bl,(%eax,%eax,1)
+  102412:	00 00                	add    %al,(%eax)
+  102414:	b0 02                	mov    $0x2,%al
+  102416:	00 00                	add    %al,(%eax)
+  102418:	93                   	xchg   %eax,%ebx
+  102419:	e4 ff                	in     $0xff,%al
+  10241b:	ff 43 00             	incl   0x0(%ebx)
+  10241e:	00 00                	add    %al,(%eax)
+  102420:	00 41 0e             	add    %al,0xe(%ecx)
+  102423:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  102429:	7f c5                	jg     1023f0 <VGA_MEMORY+0x2fc>
+  10242b:	0c 04                	or     $0x4,%al
+  10242d:	04 00                	add    $0x0,%al
+  10242f:	00 20                	add    %ah,(%eax)
+  102431:	00 00                	add    %al,(%eax)
+  102433:	00 d0                	add    %dl,%al
+  102435:	02 00                	add    (%eax),%al
+  102437:	00 b6 e4 ff ff 36    	add    %dh,0x36ffffe4(%esi)
+  10243d:	00 00                	add    %al,(%eax)
+  10243f:	00 00                	add    %al,(%eax)
+  102441:	41                   	inc    %ecx
+  102442:	0e                   	push   %cs
+  102443:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  102449:	44                   	inc    %esp
+  10244a:	83 03 6e             	addl   $0x6e,(%ebx)
+  10244d:	c5 c3 0c             	(bad)
+  102450:	04 04                	add    $0x4,%al
+  102452:	00 00                	add    %al,(%eax)
+  102454:	20 00                	and    %al,(%eax)
+  102456:	00 00                	add    %al,(%eax)
+  102458:	f4                   	hlt
+  102459:	02 00                	add    (%eax),%al
+  10245b:	00 c8                	add    %cl,%al
+  10245d:	e4 ff                	in     $0xff,%al
+  10245f:	ff                   	(bad)
+  102460:	3d 00 00 00 00       	cmp    $0x0,%eax
+  102465:	41                   	inc    %ecx
+  102466:	0e                   	push   %cs
+  102467:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  10246d:	44                   	inc    %esp
+  10246e:	83 03 75             	addl   $0x75,(%ebx)
+  102471:	c5 c3 0c             	(bad)
+  102474:	04 04                	add    $0x4,%al
+  102476:	00 00                	add    %al,(%eax)
+  102478:	20 00                	and    %al,(%eax)
+  10247a:	00 00                	add    %al,(%eax)
+  10247c:	18 03                	sbb    %al,(%ebx)
+  10247e:	00 00                	add    %al,(%eax)
+  102480:	e1 e4                	loope  102466 <VGA_MEMORY+0x372>
+  102482:	ff                   	(bad)
+  102483:	ff 69 00             	ljmp   *0x0(%ecx)
+  102486:	00 00                	add    %al,(%eax)
+  102488:	00 41 0e             	add    %al,0xe(%ecx)
+  10248b:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  102491:	44                   	inc    %esp
+  102492:	83 03 02             	addl   $0x2,(%ebx)
+  102495:	61                   	popa
+  102496:	c5 c3 0c             	(bad)
+  102499:	04 04                	add    $0x4,%al
+  10249b:	00 1c 00             	add    %bl,(%eax,%eax,1)
+  10249e:	00 00                	add    %al,(%eax)
+  1024a0:	3c 03                	cmp    $0x3,%al
+  1024a2:	00 00                	add    %al,(%eax)
+  1024a4:	26 e5 ff             	es in  $0xff,%eax
+  1024a7:	ff 8d 00 00 00 00    	decl   0x0(%ebp)
+  1024ad:	41                   	inc    %ecx
+  1024ae:	0e                   	push   %cs
+  1024af:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  1024b5:	02 89 c5 0c 04 04    	add    0x4040cc5(%ecx),%cl
+  1024bb:	00 1c 00             	add    %bl,(%eax,%eax,1)
+  1024be:	00 00                	add    %al,(%eax)
+  1024c0:	5c                   	pop    %esp
+  1024c1:	03 00                	add    (%eax),%eax
+  1024c3:	00 b9 e5 ff ff b3    	add    %bh,-0x4c00001b(%ecx)
+  1024c9:	00 00                	add    %al,(%eax)
+  1024cb:	00 00                	add    %al,(%eax)
+  1024cd:	41                   	inc    %ecx
+  1024ce:	0e                   	push   %cs
+  1024cf:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  1024d5:	02 af c5 0c 04 04    	add    0x4040cc5(%edi),%ch
+  1024db:	00 1c 00             	add    %bl,(%eax,%eax,1)
+  1024de:	00 00                	add    %al,(%eax)
+  1024e0:	7c 03                	jl     1024e5 <VGA_MEMORY+0x3f1>
+  1024e2:	00 00                	add    %al,(%eax)
+  1024e4:	4c                   	dec    %esp
+  1024e5:	e6 ff                	out    %al,$0xff
+  1024e7:	ff 2e                	ljmp   *(%esi)
+  1024e9:	01 00                	add    %eax,(%eax)
+  1024eb:	00 00                	add    %al,(%eax)
+  1024ed:	41                   	inc    %ecx
+  1024ee:	0e                   	push   %cs
+  1024ef:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  1024f5:	03 2a                	add    (%edx),%ebp
+  1024f7:	01 c5                	add    %eax,%ebp
+  1024f9:	0c 04                	or     $0x4,%al
+  1024fb:	04 20                	add    $0x20,%al
+  1024fd:	00 00                	add    %al,(%eax)
+  1024ff:	00 9c 03 00 00 8b e8 	add    %bl,-0x17750000(%ebx,%eax,1)
+  102506:	ff                   	(bad)
+  102507:	ff 83 00 00 00 00    	incl   0x0(%ebx)
+  10250d:	41                   	inc    %ecx
+  10250e:	0e                   	push   %cs
+  10250f:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  102515:	44                   	inc    %esp
+  102516:	83 03 02             	addl   $0x2,(%ebx)
+  102519:	7b c5                	jnp    1024e0 <VGA_MEMORY+0x3ec>
+  10251b:	c3                   	ret
+  10251c:	0c 04                	or     $0x4,%al
+  10251e:	04 00                	add    $0x0,%al
+  102520:	20 00                	and    %al,(%eax)
+  102522:	00 00                	add    %al,(%eax)
+  102524:	c0 03 00             	rolb   $0x0,(%ebx)
+  102527:	00 ea                	add    %ch,%dl
+  102529:	e8 ff ff 2a 03       	call   33b252d <first_page_table+0x32ab52d>
+  10252e:	00 00                	add    %al,(%eax)
+  102530:	00 41 0e             	add    %al,0xe(%ecx)
+  102533:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  102539:	44                   	inc    %esp
+  10253a:	83 03 03             	addl   $0x3,(%ebx)
+  10253d:	22 03                	and    (%ebx),%al
+  10253f:	c5 c3 0c             	(bad)
+  102542:	04 04                	add    $0x4,%al
+  102544:	20 00                	and    %al,(%eax)
+  102546:	00 00                	add    %al,(%eax)
+  102548:	e4 03                	in     $0x3,%al
+  10254a:	00 00                	add    %al,(%eax)
+  10254c:	fc                   	cld
+  10254d:	eb ff                	jmp    10254e <VGA_MEMORY+0x45a>
+  10254f:	ff 61 01             	jmp    *0x1(%ecx)
+  102552:	00 00                	add    %al,(%eax)
+  102554:	00 41 0e             	add    %al,0xe(%ecx)
+  102557:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  10255d:	44                   	inc    %esp
+  10255e:	83 03 03             	addl   $0x3,(%ebx)
+  102561:	59                   	pop    %ecx
+  102562:	01 c5                	add    %eax,%ebp
+  102564:	c3                   	ret
+  102565:	0c 04                	or     $0x4,%al
+  102567:	04 20                	add    $0x20,%al
+  102569:	00 00                	add    %al,(%eax)
+  10256b:	00 08                	add    %cl,(%eax)
+  10256d:	04 00                	add    $0x0,%al
+  10256f:	00 39                	add    %bh,(%ecx)
+  102571:	ed                   	in     (%dx),%eax
+  102572:	ff                   	(bad)
+  102573:	ff 61 01             	jmp    *0x1(%ecx)
+  102576:	00 00                	add    %al,(%eax)
+  102578:	00 41 0e             	add    %al,0xe(%ecx)
+  10257b:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  102581:	44                   	inc    %esp
+  102582:	83 03 03             	addl   $0x3,(%ebx)
+  102585:	59                   	pop    %ecx
+  102586:	01 c5                	add    %eax,%ebp
+  102588:	c3                   	ret
+  102589:	0c 04                	or     $0x4,%al
+  10258b:	04 20                	add    $0x20,%al
+  10258d:	00 00                	add    %al,(%eax)
+  10258f:	00 2c 04             	add    %ch,(%esp,%eax,1)
+  102592:	00 00                	add    %al,(%eax)
+  102594:	76 ee                	jbe    102584 <VGA_MEMORY+0x490>
+  102596:	ff                   	(bad)
+  102597:	ff 2b                	ljmp   *(%ebx)
+  102599:	00 00                	add    %al,(%eax)
+  10259b:	00 00                	add    %al,(%eax)
+  10259d:	41                   	inc    %ecx
+  10259e:	0e                   	push   %cs
+  10259f:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  1025a5:	44                   	inc    %esp
+  1025a6:	83 03 63             	addl   $0x63,(%ebx)
+  1025a9:	c5 c3 0c             	(bad)
+  1025ac:	04 04                	add    $0x4,%al
+  1025ae:	00 00                	add    %al,(%eax)
+  1025b0:	20 00                	and    %al,(%eax)
+  1025b2:	00 00                	add    %al,(%eax)
+  1025b4:	50                   	push   %eax
+  1025b5:	04 00                	add    $0x0,%al
+  1025b7:	00 7d ee             	add    %bh,-0x12(%ebp)
+  1025ba:	ff                   	(bad)
+  1025bb:	ff 4b 00             	decl   0x0(%ebx)
+  1025be:	00 00                	add    %al,(%eax)
+  1025c0:	00 41 0e             	add    %al,0xe(%ecx)
+  1025c3:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  1025c9:	44                   	inc    %esp
+  1025ca:	83 03 02             	addl   $0x2,(%ebx)
+  1025cd:	43                   	inc    %ebx
+  1025ce:	c5 c3 0c             	(bad)
+  1025d1:	04 04                	add    $0x4,%al
+  1025d3:	00 20                	add    %ah,(%eax)
+  1025d5:	00 00                	add    %al,(%eax)
+  1025d7:	00 74 04 00          	add    %dh,0x0(%esp,%eax,1)
+  1025db:	00 a4 ee ff ff f5 00 	add    %ah,0xf5ffff(%esi,%ebp,8)
+  1025e2:	00 00                	add    %al,(%eax)
+  1025e4:	00 41 0e             	add    %al,0xe(%ecx)
+  1025e7:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  1025ed:	44                   	inc    %esp
+  1025ee:	83 03 02             	addl   $0x2,(%ebx)
+  1025f1:	ed                   	in     (%dx),%eax
+  1025f2:	c5 c3 0c             	(bad)
+  1025f5:	04 04                	add    $0x4,%al
+  1025f7:	00 24 00             	add    %ah,(%eax,%eax,1)
+  1025fa:	00 00                	add    %al,(%eax)
+  1025fc:	98                   	cwtl
+  1025fd:	04 00                	add    $0x0,%al
+  1025ff:	00 75 ef             	add    %dh,-0x11(%ebp)
+  102602:	ff                   	(bad)
+  102603:	ff 74 00 00          	push   0x0(%eax,%eax,1)
+  102607:	00 00                	add    %al,(%eax)
+  102609:	41                   	inc    %ecx
+  10260a:	0e                   	push   %cs
+  10260b:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  102611:	45                   	inc    %ebp
+  102612:	86 03                	xchg   %al,(%ebx)
+  102614:	83 04 02 69          	addl   $0x69,(%edx,%eax,1)
+  102618:	c3                   	ret
+  102619:	41                   	inc    %ecx
+  10261a:	c6 41 c5 0c          	movb   $0xc,-0x3b(%ecx)
+  10261e:	04 04                	add    $0x4,%al
+  102620:	24 00                	and    $0x0,%al
+  102622:	00 00                	add    %al,(%eax)
+  102624:	c0 04 00 00          	rolb   $0x0,(%eax,%eax,1)
+  102628:	c1 ef ff             	shr    $0xff,%edi
+  10262b:	ff 76 00             	push   0x0(%esi)
+  10262e:	00 00                	add    %al,(%eax)
+  102630:	00 41 0e             	add    %al,0xe(%ecx)
+  102633:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  102639:	45                   	inc    %ebp
+  10263a:	86 03                	xchg   %al,(%ebx)
+  10263c:	83 04 02 6b          	addl   $0x6b,(%edx,%eax,1)
+  102640:	c3                   	ret
+  102641:	41                   	inc    %ecx
+  102642:	c6 41 c5 0c          	movb   $0xc,-0x3b(%ecx)
+  102646:	04 04                	add    $0x4,%al
+  102648:	1c 00                	sbb    $0x0,%al
+  10264a:	00 00                	add    %al,(%eax)
+  10264c:	e8 04 00 00 0f       	call   f102655 <first_page_table+0xeffb655>
+  102651:	f0 ff                	lock (bad)
+  102653:	ff 25 00 00 00 00    	jmp    *0x0
+  102659:	41                   	inc    %ecx
+  10265a:	0e                   	push   %cs
+  10265b:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  102661:	61                   	popa
+  102662:	c5 0c 04             	lds    (%esp,%eax,1),%ecx
+  102665:	04 00                	add    $0x0,%al
+  102667:	00 20                	add    %ah,(%eax)
+  102669:	00 00                	add    %al,(%eax)
+  10266b:	00 08                	add    %cl,(%eax)
+  10266d:	05 00 00 6c f1       	add    $0xf16c0000,%eax
+  102672:	ff                   	(bad)
+  102673:	ff 25 00 00 00 00    	jmp    *0x0
+  102679:	41                   	inc    %ecx
+  10267a:	0e                   	push   %cs
+  10267b:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  102681:	44                   	inc    %esp
+  102682:	83 03 5d             	addl   $0x5d,(%ebx)
+  102685:	c5 c3 0c             	(bad)
+  102688:	04 04                	add    $0x4,%al
+  10268a:	00 00                	add    %al,(%eax)
+  10268c:	20 00                	and    %al,(%eax)
+  10268e:	00 00                	add    %al,(%eax)
+  102690:	2c 05                	sub    $0x5,%al
+  102692:	00 00                	add    %al,(%eax)
+  102694:	6d                   	insl   (%dx),%es:(%edi)
+  102695:	f1                   	int1
+  102696:	ff                   	(bad)
+  102697:	ff e7                	jmp    *%edi
+  102699:	00 00                	add    %al,(%eax)
+  10269b:	00 00                	add    %al,(%eax)
+  10269d:	41                   	inc    %ecx
+  10269e:	0e                   	push   %cs
+  10269f:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  1026a5:	44                   	inc    %esp
+  1026a6:	83 03 02             	addl   $0x2,(%ebx)
+  1026a9:	df c5                	ffreep %st(5)
+  1026ab:	c3                   	ret
+  1026ac:	0c 04                	or     $0x4,%al
+  1026ae:	04 00                	add    $0x0,%al
+  1026b0:	20 00                	and    %al,(%eax)
+  1026b2:	00 00                	add    %al,(%eax)
+  1026b4:	50                   	push   %eax
+  1026b5:	05 00 00 30 f2       	add    $0xf2300000,%eax
+  1026ba:	ff                   	(bad)
+  1026bb:	ff 2d 00 00 00 00    	ljmp   *0x0
+  1026c1:	41                   	inc    %ecx
+  1026c2:	0e                   	push   %cs
+  1026c3:	08 85 02 42 0d 05    	or     %al,0x50d4202(%ebp)
+  1026c9:	44                   	inc    %esp
+  1026ca:	83 03 65             	addl   $0x65,(%ebx)
+  1026cd:	c5 c3 0c             	(bad)
+  1026d0:	04 04                	add    $0x4,%al
+	...
+
+Disassembly of section .data:
+
+00103000 <scancode_to_ascii>:
+  103000:	00 1b                	add    %bl,(%ebx)
+  103002:	31 32                	xor    %esi,(%edx)
+  103004:	33 34 35 36 37 38 39 	xor    0x39383736(,%esi,1),%esi
+  10300b:	30 2d 3d 08 09 71    	xor    %ch,0x7109083d
+  103011:	77 65                	ja     103078 <scancode_to_ascii+0x78>
+  103013:	72 74                	jb     103089 <_GLOBAL_OFFSET_TABLE_+0x9>
+  103015:	79 75                	jns    10308c <_GLOBAL_OFFSET_TABLE_+0xc>
+  103017:	69 6f 70 5b 5d 0a 00 	imul   $0xa5d5b,0x70(%edi),%ebp
+  10301e:	61                   	popa
+  10301f:	73 64                	jae    103085 <_GLOBAL_OFFSET_TABLE_+0x5>
+  103021:	66 67 68 6a 6b       	addr16 pushw $0x6b6a
+  103026:	6c                   	insb   (%dx),%es:(%edi)
+  103027:	3b 27                	cmp    (%edi),%esp
+  103029:	60                   	pusha
+  10302a:	00 5c 7a 78          	add    %bl,0x78(%edx,%edi,2)
+  10302e:	63 76 62             	arpl   %esi,0x62(%esi)
+  103031:	6e                   	outsb  %ds:(%esi),(%dx)
+  103032:	6d                   	insl   (%dx),%es:(%edi)
+  103033:	2c 2e                	sub    $0x2e,%al
+  103035:	2f                   	das
+  103036:	00 2a                	add    %ch,(%edx)
+  103038:	00 20                	add    %ah,(%eax)
+	...
+
+Disassembly of section .got.plt:
+
+00103080 <_GLOBAL_OFFSET_TABLE_>:
+	...
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	47                   	inc    %edi
+   1:	43                   	inc    %ebx
+   2:	43                   	inc    %ebx
+   3:	3a 20                	cmp    (%eax),%ah
+   5:	28 47 4e             	sub    %al,0x4e(%edi)
+   8:	55                   	push   %ebp
+   9:	29 20                	sub    %esp,(%eax)
+   b:	31 31                	xor    %esi,(%ecx)
+   d:	2e 32 2e             	xor    %cs:(%esi),%ch
+  10:	30 00                	xor    %al,(%eax)
+  12:	47                   	inc    %edi
+  13:	43                   	inc    %ebx
+  14:	43                   	inc    %ebx
+  15:	3a 20                	cmp    (%eax),%ah
+  17:	28 47 4e             	sub    %al,0x4e(%edi)
+  1a:	55                   	push   %ebp
+  1b:	29 20                	sub    %esp,(%eax)
+  1d:	31 34 2e             	xor    %esi,(%esi,%ebp,1)
+  20:	32 2e                	xor    (%esi),%ch
+  22:	31 20                	xor    %esp,(%eax)
+  24:	32 30                	xor    (%eax),%dh
+  26:	32 35 30 32 30 37    	xor    0x37303230,%dh
+	...

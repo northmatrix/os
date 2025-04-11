@@ -3,13 +3,12 @@
 #include "stdlib.h"
 #include "stdint.h"
 #include "vga.h"
-
+#include "stdio.h"
 
 /* Frame Buffer */
-static const size_t VGA_WIDTH = 80;
-static const size_t VGA_HEIGHT = 25;
-static uint16_t* const VGA_MEMORY = (uint16_t*) 0xB8000;
-
+#define VGA_WIDTH 80
+#define VGA_HEIGHT 25
+static uint16_t* VGA_MEMORY = (uint16_t*) 0xB8000;
 
 /* The I/O ports */
 #define FB_COMMAND_PORT         0x3D4
@@ -111,6 +110,7 @@ void vga_putchar(char c) {
 
 
 void vga_initialize() {
+  sprintf("%d   %d   %d    %d",terminal_row,terminal_column,terminal_color,terminal_buffer);
   terminal_row = 0;
   terminal_column = 0;
   terminal_color = vga_entry_color(VGA_COLOR_LIGHT_GREY,VGA_COLOR_BLACK);

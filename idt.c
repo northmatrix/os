@@ -1,13 +1,10 @@
 #include "idt.h"
-#include "stdio.h"
-#include "vga.h"
-#include "io.h"
-#include "pic.h"
 
 #define IDT_TRAP_GATE_TYPE		1 
 #define PL0 0x0
 #define PL3 0x3
 #define SEGSEL_KERNEL_CS 0x08
+
 
 #define CREATE_IDT_GATE(idx) \
     create_idt_gate(idx, (uint32_t) &interrupt_handler_##idx,\
@@ -73,10 +70,10 @@ DECLARE_INTERRUPT_HANDLER(46);
 DECLARE_INTERRUPT_HANDLER(47);
 
 
-idt_gate_t idt[IDT_NUM_ENTRIES];
+static idt_gate_t idt[IDT_NUM_ENTRIES];
 
 /* external assembly function to set the gdt */
-void load_idt(uint32_t* idt_ptr_t);
+void load_idt(uint32_t idt_ptr_t);
 
 
 static void create_idt_gate(uint8_t n, uint32_t handler, uint8_t type, uint8_t pl) {
@@ -119,7 +116,6 @@ void idt_init() {
   CREATE_IDT_GATE(17);
   CREATE_IDT_GATE(18);
   CREATE_IDT_GATE(19);
-
   /* IRQs */
   CREATE_IDT_GATE(32);
   CREATE_IDT_GATE(33);
@@ -137,7 +133,7 @@ void idt_init() {
   CREATE_IDT_GATE(45);
   CREATE_IDT_GATE(46);
   CREATE_IDT_GATE(47);
-  load_idt((uint32_t*) &idt_ptr);
+  load_idt((uint32_t) &idt_ptr);
 }
 
 

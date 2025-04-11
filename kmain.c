@@ -18,11 +18,9 @@ void kmain(unsigned int ebx) {
   serial_initialize(); 
   gdt_init();
   idt_init();
-  init_interrupt();
   pic_init();
   keyboard_init();
   paging_init(); 
-  
   enable_interrupts();
   printf("Welcome to RunexOS\n\n");
   printf("VGA INIT\n");
@@ -58,6 +56,7 @@ void kmain(unsigned int ebx) {
     vga_setcolor(i);
     printf("%c%c", 0xDB, 0xDB);
   }
+
   vga_setcolor(VGA_COLOR_LIGHT_GREY);
 }
 
