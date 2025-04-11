@@ -3,6 +3,25 @@
 #include "vga.h"
 #include "stdlib.h"
 #include "serial.h"
+#include "string.h" 
+
+void ftoa(float n, char *res, int precision) {
+    int ipart = (int)n;
+    float fpart = n - ipart;
+
+    itoa(ipart, res, 10); // Convert the integer part to string
+    int i = strlen(res);
+    res[i++] = '.'; // Add the decimal point
+
+    // Process the fractional part
+    for (int j = 0; j < precision; j++) {
+        fpart *= 10;
+        int digit = (int)fpart;
+        res[i++] = '0' + digit;
+        fpart -= digit;
+    }
+    res[i] = '\0';
+}
 
 void printf(const char* fmt, ...) {
     va_list args;
@@ -11,7 +30,13 @@ void printf(const char* fmt, ...) {
     while (*fmt) {
         if (*fmt == '%') {
             fmt++;
-            if (*fmt == 'd') {
+            if (*fmt == 'f') {
+                float num = va_arg(args, double);  // floats are promoted to double
+                char buffer[64];
+                ftoa(num, buffer, 6);  // Convert float to string (6 decimals)
+                vga_writestring(buffer); // Print to VGA or use standard puts
+            }
+            else if (*fmt == 'd') {
                 int num = va_arg(args, int);
                 char buffer[32];
                 itoa(num,buffer,10);
