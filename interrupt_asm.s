@@ -44,6 +44,16 @@
         ; return to the code that got interrupted
         iret
 
+
+enable_interrupts:
+    sti
+    ret
+
+disable_interrupts:
+    cli
+    ret
+
+
 no_error_code_interrupt_handler 0       ; create handler for interrupt 0
 no_error_code_interrupt_handler 1       ; create handler for interrupt 1 
 no_error_code_interrupt_handler 2       ; create handler for interrupt 2

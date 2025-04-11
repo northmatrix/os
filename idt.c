@@ -4,8 +4,6 @@
 #include "io.h"
 #include "pic.h"
 
-
-
 #define IDT_TRAP_GATE_TYPE		1 
 #define PL0 0x0
 #define PL3 0x3

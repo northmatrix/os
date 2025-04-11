@@ -6,6 +6,7 @@
 #include "pic.h" 
 #include "keyboard.h" 
 #include "multiboot.h"
+#include "interrupt.h"
 
 typedef void (*call_module_t)(void);
 
@@ -14,8 +15,10 @@ void kmain(unsigned int ebx) {
   serial_initialize(); 
   gdt_init();
   idt_init();
+  init_interrupt();
   pic_init();
   keyboard_init();
+
   printf("Welcome to RunexOS\n\n");
   printf("VGA INIT\n");
   printf("COM INIT\n");
@@ -23,6 +26,7 @@ void kmain(unsigned int ebx) {
   printf("IDT INIT\n");
   printf("KBD INIT\n\n");
   sprintf("Testing serial works\n");
+
   multiboot_info_t *mbinfo = (multiboot_info_t *) ebx;
   unsigned int address_of_module = mbinfo->mods_addr;
   unsigned int module_count = mbinfo->mods_count;
@@ -49,6 +53,6 @@ void kmain(unsigned int ebx) {
     vga_setcolor(i);
     printf("%c%c", 0xDB, 0xDB);
   }
-
+  vga_setcolor(VGA_COLOR_LIGHT_GREY);
 }
 

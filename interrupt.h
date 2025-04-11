@@ -15,25 +15,30 @@ struct cpu_state {
   } __attribute__((packed));
 typedef struct cpu_state cpu_state_t;
 
-  struct interrupt_detail {
-    unsigned int interrupt;
-    unsigned int error_code;
+struct interrupt_detail {
+    uint32_t interrupt;
+    uint32_t error_code;
   } __attribute__((packed));
 typedef struct interrupt_detail interrupt_detail_t;
   
-  struct stack_state {
-      unsigned int eip;
-      unsigned int cs;
-      unsigned int eflags;
+struct stack_state {
+      uint32_t eip;
+      uint32_t cs;
+      uint32_t eflags;
   } __attribute__((packed));
 typedef struct stack_state stack_state_t;
 
-typedef void (*interrupt_handler_t)(cpu_state_t cpu_state,
-    interrupt_detail_t interrupt_detail,
-    stack_state_t stack_state);
+void interrupt_handler(cpu_state_t state, interrupt_detail_t info, stack_state_t exec);
+
+typedef void (*interrupt_handler_t)(cpu_state_t state,
+                                    interrupt_detail_t info,
+                                    stack_state_t exec);
 
 uint32_t register_interrupt_handler(uint32_t interrupt,
-    interrupt_handler_t handler);
+                                    interrupt_handler_t handler);
 
-void interrupt_handler(cpu_state_t state, interrupt_detail_t info, stack_state_t exec);
+void init_interrupt();
+void enable_interrupts();
+void disable_interrupts();
+
 #endif
