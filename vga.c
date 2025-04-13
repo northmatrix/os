@@ -78,9 +78,14 @@ void vga_backspace() {
     --terminal_column;
   } else if (terminal_row > 0) {
     --terminal_row;
-    terminal_column = VGA_WIDTH - 1;
+    for(terminal_column = VGA_WIDTH -1; terminal_column > 0; terminal_column --) {
+      if ((terminal_buffer[terminal_row * VGA_WIDTH+ terminal_column] & 0xFF) != ' ') {
+        break;
+      }
+    }
   }
-  vga_putentryat((char) 0,terminal_color,terminal_column,terminal_row);
+  terminal_column++;
+  vga_putentryat((char) ' ',terminal_color,terminal_column,terminal_row);
   vga_move_cursor(terminal_row * VGA_WIDTH + terminal_column);
 }
 
@@ -110,7 +115,6 @@ void vga_putchar(char c) {
 
 
 void vga_initialize() {
-  sprintf("%d   %d   %d    %d",terminal_row,terminal_column,terminal_color,terminal_buffer);
   terminal_row = 0;
   terminal_column = 0;
   terminal_color = vga_entry_color(VGA_COLOR_LIGHT_GREY,VGA_COLOR_BLACK);
