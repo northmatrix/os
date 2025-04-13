@@ -28,13 +28,11 @@ void kmain(unsigned int ebx) {
   printf("GDT INIT\n");
   printf("IDT INIT\n");
   printf("KBD INIT\n\n");
-  enableSSE();
   sprintf("Testing serial works\n");
-
+  enableSSE();
+  
   float pi = 3.14159f;
-  float sq2 = 1.4142f;
-  float res = pi /sq2;
-  printf("%f / %f =  %f\n",pi,sq2,res);
+  sprintf("PI: %f\n",pi);
   
   multiboot_info_t *mbinfo = (multiboot_info_t *) ebx;
   unsigned int address_of_module = mbinfo->mods_addr;

@@ -1,18 +1,15 @@
 OBJECTS = loader.o kmain.o io.o vga.o string.o serial.o gdt.o gdt_asm.o stdlib.o  interrupt_asm.o idt.o idt_asm.o  stdio.o pic.o interrupt.o keyboard.o paging.o paging_asm.o sse_asm.o
 CC = i686-elf-gcc
-CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
-		 -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -fomit-frame-pointer \
-		 -Wno-unused-function -c 
-
-#-mno-sse -mno-sse2 -mno-mmx -mno-3dnow -mfpmath=387 
-LDFLAGS = -T link.ld -melf_i386
+CFLAGS = -O2 -g -ffreestanding -Wall -Wextra -nostdlib -c
+LDFLAGS = -T link.ld  -nostdlib -lgcc 
 AS = nasm
 ASFLAGS = -f elf
+LD = i686-elf-gcc 
 
 all: kernel.elf
 
 kernel.elf: $(OBJECTS)
-	ld $(LDFLAGS) $(OBJECTS) -o kernel.elf
+	$(LD) $(LDFLAGS) $(OBJECTS) -o kernel.elf
 
 os.iso: kernel.elf
 	cp kernel.elf iso/boot/kernel.elf

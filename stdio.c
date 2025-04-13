@@ -76,7 +76,13 @@ void sprintf(const char* fmt, ...) {
     while (*fmt) {
         if (*fmt == '%') {
             fmt++;
-            if (*fmt == 'd') {
+            if (*fmt == 'f') {
+                float num = va_arg(args, double);  // floats are promoted to double
+                char buffer[64];
+                ftoa(num, buffer, 6);  // Convert float to string (6 decimals)
+                serial_writestring(buffer); // Print to VGA or use standard puts
+            }
+            else if (*fmt == 'd') {
                 int num = va_arg(args, int);
                 char buffer[32];
                 itoa(num,buffer,10);
