@@ -1,4 +1,4 @@
-OBJECTS = loader.o kmain.o io.o vga.o string.o serial.o gdt.o gdt_asm.o stdlib.o  interrupt_asm.o idt.o idt_asm.o  stdio.o pic.o interrupt.o keyboard.o paging.o paging_asm.o sse_asm.o
+OBJECTS = loader.o kmain.o io.o vga.o string.o serial.o gdt.o gdt_asm.o stdlib.o  interrupt_asm.o idt.o idt_asm.o  stdio.o pic.o interrupt.o keyboard.o paging.o paging_asm.o
 CC = i686-elf-gcc
 CFLAGS = -O2 -g -ffreestanding -Wall -Wextra -nostdlib -c
 LDFLAGS = -T link.ld  -nostdlib -lgcc 

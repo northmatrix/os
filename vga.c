@@ -4,11 +4,12 @@
 #include "stdint.h"
 #include "vga.h"
 #include "stdio.h"
+#include "constants.h"
 
 /* Frame Buffer */
 #define VGA_WIDTH 80
 #define VGA_HEIGHT 25
-static uint16_t* VGA_MEMORY = (uint16_t*) 0xB8000;
+#define VGA_MEMORY KERNEL_START_VADDR + 0x000B8000
 
 /* The I/O ports */
 #define FB_COMMAND_PORT         0x3D4

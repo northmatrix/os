@@ -1,80 +1,75 @@
-; this functions as a bridge between the bootloader (GRUB) and the kernel
-; the main purpose of this file it to set up symbols for the bootloader
-; and jump to the kmain function in the kernel
+%define FOUR_KB         0x1000
+%define ONE_MB          0x100000
+%define FOUR_MB         0x400000
+%define EIGHT_MB        0x800000
 
-%include "constants.inc"
+%define KERNEL_START_VADDR  0xC0000000
+%define KERNEL_PDT_IDX      (KERNEL_START_VADDR >> 22)
 
-global loader                           ; the entry point for the linker
-global kernel_stack						; the address of the kernel stack
+global loader                   ; the entry symbol for ELF
 
-extern kmain                            ; kmain is defined in kmain.c
+extern kmain
 extern kernel_virtual_end               ; these are defined in the link script
 extern kernel_virtual_start
 extern kernel_physical_end
 extern kernel_physical_start
 
-; setting up the multiboot headers for GRUB
-MODULEALIGN equ 1<<0                    ; align loaded modules on page
-                                        ; boundaries
-MEMINFO     equ 1<<1                    ; provide memory map
-FLAGS       equ MODULEALIGN | MEMINFO   ; the multiboot flag field
-MAGIC       equ 0x1BADB002              ; magic number for bootloader to
-                                        ; find the header
-CHECKSUM    equ -(MAGIC + FLAGS)        ; checksum required
+MAGIC_NUMBER    equ 0x1BADB002                   ; define the magic number constant
+MEMINFO         equ 1<<1 
+ALIGN_MODULES   equ 0x00000001                   ; tells grub to align modules
+FLAGS           equ ALIGN_MODULES | MEMINFO
+CHECKSUM        equ -(MAGIC_NUMBER + FLAGS)      ; calculate the checksum (magic number + checksum + flags should equal 0)
 
-; we set Page write-through, Writable, Present
+; set page write through  Writeable preset
 KERNEL_PT_CFG       equ 00000000000000000000000000001011b
 KERNEL_PDT_ID_MAP   equ 00000000000000000000000010001011b
 
-; the page directory used to boot the kernel into the higher half
-section .data
+section .data 
 align 4096
 kernel_pt:
-    times 1024 dd 0
+    times 1024 dd 0  
 kernel_pdt:
-    dd KERNEL_PDT_ID_MAP
-    times 1023 dd 0
+    dd KERNEL_PDT_ID_MAP  
+    times 1023 dd 0 
 
 section .data
-align 4
+align 4 
 grub_magic_number:
-    dd 0
+    dd 0 
 grub_multiboot_info:
     dd 0
 
-section .bss
-align 4
-kernel_stack:
-    resb KERNEL_STACK_SIZE
 
-section .text
-align 4
-    dd MAGIC
-    dd FLAGS
-    dd CHECKSUM
+KERNEL_STACK_SIZE equ 4096      ; the stack size in bytes
 
-; the entry point, called by GRUB
-loader:
+section .bss                   ; start of the bss (uninitialized memory) section
+align 4                         ; 4 byte (32 bit) alignment
+kernel_stack:                   ; label points to the beggining of memory
+    resb KERNEL_STACK_SIZE      ; reserve stack for the kernel
+    
+
+section .text                   ; start of the text (code) section
+align 4                         ; the code must be 4 byte aligned
+    dd MAGIC_NUMBER             ; write the magic number to the machine code,
+    dd FLAGS                    ; align modules instruction 
+    dd CHECKSUM                 ; and the checksum
+
+
+
+loader:                  ; the loader label (defined as entry point in linker script)
     mov ecx, (grub_magic_number - KERNEL_START_VADDR)
     mov [ecx], eax
     mov ecx, (grub_multiboot_info - KERNEL_START_VADDR)
     mov [ecx], ebx
 
-set_up_kernel_pdt:
-    ; set up kernel_pdt to point to kernel_pt
-    mov ecx, (kernel_pdt - KERNEL_START_VADDR + KERNEL_PDT_IDX*4)
-    mov edx, (kernel_pt - KERNEL_START_VADDR)
-    or  edx, KERNEL_PT_CFG
-    mov [ecx], edx
-
-set_up_kernel_pt:
+set_up_kernel_pdt: 
     mov eax, (kernel_pt - KERNEL_START_VADDR)
-    mov ecx, KERNEL_PT_CFG
+    mov ecx,  KERNEL_PT_CFG
 .loop:
     mov [eax], ecx
-    add eax, 4
-    add ecx, FOUR_KB
-    cmp ecx, kernel_physical_end
+    add eax, 4 
+    add ecx, FOUR_KB 
+    cmp ecx, kernel_physical_end 
     jle .loop
 
 enable_paging:
@@ -94,12 +89,10 @@ enable_paging:
     lea ecx, [higher_half]  ; store the address higher_half in ecx
     jmp ecx                 ; now we jump into 0xC0100000
 
-; code executing from here on uses the page table, and is accessed through
-; the upper half, 0xC0100000
 higher_half:
     mov [kernel_pdt], DWORD 0
     invlpg [0]
-    mov esp, kernel_stack+KERNEL_STACK_SIZE  ; set up the stack
+    mov esp, kernel_stack+KERNEL_STACK_SIZE  ; set up the kernel_stack
 
 enter_kmain:
     push kernel_pt
@@ -114,3 +107,4 @@ enter_kmain:
     call kmain                          ; call the main function of the kernel
 hang:
     jmp hang                            ; loop forever
+
