@@ -1,667 +1,145 @@
 Testing serial works
 Interrupt Number: 33
 Error Code: 0
-EIP: -!"!!!,)
+EIP: c01000b9
 EAX: 7
 EBP: 67ee0
 EBX: 2cd80
 ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
+Handler Ptr: 0xc01019c0
 
 Interrupt Number: 33
 Error Code: 0
-EIP: -!"!!!,)
+EIP: c01000b9
 EAX: 7
 EBP: 67ee0
 EBX: 2cd80
 ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
+Handler Ptr: 0xc01019c0
 
 Interrupt Number: 33
 Error Code: 0
-EIP: -!"!!!,)
+EIP: c01000b9
 EAX: 7
 EBP: 67ee0
 EBX: 2cd80
 ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
+Handler Ptr: 0xc01019c0
 
 Interrupt Number: 33
 Error Code: 0
-EIP: -!"!!!,)
+EIP: c01000b9
 EAX: 7
 EBP: 67ee0
 EBX: 2cd80
 ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
+Handler Ptr: 0xc01019c0
 
 Interrupt Number: 33
 Error Code: 0
-EIP: -!"!!!,)
+EIP: c01000b9
 EAX: 7
 EBP: 67ee0
 EBX: 2cd80
 ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
+Handler Ptr: 0xc01019c0
 
 Interrupt Number: 33
 Error Code: 0
-EIP: -!"!!!,)
+EIP: c01000b9
 EAX: 7
 EBP: 67ee0
 EBX: 2cd80
 ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
+Handler Ptr: 0xc01019c0
 
 Interrupt Number: 33
 Error Code: 0
-EIP: -!"!!!,)
+EIP: c01000b9
 EAX: 7
 EBP: 67ee0
 EBX: 2cd80
 ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
+Handler Ptr: 0xc01019c0
 
 Interrupt Number: 33
 Error Code: 0
-EIP: -!"!!!,)
+EIP: c01000b9
 EAX: 7
 EBP: 67ee0
 EBX: 2cd80
 ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
+Handler Ptr: 0xc01019c0
 
 Interrupt Number: 33
 Error Code: 0
-EIP: -!"!!!,)
+EIP: c01000b9
 EAX: 7
 EBP: 67ee0
 EBX: 2cd80
 ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
+Handler Ptr: 0xc01019c0
 
 Interrupt Number: 33
 Error Code: 0
-EIP: -!"!!!,)
+EIP: c01000b9
 EAX: 7
 EBP: 67ee0
 EBX: 2cd80
 ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
+Handler Ptr: 0xc01019c0
 
 Interrupt Number: 33
 Error Code: 0
-EIP: -!"!!!,)
+EIP: c01000b9
 EAX: 7
 EBP: 67ee0
 EBX: 2cd80
 ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
+Handler Ptr: 0xc01019c0
 
 Interrupt Number: 33
 Error Code: 0
-EIP: -!"!!!,)
+EIP: c01000b9
 EAX: 7
 EBP: 67ee0
 EBX: 2cd80
 ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
+Handler Ptr: 0xc01019c0
 
 Interrupt Number: 33
 Error Code: 0
-EIP: -!"!!!,)
+EIP: c01000b9
 EAX: 7
 EBP: 67ee0
 EBX: 2cd80
 ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
+Handler Ptr: 0xc01019c0
 
 Interrupt Number: 33
 Error Code: 0
-EIP: -!"!!!,)
+EIP: c01000b9
 EAX: 7
 EBP: 67ee0
 EBX: 2cd80
 ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
+Handler Ptr: 0xc01019c0
 
 Interrupt Number: 33
 Error Code: 0
-EIP: -!"!!!,)
+EIP: c01000b9
 EAX: 7
 EBP: 67ee0
 EBX: 2cd80
 ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
+Handler Ptr: 0xc01019c0
 
 Interrupt Number: 33
 Error Code: 0
-EIP: -!"!!!,)
+EIP: c01000b9
 EAX: 7
 EBP: 67ee0
 EBX: 2cd80
 ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
-
-Interrupt Number: 33
-Error Code: 0
-EIP: -!"!!!,)
-EAX: 7
-EBP: 67ee0
-EBX: 2cd80
-ESI: 2cf08
-Handler Ptr: 0x-!"!"*,0
+Handler Ptr: 0xc01019c0
 

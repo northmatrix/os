@@ -43,7 +43,7 @@ void printf(const char* fmt, ...) {
                 vga_writestring(buffer);  // Assuming you have a print_dec function
             }
             else if (*fmt == 'x') {
-                int num = va_arg(args, int);
+                unsigned int num = va_arg(args, unsigned int);
                 char buffer[32];
                 itoa(num,buffer,16);
                 vga_writestring(buffer);  // Assuming you have a print_dec function

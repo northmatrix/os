@@ -83,9 +83,9 @@ void vga_backspace() {
       if ((terminal_buffer[terminal_row * VGA_WIDTH+ terminal_column] & 0xFF) != ' ') {
         break;
       }
+      terminal_column++;
     }
   }
-  terminal_column++;
   vga_putentryat((char) ' ',terminal_color,terminal_column,terminal_row);
   vga_move_cursor(terminal_row * VGA_WIDTH + terminal_column);
 }

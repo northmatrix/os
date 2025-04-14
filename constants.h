@@ -26,4 +26,5 @@
 /* registers */
 #define REG_EFLAGS_DEFAULT 0x202
 
+#define PHYSICAL_TO_VIRTUAL(addr) ((addr)+KERNEL_START_VADDR)
 #endif
